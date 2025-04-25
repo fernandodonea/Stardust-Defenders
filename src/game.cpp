@@ -16,18 +16,25 @@ void Game::_InitWindow()
 
 }
 
+void Game::_InitPlayer()
+{
+    this->player = new Player();
+}
+
 
 
 //Constructors and destructors
 Game::Game()
 {
     this->_InitWindow();
+    this->_InitPlayer();
 
 }
 
 Game::~Game()
 {
     delete this->window;
+    delete this->player;
 
 } 
 
@@ -56,6 +63,18 @@ void Game::Update()
             this->window->close();
     }
 
+    //Move player
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        this->player->Move(-1.f,0.f);
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+        this->player->Move(1.f,0.f);
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+        this->player->Move(0.f,-1.f);
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+        this->player->Move(0.f,1.f);
+    
+    
+
 }
 
 
@@ -64,6 +83,7 @@ void Game::Render()
     this->window->clear();
 
     //Draw all the stuff
+    this->player->Render(*this->window);
 
     this->window->display();
 

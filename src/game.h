@@ -15,8 +15,12 @@ class Game
     private:
         sf::RenderWindow* window;
 
+        //Player
+        Player* player;
+
         //Private Functions
         void _InitWindow();
+        void _InitPlayer();
 
     public:
         //Constructors and destructors
