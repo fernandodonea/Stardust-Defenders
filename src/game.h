@@ -1,17 +1,13 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
+#include "player.h"
 
-#include <iostream>
-#include <vector>
-#include <ctime>
-#include <sstream>
+
 
 namespace Game_Engine
 {
+
 
 
 class Game
@@ -34,7 +30,6 @@ class Game
         void Render();
 
 };
-
 
 
 
