@@ -1,4 +1,4 @@
-#include "game.h"
+#include "../include/game.h"
 
 namespace Game_Engine
 {
@@ -169,7 +169,7 @@ void Game::UpdateEnemies()
         if(this->enemies[i]->GetBounds().top >= this->window->getSize().y)
         {
             this->enemies.erase(this->enemies.begin()+i);
-            std::cout<<this->enemies.size()<<"\n"; 
+
         }
     }
 
