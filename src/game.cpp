@@ -8,7 +8,7 @@ namespace Game_Engine
 //Private Functions
 void Game::_InitWindow()
 {
-    this->window=new sf::RenderWindow(sf::VideoMode(800,600),"Game 3",
+    this->window=new sf::RenderWindow(sf::VideoMode(800,600),"Stardust Defenders",
     sf::Style::Close | sf::Style::Titlebar);
 
     this->window->setFramerateLimit(60);
@@ -157,13 +157,20 @@ void Game::UpdateEnemies()
     this->spawn_timer+=0.5f;
     if(this->spawn_timer >= this->spawn_timer_max)
     {
-        this->enemies.push_back(new Enemy(rand()%200,rand()%200));
+        this->enemies.push_back(new Enemy(rand()%this->window->getSize().x-20.f, -100.f));
         this->spawn_timer=0.f;
     }
 
-    for(auto *enemy: this->enemies)
-    {
-        enemy->Update();
+    for(int i=0; i<this->enemies.size();++i)
+    { 
+        this->enemies[i]->Update();
+
+        //Remove enemy at the bottom of the screen
+        if(this->enemies[i]->GetBounds().top >= this->window->getSize().y)
+        {
+            this->enemies.erase(this->enemies.begin()+i);
+            std::cout<<this->enemies.size()<<"\n"; 
+        }
     }
 
 }
