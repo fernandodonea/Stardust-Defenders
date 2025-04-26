@@ -7,33 +7,28 @@
 void Player::_InitVariables()
 {
     this->movement_speed=5.f;
+
+    this->attack_cooldown_max=10.f;
+    this->attack_cooldown=this->attack_cooldown_max;
     
 }
-
-
 
 void Player::_InitTexture()
 {
     //Load texture from file 
-    if(!this->texture.loadFromFile("textures/spaceship.png"))
+    if(!this->texture.loadFromFile("resources/textures/spaceship.png"))
     {
         std::cout<<"ERROR:PLAYER::_INITTEXTURE: Could not load texture file"<<"\n";
     }
-
-
-
 }
+
 void Player::_InitSprite()
 {
     //Set the texture to the sprite
     this->sprite.setTexture(this->texture);
 
     //Resize the sprite 
-    this->sprite.scale(0.3f,0.3f);
-
-    this->attack_cooldown_max=10.f;
-    this->attack_cooldown=this->attack_cooldown_max;
-
+    this->sprite.scale(0.5f,0.5f);
 } 
 
 
@@ -83,7 +78,6 @@ const bool Player::CanAttack()
     }
     return false;
 }
-
 
 void Player::UpdateAttack()
 {

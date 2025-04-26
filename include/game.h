@@ -24,6 +24,10 @@ class Game
         std::map<std::string, sf::Texture*> textures;
         std::vector<Bullet*> bullets;
 
+        //GUI
+        sf::Font font;
+        sf::Text point_text;
+
         //Player
         Player* player;
 
@@ -32,9 +36,12 @@ class Game
         float spawn_timer_max;
         std::vector<Enemy*> enemies;
 
+         
         //Private Functions
         void _InitWindow();
         void _InitTextures();
+        void _InitGUI();
+
         void _InitPlayer();
         void _InitEnemies();
 
@@ -48,10 +55,12 @@ class Game
 
         void UpdatePollEvents();
         void UpdateInput();
+        void UpdateGUI();
         void UpdateBullets();
-        void UpdateEnemies();
+        void UpdateEnemiesAndCombat();
         void Update();
         
+        void RenderGUI();
         void Render();
 
 };
