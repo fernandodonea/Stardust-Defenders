@@ -57,8 +57,6 @@ Game::Game()
     this->_InitGUI();
     this->_InitPlayer();
     this->_InitEnemies();
-
-
 }
 
 Game::~Game()
@@ -83,8 +81,6 @@ Game::~Game()
     {
         delete i;
     }
-
-
 } 
 
 
@@ -138,7 +134,7 @@ void Game::UpdateInput()
                 this->textures["BULLET"],
                 this->player->GetPosition().x + this->player->GetBounds().width/2.f,
                 this->player->GetPosition().y,
-                0.f,-1.f,5.f
+                0.f,-1.f,8.f
             )
         );
     }
@@ -171,8 +167,9 @@ void Game::UpdateBullets()
         ++counter;
     }
 }
-void Game::UpdateEnemiesAndCombat()
+void Game::UpdateEnemies()
 {
+    //Spawning
     this->spawn_timer+=0.5f;
     if(this->spawn_timer >= this->spawn_timer_max)
     {
@@ -180,31 +177,47 @@ void Game::UpdateEnemiesAndCombat()
         this->spawn_timer=0.f;
     }
 
+    //Update 
+    unsigned counter=0; 
+    for(auto *enemy: this->enemies)
+    {
+        enemy->Update();
 
-    for(int i=0; i<this->enemies.size();++i)
-    { 
-        bool enemy_removed=false;
-
-        this->enemies[i]->Update();
-
-        //Combat
-        for(size_t j=0; j<this->bullets.size() && !enemy_removed;++j)
+        // Enemy culling (Bottom of the screen)
+        if(enemy->GetBounds().top > this->window->getSize().y)
         {
-            if(this->bullets[j]->GetBounds().intersects(this->enemies[i]->GetBounds()))
-            {
-                this->bullets.erase(this->bullets.begin()+j);
-                this->enemies.erase(this->enemies.begin()+i);
-                enemy_removed=true;
-            }
+            //Delete Enemy
+            delete this->enemies.at(counter);
+            this->enemies.erase(this->enemies.begin()+counter);
+            --counter;
         }
 
-        //Remove enemy at the bottom of the screen
-        if(!enemy_removed)
+        ++counter;
+    }
+
+
+
+}
+
+void Game::UpdateCombat()
+{
+    for(int i=0; i<this->enemies.size(); ++i)
+    { 
+        bool enemy_deleted=false;
+
+        for(size_t k=0; k<this->bullets.size() && enemy_deleted==false; ++k)
         {
-            if(this->enemies[i]->GetBounds().top >= this->window->getSize().y)
+            if(this->enemies[i]->GetBounds().intersects(this->bullets[k]->GetBounds()))
             {
-                this->enemies.erase(this->enemies.begin()+i);
-                enemy_removed=true;
+                //Delete Enemy
+                delete this->enemies[i];
+                this->enemies.erase(this->enemies.begin() + i);
+
+                //Delete Bullet
+                delete this->bullets[k];
+                this->bullets.erase(this->bullets.begin() + k); 
+
+                enemy_deleted=true;
             }
         }
     }
@@ -218,8 +231,10 @@ void Game::Update()
 
 
     this->player->Update();
+
     this->UpdateBullets();
-    this->UpdateEnemiesAndCombat();
+    this->UpdateEnemies();
+    this->UpdateCombat();
 
     this->UpdateGUI();
 }

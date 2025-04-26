@@ -57,7 +57,8 @@ class Game
         void UpdateInput();
         void UpdateGUI();
         void UpdateBullets();
-        void UpdateEnemiesAndCombat();
+        void UpdateEnemies();
+        void UpdateCombat();
         void Update();
         
         void RenderGUI();
