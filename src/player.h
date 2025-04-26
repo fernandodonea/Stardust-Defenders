@@ -16,7 +16,11 @@ class Player
 
         float movement_speed;
 
+        float attack_cooldown;
+        float attack_cooldown_max; 
+
         //Private Functions
+        void _InitVariables();
         void _InitTexture();
         void _InitSprite();
 
@@ -27,8 +31,15 @@ class Player
         Player();
         virtual ~Player();
 
+        //Accesors
+        const sf::Vector2f& GetPosition() const;
+
         //Functions
         void Move(const float dir_x, const float dir_y);
+
+        const bool CanAttack();
+        void UpdateAttack();
+        
 
         void Update();
         void Render(sf::RenderTarget& target); 

@@ -21,6 +21,7 @@ void Game::_InitTextures()
     this->textures["BULLET"] = new sf::Texture();
     this->textures["BULLET"]->loadFromFile("textures/pink-bullet.png");
     
+    
 } 
 
 void Game::_InitPlayer()
@@ -103,24 +104,43 @@ void Game::UpdateInput()
         this->player->Move(0.f,1.f);
 
 
-    if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
+    if(sf::Mouse::isButtonPressed(sf::Mouse::Left) && this->player->CanAttack())
     {
-         this->bullets.push_back(new Bullet(this->textures["BULLET"],0,0,0,00,0));
+         this->bullets.push_back(new Bullet(this->textures["BULLET"],
+            this->player->GetPosition().x,this->player->GetPosition().y,
+            0.f,-1.f,5.f));
     }
 }
 
 void Game::UpdateBullets()
 {
+    unsigned counter=0;
+
     for(auto *bullet: this->bullets)
     {
         bullet->Update();
+
+        // Bullet culling (top of the screen)
+        if(bullet->GetBounds().top + bullet->GetBounds().height < 0.f)
+        {
+            //Delete bullet
+            delete this->bullets.at(counter);
+            this->bullets.erase(this->bullets.begin()+counter);
+            --counter;
+        }
+
+        ++counter;
     }
 }
 
 void Game::Update()
 {
     this->UpdatePollEvents();
+
     this->UpdateInput();
+
+    this->player->Update();
+
     this->UpdateBullets();
 
 }

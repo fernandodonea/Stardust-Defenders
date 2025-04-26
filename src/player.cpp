@@ -3,6 +3,15 @@
 
 
 //Private Functions
+
+void Player::_InitVariables()
+{
+    this->movement_speed=5.f;
+    
+}
+
+
+
 void Player::_InitTexture()
 {
     //Load texture from file 
@@ -22,6 +31,9 @@ void Player::_InitSprite()
     //Resize the sprite 
     this->sprite.scale(0.3f,0.3f);
 
+    this->attack_cooldown_max=10.f;
+    this->attack_cooldown=this->attack_cooldown_max;
+
 } 
 
 
@@ -29,8 +41,7 @@ void Player::_InitSprite()
 //Constructor and destructor
 Player::Player()
 {
-    this->movement_speed=5.f;
-
+    this->_InitVariables();
     this->_InitTexture();
     this->_InitSprite();
 
@@ -43,6 +54,14 @@ Player::~Player()
 
 
 
+//Accesors
+const sf::Vector2f& Player::GetPosition() const
+{
+     return this->sprite.getPosition();
+}
+
+
+
 //Functions
 void Player::Move(const float dir_x, const float dir_y)
 {
@@ -50,11 +69,29 @@ void Player::Move(const float dir_x, const float dir_y)
 
 }
 
+const bool Player::CanAttack()
+{
+    if(this->attack_cooldown>=this->attack_cooldown_max)
+    {
+        this->attack_cooldown=0.f;
+        return true;
+    }
+    return false;
+}
+
+
+void Player::UpdateAttack()
+{
+    if(this->attack_cooldown < this->attack_cooldown_max)
+        this->attack_cooldown+=0.5f;
+
+
+}
 
 
 void Player::Update()
 {
-
+    this->UpdateAttack();
 
 }
 
