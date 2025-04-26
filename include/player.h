@@ -25,7 +25,6 @@ class Player
         void _InitSprite();
 
 
-
     public:
         //Constructor and destructor
         Player();
@@ -34,6 +33,10 @@ class Player
         //Accesors
         const sf::Vector2f& GetPosition() const;
         const sf::FloatRect GetBounds() const;
+
+        //Modifiers
+        void SetPosition(const sf::Vector2f pos);
+        void SetPosition(const float x, const float y);
 
 
 

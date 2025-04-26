@@ -8,7 +8,7 @@ namespace Game_Engine
 //Private Functions
 void Game::_InitWindow()
 {
-    this->window=new sf::RenderWindow(sf::VideoMode(800,600),"Stardust Defenders",
+    this->window=new sf::RenderWindow(sf::VideoMode(1024,728),"Stardust Defenders",
     sf::Style::Close | sf::Style::Titlebar);
 
     this->window->setFramerateLimit(60);
@@ -34,19 +34,27 @@ void Game::_InitGUI()
     this->point_text.setString("test");
 }
 
+void Game::_InitWorld()
+{
+    //Load background
+    if(!this->world_background_texture.loadFromFile("resources/textures/starry_background.png"))
+        std::cout<<"ERROR::GAME::_INITWORLD: Failed to load background"<<"\n";
+
+    this->world_background.setTexture(this->world_background_texture);
+
+}
+
 void Game::_InitPlayer()
 {
     this->player = new Player();
-
-    
 }
 
 void Game::_InitEnemies()
 {
     this->spawn_timer_max=50.f;
     this->spawn_timer=this->spawn_timer_max;
-
 }
+
 
 
 //Constructors and destructors
@@ -55,6 +63,7 @@ Game::Game()
     this->_InitWindow();
     this->_InitTextures();
     this->_InitGUI();
+    this->_InitWorld();
     this->_InitPlayer();
     this->_InitEnemies();
 }
@@ -146,6 +155,49 @@ void Game::UpdateGUI()
 
 }
 
+void Game::UpdateWorld()
+{
+
+}
+void Game::UpdateCollision()
+{
+    //Left
+    if(this->player->GetBounds().left<0.f)
+    {
+        this->player->SetPosition(
+            0.f,
+            this->player->GetBounds().top
+        );
+    }
+    //Right
+    if(this->player->GetBounds().left+this->player->GetBounds().width > this->window->getSize().x)
+    {
+        this->player->SetPosition(
+            this->window->getSize().x - this->player->GetBounds().width,
+            this->player->GetBounds().top
+        );
+    }
+    //Top
+    if(this->player->GetBounds().top<0.f)
+    {
+        this->player->SetPosition(
+            this->player->GetBounds().left,
+            0.f
+        );
+    }
+    //Bottom
+    if(this->player->GetBounds().top+this->player->GetBounds().height > this->window->getSize().y)
+    {
+        this->player->SetPosition(
+            this->player->GetBounds().left,
+            this->window->getSize().y - this->player->GetBounds().height
+        );
+    }
+
+
+
+}
+
 
 void Game::UpdateBullets()
 {
@@ -229,6 +281,8 @@ void Game::Update()
     this->UpdatePollEvents();
     this->UpdateInput();
 
+    this->UpdateCollision();
+
 
     this->player->Update();
 
@@ -237,7 +291,10 @@ void Game::Update()
     this->UpdateCombat();
 
     this->UpdateGUI();
+
+    this->UpdateWorld();
 }
+
 
 
 void Game::RenderGUI()
@@ -245,11 +302,18 @@ void Game::RenderGUI()
     this->window->draw(this->point_text);
 }
 
+void Game::RenderWord()
+{
+    this->window->draw(this->world_background);
+}
+
 void Game::Render()
 {
     this->window->clear();
 
-    //Draw all the stuff
+    //Draw world
+    this->RenderWord();
+
 
     //Render de player
     this->player->Render(*this->window);

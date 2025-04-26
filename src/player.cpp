@@ -28,7 +28,7 @@ void Player::_InitSprite()
     this->sprite.setTexture(this->texture);
 
     //Resize the sprite 
-    this->sprite.scale(0.5f,0.5f);
+    this->sprite.scale(0.3f,0.3f);
 } 
 
 
@@ -58,6 +58,17 @@ const sf::Vector2f& Player::GetPosition() const
 const sf::FloatRect Player::GetBounds() const
 {
     return this->sprite.getGlobalBounds();
+
+}
+
+//Modifiers
+void Player::SetPosition(const sf::Vector2f pos)
+{
+    this->sprite.setPosition(pos);
+}
+void Player::SetPosition(const float x, const float y)
+{
+    this->sprite.setPosition(x,y);
 
 }
 

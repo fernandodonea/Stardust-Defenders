@@ -28,6 +28,11 @@ class Game
         sf::Font font;
         sf::Text point_text;
 
+        //World 
+        sf::Texture world_background_texture;
+        sf::Sprite world_background;
+
+
         //Player
         Player* player;
 
@@ -41,6 +46,8 @@ class Game
         void _InitWindow();
         void _InitTextures();
         void _InitGUI();
+
+        void _InitWorld();
 
         void _InitPlayer();
         void _InitEnemies();
@@ -56,12 +63,15 @@ class Game
         void UpdatePollEvents();
         void UpdateInput();
         void UpdateGUI();
+        void UpdateWorld();
+        void UpdateCollision();
         void UpdateBullets();
         void UpdateEnemies();
         void UpdateCombat();
         void Update();
         
         void RenderGUI();
+        void RenderWord();
         void Render();
 
 };
