@@ -27,6 +27,8 @@ void Game::_InitTextures()
 void Game::_InitPlayer()
 {
     this->player = new Player();
+
+    this->enemy = new Enemy(20.f,20.f) ;
 }
 
 
@@ -104,7 +106,7 @@ void Game::UpdateInput()
         this->player->Move(0.f,1.f);
 
 
-    if(sf::Mouse::isButtonPressed(sf::Mouse::Left) && this->player->CanAttack())
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->player->CanAttack())
     {
          this->bullets.push_back(new Bullet(this->textures["BULLET"],
             this->player->GetPosition().x,this->player->GetPosition().y,
@@ -160,6 +162,8 @@ void Game::Render()
     {
         bullet->Render(this->window);
     }
+
+    this->enemy->Render(this->window);
 
     this->window->display();
 

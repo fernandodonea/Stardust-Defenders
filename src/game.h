@@ -6,6 +6,7 @@
 
 #include "player.h"
 #include "bullet.h"
+#include "enemy.h"
 
 
 namespace Game_Engine
@@ -25,6 +26,9 @@ class Game
 
         //Player
         Player* player;
+
+        //Enemies
+        Enemy* enemy;  
 
         //Private Functions
         void _InitWindow();
