@@ -28,9 +28,15 @@ void Game::_InitPlayer()
 {
     this->player = new Player();
 
-    this->enemy = new Enemy(20.f,20.f) ;
+    
 }
 
+void Game::_InitEnemies()
+{
+    this->spawn_timer_max=50.f;
+    this->spawn_timer=this->spawn_timer_max;
+
+}
 
 
 //Constructors and destructors
@@ -39,6 +45,7 @@ Game::Game()
     this->_InitWindow();
     this->_InitTextures();
     this->_InitPlayer();
+    this->_InitEnemies();
 
 }
 
@@ -55,6 +62,12 @@ Game::~Game()
 
     // Delete any bullets left
     for(auto *i: this->bullets)
+    {
+        delete i;
+    }
+
+    // Delete enemies
+    for(auto *i: this->enemies)
     {
         delete i;
     }
@@ -108,9 +121,14 @@ void Game::UpdateInput()
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->player->CanAttack())
     {
-         this->bullets.push_back(new Bullet(this->textures["BULLET"],
-            this->player->GetPosition().x,this->player->GetPosition().y,
-            0.f,-1.f,5.f));
+        this->bullets.push_back(
+            new Bullet(
+                this->textures["BULLET"],
+                this->player->GetPosition().x + this->player->GetBounds().width/2.f,
+                this->player->GetPosition().y,
+                0.f,-1.f,5.f
+            )
+        );
     }
 }
 
@@ -134,6 +152,21 @@ void Game::UpdateBullets()
         ++counter;
     }
 }
+void Game::UpdateEnemies()
+{
+    this->spawn_timer+=0.5f;
+    if(this->spawn_timer >= this->spawn_timer_max)
+    {
+        this->enemies.push_back(new Enemy(rand()%200,rand()%200));
+        this->spawn_timer=0.f;
+    }
+
+    for(auto *enemy: this->enemies)
+    {
+        enemy->Update();
+    }
+
+}
 
 void Game::Update()
 {
@@ -144,6 +177,8 @@ void Game::Update()
     this->player->Update();
 
     this->UpdateBullets();
+
+    this->UpdateEnemies();
 
 }
 
@@ -163,8 +198,13 @@ void Game::Render()
         bullet->Render(this->window);
     }
 
-    this->enemy->Render(this->window);
+    //Render the enemies
+    for(auto *enemy: this->enemies)
+    {
+        enemy->Render(this->window);
+    }
 
+    
     this->window->display();
 
 }

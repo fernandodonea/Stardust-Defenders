@@ -28,12 +28,15 @@ class Game
         Player* player;
 
         //Enemies
-        Enemy* enemy;  
+        float spawn_timer;
+        float spawn_timer_max;
+        std::vector<Enemy*> enemies;
 
         //Private Functions
         void _InitWindow();
         void _InitTextures();
         void _InitPlayer();
+        void _InitEnemies();
 
     public:
         //Constructors and destructors
@@ -46,6 +49,7 @@ class Game
         void UpdatePollEvents();
         void UpdateInput();
         void UpdateBullets();
+        void UpdateEnemies();
         void Update();
         
         void Render();

@@ -6,6 +6,7 @@ void Enemy::_InitShape()
 {
     this->shape.setRadius(rand()%20+20);
     this->shape.setPointCount(rand()%5+3);
+    this->shape.setFillColor(sf::Color(rand()%255+1,rand()%255+1,rand()%255+1,255));
 
 
 }
