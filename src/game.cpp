@@ -29,9 +29,9 @@ void Game::_InitGUI()
 
     //Init point text
     this->point_text.setFont(this->font);
-    this->point_text.setCharacterSize(12);
+    this->point_text.setCharacterSize(36);
     this->point_text.setFillColor(sf::Color::White);
-    this->point_text.setString("test");
+    this->point_text.setString("");
 }
 
 void Game::_InitWorld()
@@ -41,7 +41,11 @@ void Game::_InitWorld()
         std::cout<<"ERROR::GAME::_INITWORLD: Failed to load background"<<"\n";
 
     this->world_background.setTexture(this->world_background_texture);
+}
 
+void Game::_InitSystems()
+{
+    this->points=0;
 }
 
 void Game::_InitPlayer()
@@ -64,6 +68,7 @@ Game::Game()
     this->_InitTextures();
     this->_InitGUI();
     this->_InitWorld();
+    this->_InitSystems();
     this->_InitPlayer();
     this->_InitEnemies();
 }
@@ -152,6 +157,12 @@ void Game::UpdateInput()
 
 void Game::UpdateGUI()
 {
+    std::stringstream ss;
+
+    ss<<"Points:"<<this->points<<"\n"; 
+
+
+    this->point_text.setString(ss.str());
 
 }
 
@@ -161,7 +172,7 @@ void Game::UpdateWorld()
 }
 void Game::UpdateCollision()
 {
-    //Left
+    //Left world collision
     if(this->player->GetBounds().left<0.f)
     {
         this->player->SetPosition(
@@ -169,15 +180,15 @@ void Game::UpdateCollision()
             this->player->GetBounds().top
         );
     }
-    //Right
-    if(this->player->GetBounds().left+this->player->GetBounds().width > this->window->getSize().x)
+    //Right world collision
+    else if(this->player->GetBounds().left+this->player->GetBounds().width > this->window->getSize().x)
     {
         this->player->SetPosition(
             this->window->getSize().x - this->player->GetBounds().width,
             this->player->GetBounds().top
         );
     }
-    //Top
+    //Top world collision
     if(this->player->GetBounds().top<0.f)
     {
         this->player->SetPosition(
@@ -185,17 +196,14 @@ void Game::UpdateCollision()
             0.f
         );
     }
-    //Bottom
-    if(this->player->GetBounds().top+this->player->GetBounds().height > this->window->getSize().y)
+    //Bottom world collision
+    else if(this->player->GetBounds().top+this->player->GetBounds().height > this->window->getSize().y)
     {
         this->player->SetPosition(
             this->player->GetBounds().left,
             this->window->getSize().y - this->player->GetBounds().height
         );
     }
-
-
-
 }
 
 
@@ -241,14 +249,17 @@ void Game::UpdateEnemies()
             //Delete Enemy
             delete this->enemies.at(counter);
             this->enemies.erase(this->enemies.begin()+counter);
-            --counter;
+            --counter; 
+        }
+        else if(enemy->GetBounds().intersects(this->player->GetBounds()))
+        {
+            delete this->enemies.at(counter);
+            this->enemies.erase(this->enemies.begin()+counter);
+            --counter; 
         }
 
         ++counter;
     }
-
-
-
 }
 
 void Game::UpdateCombat()
@@ -261,6 +272,9 @@ void Game::UpdateCombat()
         {
             if(this->enemies[i]->GetBounds().intersects(this->bullets[k]->GetBounds()))
             {
+                //Increase points
+                this->points+=this->enemies[i]->GetPoints();
+
                 //Delete Enemy
                 delete this->enemies[i];
                 this->enemies.erase(this->enemies.begin() + i);
@@ -270,10 +284,10 @@ void Game::UpdateCombat()
                 this->bullets.erase(this->bullets.begin() + k); 
 
                 enemy_deleted=true;
+                
             }
         }
     }
-
 }
 
 void Game::Update()
@@ -330,7 +344,7 @@ void Game::Render()
         enemy->Render(this->window);
     }
 
-     this->RenderGUI();
+    this->RenderGUI();
 
 
     this->window->display();

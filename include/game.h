@@ -1,8 +1,10 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include<map>
+#include <map>
 #include <vector>
+#include <string>
+#include <sstream>
 
 #include "player.h"
 #include "bullet.h"
@@ -32,6 +34,9 @@ class Game
         sf::Texture world_background_texture;
         sf::Sprite world_background;
 
+        //Systems
+        unsigned points;
+
 
         //Player
         Player* player;
@@ -48,6 +53,7 @@ class Game
         void _InitGUI();
 
         void _InitWorld();
+        void _InitSystems();
 
         void _InitPlayer();
         void _InitEnemies();
