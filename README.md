@@ -2,6 +2,8 @@
 
 A classic-style space shooter game built with C++ and SFML to practice object-oriented programming (OOP). Take control of a spaceship and defend against waves of enemies while trying to achieve the highest score possible.
 
+![Game Screenshot](/resources/screenshots/gameplay.png)
+
 ## Features
 
 - **Player Controls**: Control your spaceship using `W`,`A`,`S`,`D` keys
