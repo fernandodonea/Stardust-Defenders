@@ -32,6 +32,15 @@ void Game::_InitGUI()
     this->point_text.setCharacterSize(36);
     this->point_text.setFillColor(sf::Color::White);
     this->point_text.setString("");
+
+    //Init player GUI
+    this->player_hp_bar.setSize(sf::Vector2f(300.f,25.f));
+    this->player_hp_bar.setPosition(sf::Vector2f(20.f,20.f));
+    this->player_hp_bar.setFillColor(sf::Color::Red);
+
+    this->player_hp_bar_back=this->player_hp_bar;
+    this->player_hp_bar_back.setFillColor(sf::Color(25,25,25,200));
+
 }
 
 void Game::_InitWorld()
@@ -161,8 +170,17 @@ void Game::UpdateGUI()
 
     ss<<"Points:"<<this->points<<"\n"; 
 
-
     this->point_text.setString(ss.str());
+
+
+    //Update Player GUI
+    float hp_percent=static_cast<float>(this->player->GetHp())/this->player->GetHpMax();
+    this->player_hp_bar.setSize(sf::Vector2f(
+        300.f * hp_percent,
+        this->player_hp_bar.getSize().y
+    ));
+
+   
 
 }
 
@@ -314,6 +332,10 @@ void Game::Update()
 void Game::RenderGUI()
 {
     this->window->draw(this->point_text);
+
+    this->window->draw(this->player_hp_bar_back);
+    this->window->draw(this->player_hp_bar); 
+
 }
 
 void Game::RenderWord()

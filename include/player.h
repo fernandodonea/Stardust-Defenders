@@ -19,6 +19,10 @@ class Player
         float attack_cooldown;
         float attack_cooldown_max; 
 
+        int hp;
+        int hp_max;
+
+
         //Private Functions
         void _InitVariables();
         void _InitTexture();
@@ -34,9 +38,15 @@ class Player
         const sf::Vector2f& GetPosition() const;
         const sf::FloatRect GetBounds() const;
 
+        const int& GetHp() const;
+        const int& GetHpMax() const ; 
+
         //Modifiers
         void SetPosition(const sf::Vector2f pos);
         void SetPosition(const float x, const float y);
+
+        void SetHp(const int hp);
+        void LooseHp(const int hp);
 
 
 

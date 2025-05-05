@@ -41,6 +41,10 @@ class Game
         //Player
         Player* player;
 
+        //Player GUI
+        sf::RectangleShape player_hp_bar;
+        sf::RectangleShape player_hp_bar_back;
+
         //Enemies
         float spawn_timer;
         float spawn_timer_max;
