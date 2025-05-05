@@ -30,6 +30,8 @@ class Game
         sf::Font font;
         sf::Text point_text;
 
+        sf::Text game_over_text;
+
         //World 
         sf::Texture world_background_texture;
         sf::Sprite world_background;

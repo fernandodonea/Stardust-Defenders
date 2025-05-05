@@ -32,10 +32,20 @@ void Game::_InitGUI()
     this->point_text.setCharacterSize(36);
     this->point_text.setFillColor(sf::Color::White);
     this->point_text.setString("");
+    this->point_text.setPosition(850.f,20.f);
+
+    this->game_over_text.setFont(this->font);
+    this->game_over_text.setCharacterSize(60);
+    this->game_over_text.setFillColor(sf::Color::Red);
+    this->game_over_text.setString("Game Over!");
+    this->game_over_text.setPosition(
+        this->window->getSize().x/2 - this->game_over_text.getGlobalBounds().width/2.f,
+        this->window->getSize().y/2 - this->game_over_text.getGlobalBounds().height/2.f
+    );
 
     //Init player GUI
     this->player_hp_bar.setSize(sf::Vector2f(300.f,25.f));
-    this->player_hp_bar.setPosition(sf::Vector2f(20.f,20.f));
+    this->player_hp_bar.setPosition(sf::Vector2f(20.f,15.f));
     this->player_hp_bar.setFillColor(sf::Color::Red);
 
     this->player_hp_bar_back=this->player_hp_bar;
@@ -113,8 +123,11 @@ void Game::Run()
 {
     while(this->window->isOpen())
     {
-        this->Update();
-        this->Render();
+        this->UpdatePollEvents();
+        
+        if(this->player->GetHp()>0)
+            this->Update();
+        this->Render(); 
     }
 
 }
@@ -239,7 +252,7 @@ void Game::UpdateBullets()
             //Delete bullet
             delete this->bullets.at(counter);
             this->bullets.erase(this->bullets.begin()+counter);
-            --counter;
+            
         }
 
         ++counter;
@@ -267,13 +280,17 @@ void Game::UpdateEnemies()
             //Delete Enemy
             delete this->enemies.at(counter);
             this->enemies.erase(this->enemies.begin()+counter);
-            --counter; 
+             
         }
+        //Enemy player collision 
         else if(enemy->GetBounds().intersects(this->player->GetBounds()))
         {
+            //take damge
+            this->player->LoseHp(this->enemies.at(counter)->GetDamage());
+
             delete this->enemies.at(counter);
             this->enemies.erase(this->enemies.begin()+counter);
-            --counter; 
+            
         }
 
         ++counter;
@@ -310,7 +327,6 @@ void Game::UpdateCombat()
 
 void Game::Update()
 {
-    this->UpdatePollEvents();
     this->UpdateInput();
 
     this->UpdateCollision();
@@ -367,6 +383,10 @@ void Game::Render()
     }
 
     this->RenderGUI();
+
+    //Game Over Screen
+    if(this->player->GetHp()<=0)
+        this->window->draw(this->game_over_text);
 
 
     this->window->display();

@@ -15,7 +15,7 @@ class Enemy
         int hp_max;
 
         int damage;
-        unsigned points;
+        int points;
 
         //Private functions
         void _InitVariables();
@@ -29,7 +29,8 @@ class Enemy
 
         //Accesors
         const sf::FloatRect GetBounds() const;
-        const unsigned GetPoints() const;
+        const int& GetPoints() const;
+        const int& GetDamage() const; 
 
         //Functions
         void Update();

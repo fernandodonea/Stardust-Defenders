@@ -1,2 +1,7 @@
 commitMessage.md
 *.piskel
+.DS_Store
+resources/.DS_Store
+resources/screenshots/.DS_Store
+bin/app
+.DS_Store

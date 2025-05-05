@@ -46,7 +46,7 @@ class Player
         void SetPosition(const float x, const float y);
 
         void SetHp(const int hp);
-        void LooseHp(const int hp);
+        void LoseHp(const int hp);
 
 
 
