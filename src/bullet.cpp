@@ -7,8 +7,11 @@ Bullet::Bullet()
 {
 
 }
-Bullet::Bullet(sf::Texture* texture, float pos_x, float pos_y,
-    float dir_x, float dir_y, float movement_speed)
+Bullet::Bullet (
+    sf::Texture* texture, 
+    float pos_x, float pos_y,
+    float dir_x, float dir_y, 
+    float movement_speed)
 {
     this->shape.setTexture(*texture);
     this->shape.setScale(0.5f,0.5f);

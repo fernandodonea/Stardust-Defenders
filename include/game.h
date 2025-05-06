@@ -24,7 +24,7 @@ class Game
 
         //Resources 
         std::map<std::string, sf::Texture*> textures;
-        std::vector<Bullet*> bullets;
+        std::vector<Bullet*> m_bullets;
 
         //GUI
         sf::Font font;
@@ -41,7 +41,7 @@ class Game
 
 
         //Player
-        Player* player;
+        Player* m_player;
 
         //Player GUI
         sf::RectangleShape player_hp_bar;
@@ -50,7 +50,7 @@ class Game
         //Enemies
         float spawn_timer;
         float spawn_timer_max;
-        std::vector<Enemy*> enemies;
+        std::vector<Enemy*> m_enemies;
 
          
         //Private Functions

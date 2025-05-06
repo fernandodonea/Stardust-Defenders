@@ -69,7 +69,7 @@ void Game::_InitSystems()
 
 void Game::_InitPlayer()
 {
-    this->player = new Player();
+    this->m_player = new Player();
 }
 
 void Game::_InitEnemies()
@@ -95,7 +95,7 @@ Game::Game()
 Game::~Game()
 {
     delete this->window;
-    delete this->player;
+    delete this->m_player;
 
     //Delete texture to avoid memory leak
     for(auto &i : this->textures)
@@ -104,13 +104,13 @@ Game::~Game()
     }
 
     // Delete any bullets left
-    for(auto *i: this->bullets)
+    for(auto *i: this->m_bullets)
     {
         delete i;
     }
 
     // Delete enemies
-    for(auto *i: this->enemies)
+    for(auto *i: this->m_enemies)
     {
         delete i;
     }
@@ -125,7 +125,7 @@ void Game::Run()
     {
         this->UpdatePollEvents();
         
-        if(this->player->GetHp()>0)
+        if(this->m_player->GetHp()>0)
             this->Update();
         this->Render(); 
     }
@@ -151,25 +151,25 @@ void Game::UpdateInput()
     //Move player
     //Left
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-        this->player->Move(-1.f,0.f);
+        this->m_player->Move(-1.f,0.f);
     //Right
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-        this->player->Move(1.f,0.f);
+        this->m_player->Move(1.f,0.f);
     //Up
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-        this->player->Move(0.f,-1.f);
+        this->m_player->Move(0.f,-1.f);
     //Down
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-        this->player->Move(0.f,1.f);
+        this->m_player->Move(0.f,1.f);
 
-
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->player->CanAttack())
+    //Shoot Bullets
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->m_player->CanAttack())
     {
-        this->bullets.push_back(
+        this->m_bullets.push_back(
             new Bullet(
                 this->textures["BULLET"],
-                this->player->GetPosition().x + this->player->GetBounds().width/2.f,
-                this->player->GetPosition().y,
+                this->m_player->GetPosition().x + this->m_player->GetBounds().width/2.f-12.f,
+                this->m_player->GetPosition().y,
                 0.f,-1.f,8.f
             )
         );
@@ -187,7 +187,7 @@ void Game::UpdateGUI()
 
 
     //Update Player GUI
-    float hp_percent=static_cast<float>(this->player->GetHp())/this->player->GetHpMax();
+    float hp_percent=static_cast<float>(this->m_player->GetHp())/this->m_player->GetHpMax();
     this->player_hp_bar.setSize(sf::Vector2f(
         300.f * hp_percent,
         this->player_hp_bar.getSize().y
@@ -204,35 +204,35 @@ void Game::UpdateWorld()
 void Game::UpdateCollision()
 {
     //Left world collision
-    if(this->player->GetBounds().left<0.f)
+    if(this->m_player->GetBounds().left<0.f)
     {
-        this->player->SetPosition(
+        this->m_player->SetPosition(
             0.f,
-            this->player->GetBounds().top
+            this->m_player->GetBounds().top
         );
     }
     //Right world collision
-    else if(this->player->GetBounds().left+this->player->GetBounds().width > this->window->getSize().x)
+    else if(this->m_player->GetBounds().left+this->m_player->GetBounds().width > this->window->getSize().x)
     {
-        this->player->SetPosition(
-            this->window->getSize().x - this->player->GetBounds().width,
-            this->player->GetBounds().top
+        this->m_player->SetPosition(
+            this->window->getSize().x - this->m_player->GetBounds().width,
+            this->m_player->GetBounds().top
         );
     }
     //Top world collision
-    if(this->player->GetBounds().top<0.f)
+    if(this->m_player->GetBounds().top<0.f)
     {
-        this->player->SetPosition(
-            this->player->GetBounds().left,
+        this->m_player->SetPosition(
+            this->m_player->GetBounds().left,
             0.f
         );
     }
     //Bottom world collision
-    else if(this->player->GetBounds().top+this->player->GetBounds().height > this->window->getSize().y)
+    else if(this->m_player->GetBounds().top+this->m_player->GetBounds().height > this->window->getSize().y)
     {
-        this->player->SetPosition(
-            this->player->GetBounds().left,
-            this->window->getSize().y - this->player->GetBounds().height
+        this->m_player->SetPosition(
+            this->m_player->GetBounds().left,
+            this->window->getSize().y - this->m_player->GetBounds().height
         );
     }
 }
@@ -242,7 +242,7 @@ void Game::UpdateBullets()
 {
     unsigned counter=0;
 
-    for(auto *bullet: this->bullets)
+    for(auto *bullet: this->m_bullets)
     {
         bullet->Update();
 
@@ -250,8 +250,8 @@ void Game::UpdateBullets()
         if(bullet->GetBounds().top + bullet->GetBounds().height < 0.f)
         {
             //Delete bullet
-            delete this->bullets.at(counter);
-            this->bullets.erase(this->bullets.begin()+counter);
+            delete this->m_bullets.at(counter);
+            this->m_bullets.erase(this->m_bullets.begin()+counter);
             
         }
 
@@ -264,13 +264,13 @@ void Game::UpdateEnemies()
     this->spawn_timer+=0.5f;
     if(this->spawn_timer >= this->spawn_timer_max)
     {
-        this->enemies.push_back(new Enemy(rand()%this->window->getSize().x-20.f, -100.f));
+        this->m_enemies.push_back(new Enemy(rand()%this->window->getSize().x-20.f, -100.f));
         this->spawn_timer=0.f;
     }
 
     //Update 
     unsigned counter=0; 
-    for(auto *enemy: this->enemies)
+    for(auto *enemy: this->m_enemies)
     {
         enemy->Update();
 
@@ -278,18 +278,18 @@ void Game::UpdateEnemies()
         if(enemy->GetBounds().top > this->window->getSize().y)
         {
             //Delete Enemy
-            delete this->enemies.at(counter);
-            this->enemies.erase(this->enemies.begin()+counter);
+            delete this->m_enemies.at(counter);
+            this->m_enemies.erase(this->m_enemies.begin()+counter);
              
         }
         //Enemy player collision 
-        else if(enemy->GetBounds().intersects(this->player->GetBounds()))
+        else if(enemy->GetBounds().intersects(this->m_player->GetBounds()))
         {
             //take damge
-            this->player->LoseHp(this->enemies.at(counter)->GetDamage());
+            this->m_player->LoseHp(this->m_enemies.at(counter)->GetDamage());
 
-            delete this->enemies.at(counter);
-            this->enemies.erase(this->enemies.begin()+counter);
+            delete this->m_enemies.at(counter);
+            this->m_enemies.erase(this->m_enemies.begin()+counter);
             
         }
 
@@ -299,24 +299,24 @@ void Game::UpdateEnemies()
 
 void Game::UpdateCombat()
 {
-    for(int i=0; i<this->enemies.size(); ++i)
+    for(int i=0; i<this->m_enemies.size(); ++i)
     { 
         bool enemy_deleted=false;
 
-        for(size_t k=0; k<this->bullets.size() && enemy_deleted==false; ++k)
+        for(size_t k=0; k<this->m_bullets.size() && enemy_deleted==false; ++k)
         {
-            if(this->enemies[i]->GetBounds().intersects(this->bullets[k]->GetBounds()))
+            if(this->m_enemies[i]->GetBounds().intersects(this->m_bullets[k]->GetBounds()))
             {
                 //Increase points
-                this->points+=this->enemies[i]->GetPoints();
+                this->points+=this->m_enemies[i]->GetPoints();
 
                 //Delete Enemy
-                delete this->enemies[i];
-                this->enemies.erase(this->enemies.begin() + i);
+                delete this->m_enemies[i];
+                this->m_enemies.erase(this->m_enemies.begin() + i);
 
                 //Delete Bullet
-                delete this->bullets[k];
-                this->bullets.erase(this->bullets.begin() + k); 
+                delete this->m_bullets[k];
+                this->m_bullets.erase(this->m_bullets.begin() + k); 
 
                 enemy_deleted=true;
                 
@@ -332,7 +332,7 @@ void Game::Update()
     this->UpdateCollision();
 
 
-    this->player->Update();
+    this->m_player->Update();
 
     this->UpdateBullets();
     this->UpdateEnemies();
@@ -368,16 +368,16 @@ void Game::Render()
 
 
     //Render de player
-    this->player->Render(*this->window);
+    this->m_player->Render(*this->window);
 
     //Render the bullets
-    for(auto *bullet: this->bullets)
+    for(auto *bullet: this->m_bullets)
     {
         bullet->Render(this->window);
     }
 
     //Render the enemies
-    for(auto *enemy: this->enemies)
+    for(auto *enemy: this->m_enemies)
     {
         enemy->Render(this->window);
     }
@@ -385,12 +385,10 @@ void Game::Render()
     this->RenderGUI();
 
     //Game Over Screen
-    if(this->player->GetHp()<=0)
+    if(this->m_player->GetHp()<=0)
         this->window->draw(this->game_over_text);
 
-
     this->window->display();
-
 }
 
 
