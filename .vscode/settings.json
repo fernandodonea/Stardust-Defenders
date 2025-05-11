@@ -1,3 +1,11 @@
 {
-    "cSpell.words": ["SFML"]
+    "cSpell.words": [
+        "SFML"
+    ],
+    "files.associations": {
+        "*.s": "wat",
+        "*.cpp": "cpp",
+        "string": "cpp",
+        "format": "cpp"
+    }
 }
