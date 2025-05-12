@@ -9,6 +9,12 @@
 #include <iostream>
 #include <string>
 
+const sf::Vector2f up(0.f,-1.f);
+const sf::Vector2f down(0.f,1.f);
+const sf::Vector2f left(-1.f,0.f);
+const sf::Vector2f right(1.f,0.f);
+
+
 
 class Entity
 {

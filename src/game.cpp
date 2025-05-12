@@ -27,13 +27,14 @@ void Game::_InitGUI()
     if(!this->font.loadFromFile("resources/fonts/Dosis.ttf"))
         std::cout<<"ERROR::GAME::_INITGUI:: Failed to load font"<<"\n";
 
-    //Init point text
+    //Init POINTS text
     this->point_text.setFont(this->font);
     this->point_text.setCharacterSize(36);
     this->point_text.setFillColor(sf::Color::White);
     this->point_text.setString("");
     this->point_text.setPosition(850.f,20.f);
 
+    //Init GAME OVER text
     this->game_over_text.setFont(this->font);
     this->game_over_text.setCharacterSize(60);
     this->game_over_text.setFillColor(sf::Color::Red);
@@ -167,10 +168,8 @@ void Game::UpdateInput()
     {
         this->m_bullets.push_back(
             new Bullet(
-                this->textures["BULLET"],
                 this->m_player->GetPosition().x + this->m_player->GetBounds().width/2.f-12.f,
-                this->m_player->GetPosition().y,
-                0.f,-1.f,8.f
+                this->m_player->GetPosition().y
             )
         );
     }
@@ -373,7 +372,7 @@ void Game::Render()
     //Render the bullets
     for(auto *bullet: this->m_bullets)
     {
-        bullet->Render(this->window);
+        bullet->Render(*this->window);
     }
 
     //Render the enemies

@@ -10,7 +10,6 @@ Entity (Abstract Base Class)
 ├── Player
 ├── Projectile (Abstract)
 │   ├── PlayerBullet
-│   ├── BasicEnemyBullet
 │   └── BossBullet
 └── Enemy (Abstract)
     ├── BasicEnemy
