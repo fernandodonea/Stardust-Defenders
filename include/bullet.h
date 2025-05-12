@@ -14,15 +14,11 @@ class Bullet: public Projectile
         void _InitSprite() override;
 
 
-
     public:
         //Constructor and destructor
         Bullet();
         Bullet(float pos_x, float pos_y);
         virtual ~Bullet();
-
-
-
 };
 
 

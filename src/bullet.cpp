@@ -24,7 +24,6 @@ void Bullet::_InitSprite()
 {
     this->sprite.setTexture(this->texture);
     this->sprite.setScale(0.5f,0.5f);
-
 }
 
 //Constructor and destructor

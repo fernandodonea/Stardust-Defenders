@@ -45,6 +45,10 @@ void Entity::Move(const float dir_x, const float dir_y)
 {
     this->sprite.move(this->movement_speed * dir_x, this->movement_speed * dir_y);
 }
+void Entity::Move(const sf::Vector2f direction)
+{
+    this->sprite.move(direction*this->movement_speed);
+}
 
 void Entity::Render(sf::RenderTarget& target)
 {

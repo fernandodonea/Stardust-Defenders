@@ -34,17 +34,19 @@ class Entity
         virtual ~Entity();
     
         // Getters
-        virtual const sf::Vector2f& GetPosition() const;
-        virtual const sf::FloatRect GetBounds() const;
+        const sf::Vector2f& GetPosition() const;
+        const sf::FloatRect GetBounds() const;
     
         // Setters
-        virtual void SetPosition(const float x, const float y);
-        virtual void SetPosition(const sf::Vector2f pos);
+        void SetPosition(const float x, const float y);
+        void SetPosition(const sf::Vector2f pos);
     
         // Functions
-        virtual void Move(const float dir_x, const float dir_y);
+        void Move(const float dir_x, const float dir_y);
+        void Move(const sf::Vector2f direction);
+        
         virtual void Update() = 0;
-        virtual void Render(sf::RenderTarget& target);
+        void Render(sf::RenderTarget& target);
 
 };
 

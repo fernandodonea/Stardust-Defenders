@@ -263,7 +263,7 @@ void Game::UpdateEnemies()
     this->spawn_timer+=0.5f;
     if(this->spawn_timer >= this->spawn_timer_max)
     {
-        this->m_enemies.push_back(new Enemy(rand()%this->window->getSize().x-20.f, -100.f));
+        this->m_enemies.push_back(new Asteroid(rand()%this->window->getSize().x-20.f, -100.f));
         this->spawn_timer=0.f;
     }
 
@@ -378,7 +378,7 @@ void Game::Render()
     //Render the enemies
     for(auto *enemy: this->m_enemies)
     {
-        enemy->Render(this->window);
+        enemy->Render(*this->window);
     }
 
     this->RenderGUI();
