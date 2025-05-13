@@ -27,13 +27,14 @@ void Game::_InitGUI()
     if(!this->font.loadFromFile("resources/fonts/Dosis.ttf"))
         std::cout<<"ERROR::GAME::_INITGUI:: Failed to load font"<<"\n";
 
-    //Init point text
+    //Init POINTS text
     this->point_text.setFont(this->font);
     this->point_text.setCharacterSize(36);
     this->point_text.setFillColor(sf::Color::White);
     this->point_text.setString("");
     this->point_text.setPosition(850.f,20.f);
 
+    //Init GAME OVER text
     this->game_over_text.setFont(this->font);
     this->game_over_text.setCharacterSize(60);
     this->game_over_text.setFillColor(sf::Color::Red);
@@ -167,10 +168,8 @@ void Game::UpdateInput()
     {
         this->m_bullets.push_back(
             new Bullet(
-                this->textures["BULLET"],
                 this->m_player->GetPosition().x + this->m_player->GetBounds().width/2.f-12.f,
-                this->m_player->GetPosition().y,
-                0.f,-1.f,8.f
+                this->m_player->GetPosition().y
             )
         );
     }
@@ -264,7 +263,7 @@ void Game::UpdateEnemies()
     this->spawn_timer+=0.5f;
     if(this->spawn_timer >= this->spawn_timer_max)
     {
-        this->m_enemies.push_back(new Enemy(rand()%this->window->getSize().x-20.f, -100.f));
+        this->m_enemies.push_back(new Asteroid(rand()%this->window->getSize().x-80.f, -100.f));
         this->spawn_timer=0.f;
     }
 
@@ -307,18 +306,25 @@ void Game::UpdateCombat()
         {
             if(this->m_enemies[i]->GetBounds().intersects(this->m_bullets[k]->GetBounds()))
             {
-                //Increase points
-                this->points+=this->m_enemies[i]->GetPoints();
+                //Enemy take damage
+                this->m_enemies[i]->LoseHp(this->m_bullets[k]->GetDamage());
 
-                //Delete Enemy
-                delete this->m_enemies[i];
-                this->m_enemies.erase(this->m_enemies.begin() + i);
+                if(m_enemies[i]->GetHp()==0)
+                {
+                    //Increase points
+                    this->points+=this->m_enemies[i]->GetPoints();
+
+                    //Delete Enemy
+                    delete this->m_enemies[i];
+                    this->m_enemies.erase(this->m_enemies.begin() + i);
+
+                    enemy_deleted=true;
+                }
+
 
                 //Delete Bullet
                 delete this->m_bullets[k];
                 this->m_bullets.erase(this->m_bullets.begin() + k); 
-
-                enemy_deleted=true;
                 
             }
         }
@@ -373,13 +379,13 @@ void Game::Render()
     //Render the bullets
     for(auto *bullet: this->m_bullets)
     {
-        bullet->Render(this->window);
+        bullet->Render(*this->window);
     }
 
     //Render the enemies
     for(auto *enemy: this->m_enemies)
     {
-        enemy->Render(this->window);
+        enemy->Render(*this->window);
     }
 
     this->RenderGUI();

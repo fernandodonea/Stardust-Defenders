@@ -1,27 +1,8 @@
 #include "../include/enemy.h"
 
 
-//Private functions
-void Enemy::_InitVariables()
-{
-    this->type=rand()%8+3;
 
-    this->speed=static_cast<float>(this->type/2);
 
-    this->hp_max=static_cast<int>(this->type);
-    this->hp=this->hp_max;
-    
-    this->damage=this->type;
-    this->points=10*this->type;
-    
-}
-
-void Enemy::_InitShape()
-{
-    this->shape.setRadius(this->type*4);
-    this->shape.setPointCount(this->type);
-    this->shape.setFillColor(sf::Color(rand()%255+1,rand()%255+1,rand()%255+1,255));
-}
 
 
 //Constructor and Destructor
@@ -29,14 +10,6 @@ Enemy::Enemy()
 {
 
 }
-Enemy::Enemy(float pos_x, float pos_y)
-{
-    this->_InitVariables(); 
-    this->_InitShape();
-    
-    this->shape.setPosition(pos_x,pos_y);
-
-} 
 Enemy::~Enemy()
 {
     
@@ -44,9 +17,13 @@ Enemy::~Enemy()
 
 
 //Accesors
-const sf::FloatRect Enemy::GetBounds() const
+const int& Enemy::GetType() const
 {
-    return this->shape.getGlobalBounds();
+    return this->type; 
+}
+const int& Enemy::GetHp() const
+{
+    return this->hp;
 }
 const int& Enemy::GetPoints() const
 {
@@ -58,12 +35,15 @@ const int&Enemy::GetDamage() const
 }
 
 //Functions
+
+void Enemy::LoseHp(const int value)
+{
+    this->hp-=value;
+    if(this->hp<0)
+        this->hp=0;
+}
+
 void Enemy::Update()
 {
-    this->shape.move(0.f,this->speed);
-
-}
-void Enemy::Render(sf::RenderTarget* target)
-{
-    target->draw(this->shape); 
+    Move(down);
 }

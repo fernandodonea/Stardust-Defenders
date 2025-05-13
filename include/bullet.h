@@ -1,35 +1,24 @@
 #ifndef BULLET_H
 #define BULLET_H
 
-#include <SFML/Graphics.hpp>
+
+#include "projectile.h"
 
 
-#include <iostream>
 
-
-class Bullet
+class Bullet: public Projectile
 {
     private:
-        sf::Sprite shape;
-
-        sf::Vector2f direction;
-        float movement_speed;
+        void _InitVariables() override;
+        void _InitTexture() override;
+        void _InitSprite() override;
 
 
     public:
         //Constructor and destructor
         Bullet();
-        Bullet(sf::Texture* texture, float pos_x, float pos_y,
-             float dir_x, float dir_y, float movement_speed);
+        Bullet(float pos_x, float pos_y);
         virtual ~Bullet();
-
-        //Accesors
-        const sf::FloatRect GetBounds() const;
-
-        //Functions
-        void Update();
-        void Render(sf::RenderTarget* target);
-
 };
 
 

@@ -6,9 +6,10 @@
 #include <string>
 #include <sstream>
 
+
 #include "player.h"
 #include "bullet.h"
-#include "enemy.h"
+#include "asteroid.h"
 
 
 namespace Game_Engine
@@ -50,7 +51,7 @@ class Game
         //Enemies
         float spawn_timer;
         float spawn_timer_max;
-        std::vector<Enemy*> m_enemies;
+        std::vector<Asteroid*> m_enemies;
 
          
         //Private Functions

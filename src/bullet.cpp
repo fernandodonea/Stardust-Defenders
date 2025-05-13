@@ -1,51 +1,45 @@
 #include "../include/bullet.h"
 
 
+void Bullet::_InitVariables()
+{
+    this->movement_speed=8.f;
+
+    this->damage=10;
+
+    this->direction=up;
+    
+
+}
+void Bullet::_InitTexture()
+{
+    //Load texture from file 
+    if(!this->texture.loadFromFile("resources/textures/cyan-bullet.png"))
+    {
+        std::cout<<"ERROR:BULLET::_INITTEXTURE: Could not load texture file"<<"\n";
+    }
+
+}
+void Bullet::_InitSprite()
+{
+    this->sprite.setTexture(this->texture);
+    this->sprite.setScale(0.5f,0.5f);
+}
 
 //Constructor and destructor
 Bullet::Bullet()
 {
 
 }
-Bullet::Bullet (
-    sf::Texture* texture, 
-    float pos_x, float pos_y,
-    float dir_x, float dir_y, 
-    float movement_speed)
+Bullet::Bullet (float pos_x, float pos_y)
 {
-    this->shape.setTexture(*texture);
-    this->shape.setScale(0.5f,0.5f);
-
-    this->shape.setPosition(pos_x,pos_y);
-
-    this->direction.x=dir_x;
-    this->direction.y=dir_y; 
-
-    this->movement_speed=movement_speed;
+    _InitVariables();
+    _InitTexture();
+    _InitSprite();
+    this->sprite.setPosition(pos_x,pos_y);
 }
 Bullet::~Bullet()
 {
 
 }
 
-
-//Accesors
-const sf::FloatRect Bullet::GetBounds() const
-{
-    return this->shape.getGlobalBounds();
-}
-
-
- //Functions
- void Bullet::Update()
- {
-    //Movement
-    this->shape.move(this->movement_speed*this->direction);
-
-
- }
- void Bullet::Render(sf::RenderTarget* target)
- {
-    target->draw(this->shape);
-     
- }

@@ -1,41 +1,38 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
-#include <SFML/Graphics.hpp>
+#include "entity.h"
 
-class Enemy
+class Enemy: public Entity
 {
-    private:
-        sf::CircleShape shape;
-        unsigned point_count;
+    protected:  
         int type;
-        float speed;
-
+        
         int hp;
         int hp_max;
 
         int damage;
         int points;
 
+        float size;
+
         //Private functions
-        void _InitVariables();
-        void _InitShape();
 
     public:
         //Constructor and Destructor
         Enemy();
-        Enemy(float pos_x, float pos_y);
         virtual ~Enemy();
 
         //Accesors
-        const sf::FloatRect GetBounds() const;
+        const int& GetType() const;
+        const int& GetHp() const;
         const int& GetPoints() const;
-        const int& GetDamage() const; 
-
+        const int& GetDamage() const;
+        
         //Functions
-        void Update();
-        void Render(sf::RenderTarget* target);
-     
+        void LoseHp(const int value);
+
+        void Update() override;
 };
 
 

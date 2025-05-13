@@ -4,6 +4,21 @@ A classic-style space shooter game built with C++ and SFML to practice object-or
 
 ![Game Screenshot](/resources/screenshots/gameplay.png)
 
+## Class hierarchy
+```
+Entity (Abstract Base Class)
+├── Player
+├── Projectile (Abstract)
+│   ├── PlayerBullet
+│   └── BossBullet
+└── Enemy (Abstract)
+    ├── BasicEnemy
+    ├── FastEnemy
+    ├── TankEnemy
+    └── Boss
+```
+
+
 ## Features
 
 - **Player Controls**: Control your spaceship using `W`,`A`,`S`,`D` keys
