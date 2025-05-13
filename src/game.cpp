@@ -6,14 +6,6 @@ namespace Game_Engine
 
 
 //Private Functions
-void Game::_InitWindow()
-{
-    this->window=new sf::RenderWindow(sf::VideoMode(1024,728),"Stardust Defenders",
-    sf::Style::Close | sf::Style::Titlebar);
-
-    this->window->setFramerateLimit(60);
-    this->window->setVerticalSyncEnabled(false);
-}
 
 void Game::_InitTextures()
 {
@@ -40,8 +32,8 @@ void Game::_InitGUI()
     this->game_over_text.setFillColor(sf::Color::Red);
     this->game_over_text.setString("Game Over!");
     this->game_over_text.setPosition(
-        this->window->getSize().x/2 - this->game_over_text.getGlobalBounds().width/2.f,
-        this->window->getSize().y/2 - this->game_over_text.getGlobalBounds().height/2.f
+        this->m_window_manager->GetWindow()->getSize().x/2 - this->game_over_text.getGlobalBounds().width/2.f,
+        this->m_window_manager->GetWindow()->getSize().y/2 - this->game_over_text.getGlobalBounds().height/2.f
     );
 
     //Init player GUI
@@ -84,7 +76,7 @@ void Game::_InitEnemies()
 //Constructors and destructors
 Game::Game()
 {
-    this->_InitWindow();
+    this->m_window_manager = new WindowManger(); // Initialize the window manager
     this->_InitTextures();
     this->_InitGUI();
     this->_InitWorld();
@@ -95,7 +87,10 @@ Game::Game()
 
 Game::~Game()
 {
-    delete this->window;
+    delete this->m_window_manager;
+
+
+
     delete this->m_player;
 
     //Delete texture to avoid memory leak
@@ -122,9 +117,9 @@ Game::~Game()
 //Functions
 void Game::Run()
 {
-    while(this->window->isOpen())
+    while(this->m_window_manager->GetWindow()->isOpen())
     {
-        this->UpdatePollEvents();
+        this->m_window_manager->PollEvents();
         
         if(this->m_player->GetHp()>0)
             this->Update();
@@ -134,19 +129,7 @@ void Game::Run()
 }
 
 
-void Game::UpdatePollEvents()
-{
-    sf::Event ev;
-    while(this->window->pollEvent(ev))
-    {
-        if(ev.Event::type==sf::Event::Closed)
-            this->window->close();
-        if(ev.Event::KeyPressed && ev.Event::key.code==sf::Keyboard::Escape)
-            this->window->close();
-    }
-    
 
-}
 void Game::UpdateInput()
 {
     //Move player
@@ -211,10 +194,10 @@ void Game::UpdateCollision()
         );
     }
     //Right world collision
-    else if(this->m_player->GetBounds().left+this->m_player->GetBounds().width > this->window->getSize().x)
+    else if(this->m_player->GetBounds().left+this->m_player->GetBounds().width > this->m_window_manager->GetWindow()->getSize().x)
     {
         this->m_player->SetPosition(
-            this->window->getSize().x - this->m_player->GetBounds().width,
+            this->m_window_manager->GetWindow()->getSize().x - this->m_player->GetBounds().width,
             this->m_player->GetBounds().top
         );
     }
@@ -227,11 +210,11 @@ void Game::UpdateCollision()
         );
     }
     //Bottom world collision
-    else if(this->m_player->GetBounds().top+this->m_player->GetBounds().height > this->window->getSize().y)
+    else if(this->m_player->GetBounds().top+this->m_player->GetBounds().height > this->m_window_manager->GetWindow()->getSize().y)
     {
         this->m_player->SetPosition(
             this->m_player->GetBounds().left,
-            this->window->getSize().y - this->m_player->GetBounds().height
+            this->m_window_manager->GetWindow()->getSize().y - this->m_player->GetBounds().height
         );
     }
 }
@@ -263,7 +246,7 @@ void Game::UpdateEnemies()
     this->spawn_timer+=0.5f;
     if(this->spawn_timer >= this->spawn_timer_max)
     {
-        this->m_enemies.push_back(new Asteroid(rand()%this->window->getSize().x-80.f, -100.f));
+        this->m_enemies.push_back(new Asteroid(rand()%this->m_window_manager->GetWindow()->getSize().x-80.f, -100.f));
         this->spawn_timer=0.f;
     }
 
@@ -274,7 +257,7 @@ void Game::UpdateEnemies()
         enemy->Update();
 
         // Enemy culling (Bottom of the screen)
-        if(enemy->GetBounds().top > this->window->getSize().y)
+        if(enemy->GetBounds().top > this->m_window_manager->GetWindow()->getSize().y)
         {
             //Delete Enemy
             delete this->m_enemies.at(counter);
@@ -353,48 +336,48 @@ void Game::Update()
 
 void Game::RenderGUI()
 {
-    this->window->draw(this->point_text);
+    this->m_window_manager->GetWindow()->draw(this->point_text);
 
-    this->window->draw(this->player_hp_bar_back);
-    this->window->draw(this->player_hp_bar); 
+    this->m_window_manager->GetWindow()->draw(this->player_hp_bar_back);
+    this->m_window_manager->GetWindow()->draw(this->player_hp_bar); 
 
 }
 
 void Game::RenderWord()
 {
-    this->window->draw(this->world_background);
+    this->m_window_manager->GetWindow()->draw(this->world_background);
 }
 
 void Game::Render()
 {
-    this->window->clear();
+    this->m_window_manager->GetWindow()->clear();
 
     //Draw world
     this->RenderWord();
 
 
     //Render de player
-    this->m_player->Render(*this->window);
+    this->m_player->Render(*this->m_window_manager->GetWindow());
 
     //Render the bullets
     for(auto *bullet: this->m_bullets)
     {
-        bullet->Render(*this->window);
+        bullet->Render(*this->m_window_manager->GetWindow());
     }
 
     //Render the enemies
     for(auto *enemy: this->m_enemies)
     {
-        enemy->Render(*this->window);
+        enemy->Render(*this->m_window_manager->GetWindow());
     }
 
     this->RenderGUI();
 
     //Game Over Screen
     if(this->m_player->GetHp()<=0)
-        this->window->draw(this->game_over_text);
+        this->m_window_manager->GetWindow()->draw(this->game_over_text);
 
-    this->window->display();
+    this->m_window_manager->GetWindow()->display();
 }
 
 

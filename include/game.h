@@ -11,6 +11,8 @@
 #include "bullet.h"
 #include "asteroid.h"
 
+#include "window_manager.h"
+
 
 namespace Game_Engine
 {
@@ -20,8 +22,8 @@ namespace Game_Engine
 class Game
 {
     private:
-        //Window
-        sf::RenderWindow* window;
+        //Core
+        WindowManger* m_window_manager;
 
         //Resources 
         std::map<std::string, sf::Texture*> textures;
@@ -55,7 +57,6 @@ class Game
 
          
         //Private Functions
-        void _InitWindow();
         void _InitTextures();
         void _InitGUI();
 
