@@ -7,35 +7,7 @@ namespace Game_Engine
 
 //Private Functions
  
-void Game::_InitGUI()
-{
 
-    //Init POINTS text
-    this->point_text.setFont(this->m_resource_manager->GetFont());
-    this->point_text.setCharacterSize(36);
-    this->point_text.setFillColor(sf::Color::White);
-    this->point_text.setString("");
-    this->point_text.setPosition(850.f,20.f);
-
-    //Init GAME OVER text
-    this->game_over_text.setFont(this->m_resource_manager->GetFont());
-    this->game_over_text.setCharacterSize(60);
-    this->game_over_text.setFillColor(sf::Color::Red);
-    this->game_over_text.setString("Game Over!");
-    this->game_over_text.setPosition(
-        this->m_window_manager->GetWindow()->getSize().x/2 - this->game_over_text.getGlobalBounds().width/2.f,
-        this->m_window_manager->GetWindow()->getSize().y/2 - this->game_over_text.getGlobalBounds().height/2.f
-    );
-
-    //Init player GUI
-    this->player_hp_bar.setSize(sf::Vector2f(300.f,25.f));
-    this->player_hp_bar.setPosition(sf::Vector2f(20.f,15.f));
-    this->player_hp_bar.setFillColor(sf::Color::Red);
-
-    this->player_hp_bar_back=this->player_hp_bar;
-    this->player_hp_bar_back.setFillColor(sf::Color(25,25,25,200));
-
-}
 
 void Game::_InitWorld()
 {
@@ -68,8 +40,14 @@ void Game::_InitEnemies()
 Game::Game()
 {
     this->m_window_manager = new WindowManger(); // Initialize the window manager
+
     this->m_resource_manager = new ResourceManager(); // Initialize the resource manager
-    this->_InitGUI();
+
+    this->m_gui_manager = new GuiManager(
+        m_resource_manager->GetFont(),
+        m_window_manager->GetWindow()
+    ); // Initialize GUI
+
     this->_InitWorld();
     this->_InitSystems();
     this->_InitPlayer();
@@ -81,6 +59,8 @@ Game::~Game()
     delete this->m_window_manager;
 
     delete this->m_resource_manager;
+
+    delete this->m_gui_manager;
 
 
 
@@ -147,25 +127,7 @@ void Game::UpdateInput()
 }
 
 
-void Game::UpdateGUI()
-{
-    std::stringstream ss;
 
-    ss<<"Points:"<<this->points<<"\n"; 
-
-    this->point_text.setString(ss.str());
-
-
-    //Update Player GUI
-    float hp_percent=static_cast<float>(this->m_player->GetHp())/this->m_player->GetHpMax();
-    this->player_hp_bar.setSize(sf::Vector2f(
-        300.f * hp_percent,
-        this->player_hp_bar.getSize().y
-    ));
-
-   
-
-}
 
 void Game::UpdateWorld()
 {
@@ -315,21 +277,17 @@ void Game::Update()
     this->UpdateEnemies();
     this->UpdateCombat();
 
-    this->UpdateGUI();
+    m_gui_manager->Update(
+        this->points,
+        this->m_player->GetHp(),
+        this->m_player->GetHpMax()
+    );
 
     this->UpdateWorld();
 }
 
 
 
-void Game::RenderGUI()
-{
-    this->m_window_manager->GetWindow()->draw(this->point_text);
-
-    this->m_window_manager->GetWindow()->draw(this->player_hp_bar_back);
-    this->m_window_manager->GetWindow()->draw(this->player_hp_bar); 
-
-}
 
 void Game::RenderWord()
 {
@@ -338,6 +296,7 @@ void Game::RenderWord()
 
 void Game::Render()
 {
+    //Clear the screen
     this->m_window_manager->GetWindow()->clear();
 
     //Draw world
@@ -359,12 +318,15 @@ void Game::Render()
         enemy->Render(*this->m_window_manager->GetWindow());
     }
 
-    this->RenderGUI();
+    //Render Gui
+    this->m_gui_manager->Render(*this->m_window_manager->GetWindow());
 
     //Game Over Screen
     if(this->m_player->GetHp()<=0)
-        this->m_window_manager->GetWindow()->draw(this->game_over_text);
+        this->m_gui_manager->GameOver(*this->m_window_manager->GetWindow());
 
+
+        
     this->m_window_manager->GetWindow()->display();
 }
 

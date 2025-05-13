@@ -13,6 +13,7 @@
 
 #include "window_manager.h"
 #include "resource_manager.h"
+#include "gui_manager.h"
 
 
 namespace Game_Engine
@@ -26,29 +27,25 @@ class Game
         //Core
         WindowManger* m_window_manager;
         ResourceManager* m_resource_manager;
-
+        
+        //GUI
+        GuiManager* m_gui_manager;
+        
         //Resources 
         std::vector<Bullet*> m_bullets;
 
-        //GUI
-        sf::Text point_text;
-
-        sf::Text game_over_text;
 
         //World 
         sf::Texture world_background_texture;
         sf::Sprite world_background;
 
         //Systems
-        unsigned points;
+        int points;
 
 
         //Player
         Player* m_player;
 
-        //Player GUI
-        sf::RectangleShape player_hp_bar;
-        sf::RectangleShape player_hp_bar_back;
 
         //Enemies
         float spawn_timer;
@@ -57,8 +54,6 @@ class Game
 
          
         //Private Functions
-        void _InitTextures();
-        void _InitGUI();
 
         void _InitWorld();
         void _InitSystems();
@@ -74,9 +69,8 @@ class Game
         //Functions
         void Run(); 
 
-        void UpdatePollEvents();
         void UpdateInput();
-        void UpdateGUI();
+
         void UpdateWorld();
         void UpdateCollision();
         void UpdateBullets();
@@ -84,7 +78,6 @@ class Game
         void UpdateCombat();
         void Update();
         
-        void RenderGUI();
         void RenderWord();
         void Render();
 
