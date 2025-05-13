@@ -9,9 +9,6 @@ protected:
     sf::Vector2f direction;
 
 public:
-    Projectile();
-    virtual ~Projectile();
-
     // Getters
     const int& GetDamage() const;
     

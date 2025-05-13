@@ -28,7 +28,7 @@ class Player: public Entity
 
         //Modifiers
         void SetHp(const int hp);
-        void LoseHp(const int hp);
+        void LoseHp(const int value);
 
 
         //Functions

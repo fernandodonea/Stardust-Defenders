@@ -2,9 +2,7 @@
 #define ASTEROID_H
 
 #include "enemy.h"
-
-
-
+#include "constants/constants_asteroid.h"
 
 class Asteroid: public Enemy
 {
@@ -24,12 +22,8 @@ class Asteroid: public Enemy
 
         //Functions
         void Update() override;
-
-     
+  
 };
-
-
-
 
 
 

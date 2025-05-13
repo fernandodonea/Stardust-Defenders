@@ -263,7 +263,7 @@ void Game::UpdateEnemies()
     this->spawn_timer+=0.5f;
     if(this->spawn_timer >= this->spawn_timer_max)
     {
-        this->m_enemies.push_back(new Asteroid(rand()%this->window->getSize().x-20.f, -100.f));
+        this->m_enemies.push_back(new Asteroid(rand()%this->window->getSize().x-80.f, -100.f));
         this->spawn_timer=0.f;
     }
 
@@ -306,18 +306,25 @@ void Game::UpdateCombat()
         {
             if(this->m_enemies[i]->GetBounds().intersects(this->m_bullets[k]->GetBounds()))
             {
-                //Increase points
-                this->points+=this->m_enemies[i]->GetPoints();
+                //Enemy take damage
+                this->m_enemies[i]->LoseHp(this->m_bullets[k]->GetDamage());
 
-                //Delete Enemy
-                delete this->m_enemies[i];
-                this->m_enemies.erase(this->m_enemies.begin() + i);
+                if(m_enemies[i]->GetHp()==0)
+                {
+                    //Increase points
+                    this->points+=this->m_enemies[i]->GetPoints();
+
+                    //Delete Enemy
+                    delete this->m_enemies[i];
+                    this->m_enemies.erase(this->m_enemies.begin() + i);
+
+                    enemy_deleted=true;
+                }
+
 
                 //Delete Bullet
                 delete this->m_bullets[k];
                 this->m_bullets.erase(this->m_bullets.begin() + k); 
-
-                enemy_deleted=true;
                 
             }
         }

@@ -29,10 +29,6 @@ class Entity
         virtual void _InitSprite()=0;
     
     public:
-        //Constructor and destructor
-        Entity();
-        virtual ~Entity();
-    
         // Getters
         const sf::Vector2f& GetPosition() const;
         const sf::FloatRect GetBounds() const;

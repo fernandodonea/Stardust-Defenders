@@ -14,6 +14,8 @@ class Enemy: public Entity
         int damage;
         int points;
 
+        float size;
+
         //Private functions
 
     public:
@@ -23,10 +25,13 @@ class Enemy: public Entity
 
         //Accesors
         const int& GetType() const;
+        const int& GetHp() const;
         const int& GetPoints() const;
         const int& GetDamage() const;
         
         //Functions
+        void LoseHp(const int value);
+
         void Update() override;
 };
 

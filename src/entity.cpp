@@ -1,18 +1,6 @@
 #include "../include/entity.h"
 
 
-//Constructor and destructor
-Entity::Entity()
-{
-
-}
-
-Entity::~Entity()
-{
-
-}
-
-
 
 // Getters
 const sf::Vector2f& Entity::GetPosition() const

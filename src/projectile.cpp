@@ -1,14 +1,5 @@
 #include "../include/projectile.h" 
 
-Projectile::Projectile()
-{
-
-}
-
-Projectile::~Projectile()
-{
-
-}
 
 const int& Projectile::GetDamage() const
 {
