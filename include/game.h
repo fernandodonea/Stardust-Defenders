@@ -12,6 +12,7 @@
 #include "asteroid.h"
 
 #include "window_manager.h"
+#include "resource_manager.h"
 
 
 namespace Game_Engine
@@ -24,13 +25,12 @@ class Game
     private:
         //Core
         WindowManger* m_window_manager;
+        ResourceManager* m_resource_manager;
 
         //Resources 
-        std::map<std::string, sf::Texture*> textures;
         std::vector<Bullet*> m_bullets;
 
         //GUI
-        sf::Font font;
         sf::Text point_text;
 
         sf::Text game_over_text;

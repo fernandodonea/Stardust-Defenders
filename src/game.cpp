@@ -6,28 +6,19 @@ namespace Game_Engine
 
 
 //Private Functions
-
-void Game::_InitTextures()
-{
-    this->textures["BULLET"] = new sf::Texture();
-    this->textures["BULLET"]->loadFromFile("resources/textures/cyan-bullet.png");
-} 
  
 void Game::_InitGUI()
 {
-    //Load font
-    if(!this->font.loadFromFile("resources/fonts/Dosis.ttf"))
-        std::cout<<"ERROR::GAME::_INITGUI:: Failed to load font"<<"\n";
 
     //Init POINTS text
-    this->point_text.setFont(this->font);
+    this->point_text.setFont(this->m_resource_manager->GetFont());
     this->point_text.setCharacterSize(36);
     this->point_text.setFillColor(sf::Color::White);
     this->point_text.setString("");
     this->point_text.setPosition(850.f,20.f);
 
     //Init GAME OVER text
-    this->game_over_text.setFont(this->font);
+    this->game_over_text.setFont(this->m_resource_manager->GetFont());
     this->game_over_text.setCharacterSize(60);
     this->game_over_text.setFillColor(sf::Color::Red);
     this->game_over_text.setString("Game Over!");
@@ -77,7 +68,7 @@ void Game::_InitEnemies()
 Game::Game()
 {
     this->m_window_manager = new WindowManger(); // Initialize the window manager
-    this->_InitTextures();
+    this->m_resource_manager = new ResourceManager(); // Initialize the resource manager
     this->_InitGUI();
     this->_InitWorld();
     this->_InitSystems();
@@ -89,15 +80,12 @@ Game::~Game()
 {
     delete this->m_window_manager;
 
+    delete this->m_resource_manager;
+
 
 
     delete this->m_player;
 
-    //Delete texture to avoid memory leak
-    for(auto &i : this->textures)
-    {
-        delete i.second;
-    }
 
     // Delete any bullets left
     for(auto *i: this->m_bullets)
