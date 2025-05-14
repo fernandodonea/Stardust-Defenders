@@ -14,6 +14,7 @@
 #include "window_manager.h"
 #include "resource_manager.h"
 #include "gui_manager.h"
+#include "player_manager.h"
 
 
 namespace Game_Engine
@@ -30,7 +31,15 @@ class Game
         
         //GUI
         GuiManager* m_gui_manager;
-        
+
+        //Player
+        PlayerManager *m_player_manager;
+
+
+
+
+
+
         //Resources 
         std::vector<Bullet*> m_bullets;
 
@@ -43,8 +52,6 @@ class Game
         int points;
 
 
-        //Player
-        Player* m_player;
 
 
         //Enemies
@@ -58,7 +65,6 @@ class Game
         void _InitWorld();
         void _InitSystems();
 
-        void _InitPlayer();
         void _InitEnemies();
 
     public:
@@ -72,7 +78,6 @@ class Game
         void UpdateInput();
 
         void UpdateWorld();
-        void UpdateCollision();
         void UpdateBullets();
         void UpdateEnemies();
         void UpdateCombat();

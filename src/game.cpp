@@ -23,10 +23,6 @@ void Game::_InitSystems()
     this->points=0;
 }
 
-void Game::_InitPlayer()
-{
-    this->m_player = new Player();
-}
 
 void Game::_InitEnemies()
 {
@@ -48,9 +44,10 @@ Game::Game()
         m_window_manager->GetWindow()
     ); // Initialize GUI
 
+    this->m_player_manager = new PlayerManager(this->m_window_manager->GetWindow());
+
     this->_InitWorld();
     this->_InitSystems();
-    this->_InitPlayer();
     this->_InitEnemies();
 }
 
@@ -62,9 +59,7 @@ Game::~Game()
 
     delete this->m_gui_manager;
 
-
-
-    delete this->m_player;
+    delete this->m_player_manager;
 
 
     // Delete any bullets left
@@ -89,7 +84,7 @@ void Game::Run()
     {
         this->m_window_manager->PollEvents();
         
-        if(this->m_player->GetHp()>0)
+        if(this->m_player_manager->GetPlayer()->GetHp()>0)
             this->Update();
         this->Render(); 
     }
@@ -103,24 +98,24 @@ void Game::UpdateInput()
     //Move player
     //Left
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-        this->m_player->Move(-1.f,0.f);
+        this->m_player_manager->GetPlayer()->Move(-1.f,0.f);
     //Right
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-        this->m_player->Move(1.f,0.f);
+        this->m_player_manager->GetPlayer()->Move(1.f,0.f);
     //Up
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-        this->m_player->Move(0.f,-1.f);
+        this->m_player_manager->GetPlayer()->Move(0.f,-1.f);
     //Down
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-        this->m_player->Move(0.f,1.f);
+        this->m_player_manager->GetPlayer()->Move(0.f,1.f);
 
     //Shoot Bullets
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->m_player->CanAttack())
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->m_player_manager->GetPlayer()->CanAttack())
     {
         this->m_bullets.push_back(
             new Bullet(
-                this->m_player->GetPosition().x + this->m_player->GetBounds().width/2.f-12.f,
-                this->m_player->GetPosition().y
+                this->m_player_manager->GetPlayer()->GetPosition().x + this->m_player_manager->GetPlayer()->GetBounds().width/2.f-12.f,
+                this->m_player_manager->GetPlayer()->GetPosition().y
             )
         );
     }
@@ -133,41 +128,7 @@ void Game::UpdateWorld()
 {
 
 }
-void Game::UpdateCollision()
-{
-    //Left world collision
-    if(this->m_player->GetBounds().left<0.f)
-    {
-        this->m_player->SetPosition(
-            0.f,
-            this->m_player->GetBounds().top
-        );
-    }
-    //Right world collision
-    else if(this->m_player->GetBounds().left+this->m_player->GetBounds().width > this->m_window_manager->GetWindow()->getSize().x)
-    {
-        this->m_player->SetPosition(
-            this->m_window_manager->GetWindow()->getSize().x - this->m_player->GetBounds().width,
-            this->m_player->GetBounds().top
-        );
-    }
-    //Top world collision
-    if(this->m_player->GetBounds().top<0.f)
-    {
-        this->m_player->SetPosition(
-            this->m_player->GetBounds().left,
-            0.f
-        );
-    }
-    //Bottom world collision
-    else if(this->m_player->GetBounds().top+this->m_player->GetBounds().height > this->m_window_manager->GetWindow()->getSize().y)
-    {
-        this->m_player->SetPosition(
-            this->m_player->GetBounds().left,
-            this->m_window_manager->GetWindow()->getSize().y - this->m_player->GetBounds().height
-        );
-    }
-}
+
 
 
 void Game::UpdateBullets()
@@ -215,10 +176,10 @@ void Game::UpdateEnemies()
              
         }
         //Enemy player collision 
-        else if(enemy->GetBounds().intersects(this->m_player->GetBounds()))
+        else if(enemy->GetBounds().intersects(this->m_player_manager->GetPlayer()->GetBounds()))
         {
             //take damge
-            this->m_player->LoseHp(this->m_enemies.at(counter)->GetDamage());
+            this->m_player_manager->GetPlayer()->LoseHp(this->m_enemies.at(counter)->GetDamage());
 
             delete this->m_enemies.at(counter);
             this->m_enemies.erase(this->m_enemies.begin()+counter);
@@ -268,10 +229,10 @@ void Game::Update()
 {
     this->UpdateInput();
 
-    this->UpdateCollision();
+  
 
 
-    this->m_player->Update();
+    this->m_player_manager->GetPlayer()->Update();
 
     this->UpdateBullets();
     this->UpdateEnemies();
@@ -279,8 +240,8 @@ void Game::Update()
 
     m_gui_manager->Update(
         this->points,
-        this->m_player->GetHp(),
-        this->m_player->GetHpMax()
+        this->m_player_manager->GetPlayer()->GetHp(),
+        this->m_player_manager->GetPlayer()->GetHpMax()
     );
 
     this->UpdateWorld();
@@ -304,7 +265,7 @@ void Game::Render()
 
 
     //Render de player
-    this->m_player->Render(*this->m_window_manager->GetWindow());
+    this->m_player_manager->GetPlayer()->Render(*this->m_window_manager->GetWindow());
 
     //Render the bullets
     for(auto *bullet: this->m_bullets)
@@ -322,7 +283,7 @@ void Game::Render()
     this->m_gui_manager->Render(*this->m_window_manager->GetWindow());
 
     //Game Over Screen
-    if(this->m_player->GetHp()<=0)
+    if(this->m_player_manager->GetPlayer()->GetHp()<=0)
         this->m_gui_manager->GameOver(*this->m_window_manager->GetWindow());
 
 
