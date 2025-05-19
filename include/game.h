@@ -11,6 +11,16 @@
 #include "bullet.h"
 #include "asteroid.h"
 
+#include "window_manager.h"
+#include "resource_manager.h"
+#include "gui_manager.h"
+#include "player_manager.h"
+#include "input_manager.h"
+#include "enemy_manager.h"
+#include "bullet_manager.h"
+#include "combat_manager.h"
+#include "world_manager.h"
+
 
 namespace Game_Engine
 {
@@ -20,50 +30,32 @@ namespace Game_Engine
 class Game
 {
     private:
-        //Window
-        sf::RenderWindow* window;
-
-        //Resources 
-        std::map<std::string, sf::Texture*> textures;
-        std::vector<Bullet*> m_bullets;
-
+        //Core
+        WindowManger* m_window_manager;
+        ResourceManager* m_resource_manager;
+        
         //GUI
-        sf::Font font;
-        sf::Text point_text;
+        GuiManager* m_gui_manager;
 
-        sf::Text game_over_text;
+        //Player 
+        PlayerManager *m_player_manager;
+
+        //Input
+        InputManager *m_input_manager;
+
+        //Enemy
+        EnemyManager *m_enemy_manager;
+
+        //Bullet 
+        BulletManager *m_bullet_manager;
+
+        //Combat
+        CombatManager *m_combat_manager;
 
         //World 
-        sf::Texture world_background_texture;
-        sf::Sprite world_background;
-
-        //Systems
-        unsigned points;
+        WorldManager *m_world_manager;
 
 
-        //Player
-        Player* m_player;
-
-        //Player GUI
-        sf::RectangleShape player_hp_bar;
-        sf::RectangleShape player_hp_bar_back;
-
-        //Enemies
-        float spawn_timer;
-        float spawn_timer_max;
-        std::vector<Asteroid*> m_enemies;
-
-         
-        //Private Functions
-        void _InitWindow();
-        void _InitTextures();
-        void _InitGUI();
-
-        void _InitWorld();
-        void _InitSystems();
-
-        void _InitPlayer();
-        void _InitEnemies();
 
     public:
         //Constructors and destructors
@@ -73,20 +65,11 @@ class Game
         //Functions
         void Run(); 
 
-        void UpdatePollEvents();
         void UpdateInput();
-        void UpdateGUI();
-        void UpdateWorld();
-        void UpdateCollision();
-        void UpdateBullets();
-        void UpdateEnemies();
-        void UpdateCombat();
+
         void Update();
         
-        void RenderGUI();
-        void RenderWord();
         void Render();
-
 };
 
 

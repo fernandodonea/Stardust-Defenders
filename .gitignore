@@ -1,7 +1,46 @@
-commitMessage.md
+# Build artifacts and binaries
+/bin/
+/build/
+/obj/
+*.o
+*.obj
+*.exe
+*.out
+*.a
+*.so
+*.dll
+*.dylib
+
+# CMake and Make build files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Editor and OS-specific files
+.vscode/
+.idea/
+*.code-workspace
+*.sublime-workspace
+*.sublime-project
+.DS_Store
+Thumbs.db
+
+# Backup and temporary files
+*~
+*.swp
+*.swo
+*.tmp
+*.bak
+
+# SFML cache (if any)
+.sfml-cache/
+
+# Ignore screenshots and piskel source files
 *.piskel
-.DS_Store
-resources/.DS_Store
-resources/screenshots/.DS_Store
+
+# Ignore the commit message file (if not needed in repo)
+commitMessage.md
+
+# Ignore the binary app (if built locally)
 bin/app
-.DS_Store
