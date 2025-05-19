@@ -17,6 +17,7 @@
 #include "player_manager.h"
 #include "enemy_manager.h"
 #include "bullet_manager.h"
+#include "combat_manager.h"
 #include "world_manager.h"
 
 
@@ -44,6 +45,8 @@ class Game
         //Bullet 
         BulletManager *m_bullet_manager;
 
+        //Combat
+        CombatManager *m_combat_manager;
 
         //World 
         WorldManager *m_world_manager;
@@ -60,9 +63,6 @@ class Game
 
         void UpdateInput();
 
-
-        void UpdateEnemies();
-        void UpdateCombat();
         void Update();
         
         void Render();

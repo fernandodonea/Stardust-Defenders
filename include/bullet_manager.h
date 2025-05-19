@@ -12,7 +12,6 @@ class BulletManager
 
     public:
         BulletManager();
-        BulletManager();
         ~BulletManager();
 
         std::vector<Bullet*>& GetBullets();

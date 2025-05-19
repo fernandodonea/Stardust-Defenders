@@ -26,6 +26,8 @@ Game::Game()
 
     this->m_bullet_manager = new BulletManager();
 
+    this->m_combat_manager = new CombatManager();
+
     this->m_world_manager = new WorldManager();
 }
 
@@ -42,6 +44,8 @@ Game::~Game()
     delete this->m_enemy_manager;
 
     delete this->m_bullet_manager;
+
+    delete this->m_combat_manager;
 
     delete this->m_world_manager;
 
@@ -102,41 +106,6 @@ void Game::UpdateInput()
 
 
 
-void Game::UpdateCombat()
-{
-    for(int i=0; i<this->m_enemy_manager->GetAsteroids().size(); ++i)
-    { 
-        bool enemy_deleted=false;
-
-        for(size_t k=0; k<this->m_bullet_manager->GetBullets().size() && enemy_deleted==false; ++k)
-        {
-            if(this->m_enemy_manager->GetAsteroids()[i]->GetBounds().intersects(this->m_bullet_manager->GetBullets()[k]->GetBounds()))
-            {
-                //Enemy take damage
-                this->m_enemy_manager->GetAsteroids()[i]->LoseHp(this->m_bullet_manager->GetBullets()[k]->GetDamage());
-
-                if(m_enemy_manager->GetAsteroids()[i]->GetHp()==0)
-                {
-                    //Increase points
-                    this->m_world_manager->AddPoints(this->m_enemy_manager->GetAsteroids()[i]->GetPoints());
-
-                    //Delete Enemy
-                    delete this->m_enemy_manager->GetAsteroids()[i];
-                    this->m_enemy_manager->GetAsteroids().erase(this->m_enemy_manager->GetAsteroids().begin() + i);
-
-                    enemy_deleted=true;
-                }
-
-
-                //Delete Bullet
-                delete this->m_bullet_manager->GetBullets()[k];
-                this->m_bullet_manager->GetBullets().erase(this->m_bullet_manager->GetBullets().begin() + k); 
-                
-            }
-        }
-    }
-}
-
 void Game::Update()
 {
     this->UpdateInput();
@@ -149,11 +118,16 @@ void Game::Update()
     this->m_bullet_manager->Update();
 
     this->m_enemy_manager->Update(
-        this->m_window_manager->GetWindow(),
-        this->m_player_manager->GetPlayer()
+        this->m_window_manager->GetWindow()
     );
 
-    this->UpdateCombat();
+    this->m_combat_manager->Update(
+        m_player_manager->GetPlayer(),
+        m_enemy_manager->GetAsteroids(),
+        m_bullet_manager->GetBullets(),
+        m_world_manager
+    );
+    
 
     m_gui_manager->Update(
         this->m_world_manager->GetPoints(),

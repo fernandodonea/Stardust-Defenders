@@ -50,31 +50,10 @@ void EnemyManager::WorldCollision(sf:: RenderWindow *window)
         counter++;
     }
 }
-void EnemyManager::PlayerCollision(Player *player)
-{
 
-    unsigned counter=0; 
-    for(auto *enemy: this->m_enemies)
-    {
-
-        //Enemy player collision 
-        if(enemy->GetBounds().intersects(player->GetBounds()))
-        {
-            //take damge
-            player->LoseHp(this->m_enemies.at(counter)->GetDamage());
-
-            delete this->m_enemies.at(counter);
-            this->m_enemies.erase(this->m_enemies.begin()+counter); 
-        }
-
-        ++counter;
-    }
-}
-
-void EnemyManager::Update(sf:: RenderWindow *window, Player *player)
+void EnemyManager::Update(sf:: RenderWindow *window)
 {
     SpawnEnemies(window);
     WorldCollision(window);
-    PlayerCollision(player);
 }
 

@@ -20,10 +20,8 @@ class EnemyManager
         void SpawnEnemies(sf::RenderWindow *window);
         
         void WorldCollision(sf:: RenderWindow *window);
-        void PlayerCollision(Player *player);
 
-
-        void Update(sf:: RenderWindow *window, Player *player);
+        void Update(sf:: RenderWindow *window);
 };
 
 
