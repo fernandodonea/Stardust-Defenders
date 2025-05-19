@@ -66,4 +66,5 @@ void PlayerManager::WorldCollision()
 void PlayerManager::Update()
 {
     WorldCollision();
+    GetPlayer()->UpdateAttack();
 }

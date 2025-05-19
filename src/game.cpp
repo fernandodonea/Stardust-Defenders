@@ -232,7 +232,7 @@ void Game::Update()
   
 
 
-    this->m_player_manager->GetPlayer()->Update();
+    this->m_player_manager->Update();
 
     this->UpdateBullets();
     this->UpdateEnemies();
