@@ -5,25 +5,6 @@ namespace Game_Engine
 
 
 
-//Private Functions
- 
-
-
-void Game::_InitWorld()
-{
-    //Load background
-    if(!this->world_background_texture.loadFromFile("resources/textures/starry_background.png"))
-        std::cout<<"ERROR::GAME::_INITWORLD: Failed to load background"<<"\n";
-
-    this->world_background.setTexture(this->world_background_texture);
-}
-
-void Game::_InitSystems()
-{
-    this->points=0;
-}
-
-
 
 
 
@@ -45,8 +26,7 @@ Game::Game()
 
     this->m_bullet_manager = new BulletManager(this->m_window_manager->GetWindow());
 
-    this->_InitWorld();
-    this->_InitSystems();
+    this->m_world_manager = new WorldManager();
 }
 
 Game::~Game()
@@ -62,6 +42,8 @@ Game::~Game()
     delete this->m_enemy_manager;
 
     delete this->m_bullet_manager;
+
+    delete this->m_world_manager;
 
 } 
 
@@ -114,10 +96,6 @@ void Game::UpdateInput()
 
 
 
-void Game::UpdateWorld()
-{
-
-}
 
 
 
@@ -161,7 +139,7 @@ void Game::UpdateCombat()
                 if(m_enemy_manager->GetAsteroids()[i]->GetHp()==0)
                 {
                     //Increase points
-                    this->points+=this->m_enemy_manager->GetAsteroids()[i]->GetPoints();
+                    this->m_world_manager->AddPoints(this->m_enemy_manager->GetAsteroids()[i]->GetPoints());
 
                     //Delete Enemy
                     delete this->m_enemy_manager->GetAsteroids()[i];
@@ -185,8 +163,6 @@ void Game::Update()
     this->UpdateInput();
 
   
-
-
     this->m_player_manager->Update();
 
     this->m_bullet_manager->Update();
@@ -197,21 +173,17 @@ void Game::Update()
     this->UpdateCombat();
 
     m_gui_manager->Update(
-        this->points,
+        this->m_world_manager->GetPoints(),
         this->m_player_manager->GetPlayer()->GetHp(),
         this->m_player_manager->GetPlayer()->GetHpMax()
     );
 
-    this->UpdateWorld();
 }
 
 
 
 
-void Game::RenderWord()
-{
-    this->m_window_manager->GetWindow()->draw(this->world_background);
-}
+
 
 void Game::Render()
 {
@@ -219,7 +191,7 @@ void Game::Render()
     this->m_window_manager->GetWindow()->clear();
 
     //Draw world
-    this->RenderWord();
+    this->m_world_manager->Render(*this->m_window_manager->GetWindow());
 
 
     //Render de player
@@ -244,8 +216,7 @@ void Game::Render()
     if(this->m_player_manager->GetPlayer()->GetHp()<=0)
         this->m_gui_manager->GameOver(*this->m_window_manager->GetWindow());
 
-
-        
+      
     this->m_window_manager->GetWindow()->display();
 }
 

@@ -17,6 +17,7 @@
 #include "player_manager.h"
 #include "enemy_manager.h"
 #include "bullet_manager.h"
+#include "world_manager.h"
 
 
 namespace Game_Engine
@@ -44,25 +45,9 @@ class Game
         BulletManager *m_bullet_manager;
 
 
-
-
         //World 
-        sf::Texture world_background_texture;
-        sf::Sprite world_background;
+        WorldManager *m_world_manager;
 
-        //Systems
-        int points;
-
-
-
-
-
-
-         
-        //Private Functions
-
-        void _InitWorld();
-        void _InitSystems();
 
 
     public:
@@ -75,13 +60,11 @@ class Game
 
         void UpdateInput();
 
-        void UpdateWorld();
 
         void UpdateEnemies();
         void UpdateCombat();
         void Update();
         
-        void RenderWord();
         void Render();
 
 };
