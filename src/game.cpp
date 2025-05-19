@@ -24,11 +24,6 @@ void Game::_InitSystems()
 }
 
 
-void Game::_InitEnemies()
-{
-    this->spawn_timer_max=50.f;
-    this->spawn_timer=this->spawn_timer_max;
-}
 
 
 
@@ -46,9 +41,10 @@ Game::Game()
 
     this->m_player_manager = new PlayerManager(this->m_window_manager->GetWindow());
 
+    this->m_enemy_manager = new EnemyManager(this->m_window_manager->GetWindow());
+
     this->_InitWorld();
     this->_InitSystems();
-    this->_InitEnemies();
 }
 
 Game::~Game()
@@ -61,6 +57,8 @@ Game::~Game()
 
     delete this->m_player_manager;
 
+    delete this->m_enemy_manager;
+
 
     // Delete any bullets left
     for(auto *i: this->m_bullets)
@@ -69,7 +67,7 @@ Game::~Game()
     }
 
     // Delete enemies
-    for(auto *i: this->m_enemies)
+    for(auto *i: this->m_enemy_manager->GetAsteroids())
     {
         delete i;
     }
@@ -153,37 +151,21 @@ void Game::UpdateBullets()
 }
 void Game::UpdateEnemies()
 {
-    //Spawning
-    this->spawn_timer+=0.5f;
-    if(this->spawn_timer >= this->spawn_timer_max)
-    {
-        this->m_enemies.push_back(new Asteroid(rand()%this->m_window_manager->GetWindow()->getSize().x-80.f, -100.f));
-        this->spawn_timer=0.f;
-    }
+
 
     //Update 
     unsigned counter=0; 
-    for(auto *enemy: this->m_enemies)
+    for(auto *enemy: this->m_enemy_manager->GetAsteroids())
     {
-        enemy->Update();
 
-        // Enemy culling (Bottom of the screen)
-        if(enemy->GetBounds().top > this->m_window_manager->GetWindow()->getSize().y)
-        {
-            //Delete Enemy
-            delete this->m_enemies.at(counter);
-            this->m_enemies.erase(this->m_enemies.begin()+counter);
-             
-        }
         //Enemy player collision 
-        else if(enemy->GetBounds().intersects(this->m_player_manager->GetPlayer()->GetBounds()))
+        if(enemy->GetBounds().intersects(this->m_player_manager->GetPlayer()->GetBounds()))
         {
             //take damge
-            this->m_player_manager->GetPlayer()->LoseHp(this->m_enemies.at(counter)->GetDamage());
+            this->m_player_manager->GetPlayer()->LoseHp(this->m_enemy_manager->GetAsteroids().at(counter)->GetDamage());
 
-            delete this->m_enemies.at(counter);
-            this->m_enemies.erase(this->m_enemies.begin()+counter);
-            
+            delete this->m_enemy_manager->GetAsteroids().at(counter);
+            this->m_enemy_manager->GetAsteroids().erase(this->m_enemy_manager->GetAsteroids().begin()+counter); 
         }
 
         ++counter;
@@ -192,25 +174,25 @@ void Game::UpdateEnemies()
 
 void Game::UpdateCombat()
 {
-    for(int i=0; i<this->m_enemies.size(); ++i)
+    for(int i=0; i<this->m_enemy_manager->GetAsteroids().size(); ++i)
     { 
         bool enemy_deleted=false;
 
         for(size_t k=0; k<this->m_bullets.size() && enemy_deleted==false; ++k)
         {
-            if(this->m_enemies[i]->GetBounds().intersects(this->m_bullets[k]->GetBounds()))
+            if(this->m_enemy_manager->GetAsteroids()[i]->GetBounds().intersects(this->m_bullets[k]->GetBounds()))
             {
                 //Enemy take damage
-                this->m_enemies[i]->LoseHp(this->m_bullets[k]->GetDamage());
+                this->m_enemy_manager->GetAsteroids()[i]->LoseHp(this->m_bullets[k]->GetDamage());
 
-                if(m_enemies[i]->GetHp()==0)
+                if(m_enemy_manager->GetAsteroids()[i]->GetHp()==0)
                 {
                     //Increase points
-                    this->points+=this->m_enemies[i]->GetPoints();
+                    this->points+=this->m_enemy_manager->GetAsteroids()[i]->GetPoints();
 
                     //Delete Enemy
-                    delete this->m_enemies[i];
-                    this->m_enemies.erase(this->m_enemies.begin() + i);
+                    delete this->m_enemy_manager->GetAsteroids()[i];
+                    this->m_enemy_manager->GetAsteroids().erase(this->m_enemy_manager->GetAsteroids().begin() + i);
 
                     enemy_deleted=true;
                 }
@@ -235,6 +217,9 @@ void Game::Update()
     this->m_player_manager->Update();
 
     this->UpdateBullets();
+
+    this->m_enemy_manager->Update();
+
     this->UpdateEnemies();
     this->UpdateCombat();
 
@@ -274,7 +259,7 @@ void Game::Render()
     }
 
     //Render the enemies
-    for(auto *enemy: this->m_enemies)
+    for(auto *enemy: this->m_enemy_manager->GetAsteroids())
     {
         enemy->Render(*this->m_window_manager->GetWindow());
     }

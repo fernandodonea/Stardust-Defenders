@@ -15,6 +15,7 @@
 #include "resource_manager.h"
 #include "gui_manager.h"
 #include "player_manager.h"
+#include "enemy_manager.h"
 
 
 namespace Game_Engine
@@ -35,7 +36,8 @@ class Game
         //Player
         PlayerManager *m_player_manager;
 
-
+        //Enemy
+        EnemyManager *m_enemy_manager;
 
 
 
@@ -54,10 +56,7 @@ class Game
 
 
 
-        //Enemies
-        float spawn_timer;
-        float spawn_timer_max;
-        std::vector<Asteroid*> m_enemies;
+
 
          
         //Private Functions
@@ -65,7 +64,6 @@ class Game
         void _InitWorld();
         void _InitSystems();
 
-        void _InitEnemies();
 
     public:
         //Constructors and destructors
