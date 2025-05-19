@@ -1,5 +1,10 @@
 #include "../include/enemy_manager.h"
 
+/*
+-------------------------------
+    Constructor and destructor
+-------------------------------
+*/
 
 EnemyManager::EnemyManager()
 {
@@ -17,12 +22,21 @@ EnemyManager::~EnemyManager()
 }
 
 
+/*
+-------------
+    Getter
+-------------
+*/
 std::vector<Asteroid*>& EnemyManager::GetAsteroids()
 {
     return this->m_enemies;
 }
 
-
+/*
+---------------
+    Functions
+---------------
+*/
 void EnemyManager::SpawnEnemies(sf::RenderWindow *window)
 {
     this->spawn_timer+=0.5f;
@@ -32,6 +46,7 @@ void EnemyManager::SpawnEnemies(sf::RenderWindow *window)
         this->spawn_timer=0.f;
     }
 }
+
 void EnemyManager::WorldCollision(sf:: RenderWindow *window)
 {
     unsigned counter=0; 
@@ -50,6 +65,7 @@ void EnemyManager::WorldCollision(sf:: RenderWindow *window)
         counter++;
     }
 }
+
 
 void EnemyManager::Update(sf:: RenderWindow *window)
 {

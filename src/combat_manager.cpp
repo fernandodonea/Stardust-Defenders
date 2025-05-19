@@ -1,19 +1,27 @@
 #include "../include/combat_manager.h"
 
+/*
+--------------
+    Functions
+--------------
+*/
+
 void CombatManager::HandleEnemyPlayerCollision(
     Player *player,
     std::vector<Asteroid*>& asteroids)
 {
+
     unsigned counter=0; 
     for(auto *enemy: asteroids)
     {
 
-        //Enemy player collision 
+        //Enemy-Player collision 
         if(enemy->GetBounds().intersects(player->GetBounds()))
         {
-            //take damge
+            //Player takes damage
             player->LoseHp(asteroids.at(counter)->GetDamage());
 
+            //Delete enemy
             delete asteroids.at(counter);
             asteroids.erase(asteroids.begin()+counter); 
         }
@@ -21,6 +29,8 @@ void CombatManager::HandleEnemyPlayerCollision(
     }
 
 }
+
+
 void CombatManager::HandleBulletEnemyCollisions(
     std::vector<Bullet*>& bullets,
     std::vector<Asteroid*>& asteroids,
@@ -35,7 +45,7 @@ void CombatManager::HandleBulletEnemyCollisions(
         {
             if(asteroids[i]->GetBounds().intersects(bullets[k]->GetBounds()))
             {
-                //Enemy take damage
+                //Enemy takes damage
                 asteroids[i]->LoseHp(bullets[k]->GetDamage());
 
                 if(asteroids[i]->GetHp()==0)
@@ -60,6 +70,8 @@ void CombatManager::HandleBulletEnemyCollisions(
     }
 
 }
+
+
 
 void CombatManager::Update(
     Player *player,

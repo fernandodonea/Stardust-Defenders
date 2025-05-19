@@ -1,29 +1,39 @@
 #include "../include/window_manager.h" 
 
-//Private functions
-void WindowManger::_InitWindow()
+/*
+--------------------------------
+    Constructor and destructor
+--------------------------------
+*/
+WindowManger::WindowManger()
 {
     this->window = new sf::RenderWindow(sf::VideoMode(1024,728),"Stardust Defenders",
     sf::Style::Close | sf::Style::Titlebar);
 
     this->window->setFramerateLimit(60);
 }
-
-
-WindowManger::WindowManger()
-{
-    this->_InitWindow();
-}
 WindowManger::~WindowManger()
 {
     delete this->window;
 }
+
+/*
+------------
+    Getter
+------------
+*/
 
 sf::RenderWindow* WindowManger::GetWindow()
 {
     return this->window;
 }
 
+
+/*
+----------------
+    Functions
+----------------
+*/
 void WindowManger::PollEvents()
 {
     sf::Event ev;

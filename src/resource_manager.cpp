@@ -1,5 +1,10 @@
 #include "../include/resource_manager.h"
 
+/*
+-------------------------------
+    Constructor and destructor
+-------------------------------
+*/
 
 ResourceManager::ResourceManager()
 {
@@ -20,6 +25,27 @@ ResourceManager::~ResourceManager()
 
 }
 
+
+/*
+-------------
+    Getters
+-------------
+*/
+sf::Texture* ResourceManager::GetTexture(const std::string& key)
+{
+    return this->textures[key];
+}
+sf::Font& ResourceManager::GetFont()
+{
+    return this->font;  
+}
+
+
+/*
+---------------
+    Functions
+---------------
+*/
 void ResourceManager::LoadFont()
 {
     //Load font
@@ -45,13 +71,4 @@ void ResourceManager::LoadTextures()
 
     this->textures["ASTEROID_TANK"] = new sf::Texture();
     this->textures["ASTEROID_TANK"]->loadFromFile("resources/textures/asteroid_3.png");
-}
-
-sf::Texture* ResourceManager::GetTexture(const std::string& key)
-{
-    return this->textures[key];
-}
-sf::Font& ResourceManager::GetFont()
-{
-    return this->font;  
 }

@@ -1,6 +1,11 @@
 #include "../include/bullet_manager.h"
 
 
+/*
+-------------------------------
+    Constructor and destructor
+-------------------------------
+*/
 
 BulletManager::BulletManager()
 {
@@ -16,10 +21,23 @@ BulletManager::~BulletManager()
     }
 }
 
+/*
+----------------
+    Getters
+----------------
+*/
+
 std::vector<Bullet*>& BulletManager::GetBullets()
 {
     return this->m_bullets;
 }
+
+
+/*
+---------------
+    Functions
+---------------
+*/
 
 void BulletManager::WorldCollision()
 {
@@ -27,7 +45,7 @@ void BulletManager::WorldCollision()
 
     for(auto *bullet: this->m_bullets)
     {   
-        //Movement
+        //Bullet Movement
         bullet->Update();
 
         // Bullet culling (top of the screen)
@@ -41,6 +59,7 @@ void BulletManager::WorldCollision()
         ++counter;
     }
 }
+
 
 void BulletManager::Update()
 {

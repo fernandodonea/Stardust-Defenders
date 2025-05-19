@@ -1,8 +1,14 @@
 #include "../include/input_manager.h"
 
+
+/*
+---------------
+    Functions
+---------------
+*/
+
 void InputManager::Movement(Player* player)
 {
-    //Move player
     //Left
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
         player->Move(left);
@@ -17,6 +23,7 @@ void InputManager::Movement(Player* player)
         player->Move(down);
 }
 
+
 void InputManager::Attack(Player* player,std::vector<Bullet*>&bullets)
 {
     //Shoot Bullets
@@ -30,6 +37,8 @@ void InputManager::Attack(Player* player,std::vector<Bullet*>&bullets)
         );
     }
 }
+
+
 
 void InputManager::Update(Player* player,std::vector<Bullet*>&bullets)
 {

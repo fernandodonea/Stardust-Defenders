@@ -1,5 +1,10 @@
 #include "../include/world_manager.h"
 
+/*
+--------------------------------
+    Constructor and destructor
+--------------------------------
+*/
 
 WorldManager::WorldManager()
 {
@@ -11,22 +16,36 @@ WorldManager::WorldManager()
 
     //Innit System
     this->points=0;
-
 }
+
 WorldManager::~WorldManager()
 {
 
 }
 
 
+/*
+-------------
+    Getters
+-------------
+*/
+
 const sf::Sprite& WorldManager::GetBackground() const 
 {
     return this->world_background;
 }
+
 int WorldManager::GetPoints() const 
 {
     return this->points;
 }
+
+
+/*
+-------------
+    Setters
+-------------
+*/
 
 void WorldManager::SetPoints(int value)
 {
@@ -36,6 +55,13 @@ void WorldManager::AddPoints(int value)
 {
     SetPoints(this->points+value);
 }
+
+
+/*
+--------------
+    Functions
+--------------
+*/
 
 void WorldManager::Render(sf::RenderTarget& target)
 {

@@ -21,17 +21,15 @@ class GuiManager
         void _InitHealthBar();
 
     public:
+        //Constructors and destructor
         GuiManager();
         GuiManager(sf::Font &font,sf::RenderWindow* window);
         ~GuiManager();
 
+        //Functions
         void Update(int points, int health, int health_max);
         void Render(sf::RenderTarget& target);
         void GameOver(sf::RenderTarget& target);
-
-
-
-
 };
 
 

@@ -1,8 +1,12 @@
 #include "../include/player_manager.h"
 
 
+/*
+-------------------------------
+    Constructor and destructor
+-------------------------------
+*/
 
-//Constructors and destructors
 PlayerManager::PlayerManager()
 {
     this->m_player=new Player();
@@ -13,13 +17,24 @@ PlayerManager::~PlayerManager()
     delete this->m_player;
 }
 
-//Getter
+
+/*
+------------
+    Getter
+------------
+*/
+
 Player* PlayerManager::GetPlayer()
 {
     return this->m_player;
 } 
 
-//Functions
+
+/*
+---------------
+    Functions
+---------------
+*/
 void PlayerManager::WorldCollision(sf::RenderWindow *window)
 {
     //Left world collision
@@ -58,6 +73,7 @@ void PlayerManager::WorldCollision(sf::RenderWindow *window)
         );
     }
 }
+
 void PlayerManager::Update(sf::RenderWindow *window)
 {
     WorldCollision(window);

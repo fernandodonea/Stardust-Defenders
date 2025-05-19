@@ -1,3 +1,12 @@
+/*
+* @class WorldManager
+* @brief Manages the game world and global systems.
+
+    WorldManager is responsible for handling the world background, global game variables (such as points/score),
+    and rendering the world environment. 
+*/
+
+
 #ifndef WORLD_MANAGER_H
 #define WORLD_MANAGER_H
 
@@ -18,15 +27,19 @@ class WorldManager
         int points;
         
     public:
+        //Constructor and destructor
         WorldManager();
         ~WorldManager();
 
+        //Getters
         const sf::Sprite& GetBackground() const;
         int GetPoints() const;
 
+        //Setters
         void SetPoints(int value);
         void AddPoints(int value);
 
+        //Functions
         void Render(sf::RenderTarget& target);
 
 
