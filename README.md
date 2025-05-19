@@ -10,18 +10,51 @@ Entity (Abstract Base Class)
 ├── Player
 ├── Projectile (Abstract)
 │   ├── PlayerBullet
-│   └── BossBullet
+│   └── BossBullet //TODO
 └── Enemy (Abstract)
     ├── BasicEnemy
     ├── FastEnemy
     ├── TankEnemy
-    └── Boss
+    └── Boss //TODO
 ```
+```
+Manager Classes
+├── WindowManager
+├── ResourceManager
+├── GuiManager
+├── PlayerManager
+├── EnemyManager
+├── BulletManager
+├── CombatManager
+├── InputManager
+└── WorldManager
+
+```
+
+## Manager Classes
+
+- **WindowManager**: Manages the game window and window-related events.
+
+- **ResourceManager**: Loads, stores, and provides access to textures and fonts.
+
+- **GuiManager**: Handles all GUI elements (score, health bar, game over screen).
+
+- **PlayerManager**: Manages the player entity, movement, and world collision.
+
+- **EnemyManager**: Spawns, updates, and removes enemies.
+
+- **BulletManager**: Creates, updates, and deletes bullets.
+
+- **CombatManager**: Handles all combat logic (player-enemy and bullet-enemy collisions).
+
+- **InputManager**: Processes player input for movement, shooting.
+
+- **WorldManager**: Manages the world background and global game variables (score, etc.).
 
 
 ## Features
 
-- **Player Controls**: Control your spaceship using `W`,`A`,`S`,`D` keys
+- **Player Controls**: Control your spaceship using `W`, `A`, `S`, `D` keys
 - **Combat System**: 
   - Shoot bullets using the `spacebar`
   - Enemy collision detection
@@ -32,6 +65,8 @@ Entity (Abstract Base Class)
   - Collision detection with player and bullets
 - **GUI Elements**:
   - Score tracking
+  - Health bar
+  - Game over screen
 
 ## Controls
 
