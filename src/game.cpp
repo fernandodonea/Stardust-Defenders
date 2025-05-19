@@ -43,6 +43,8 @@ Game::Game()
 
     this->m_enemy_manager = new EnemyManager(this->m_window_manager->GetWindow());
 
+    this->m_bullet_manager = new BulletManager(this->m_window_manager->GetWindow());
+
     this->_InitWorld();
     this->_InitSystems();
 }
@@ -59,18 +61,8 @@ Game::~Game()
 
     delete this->m_enemy_manager;
 
+    delete this->m_bullet_manager;
 
-    // Delete any bullets left
-    for(auto *i: this->m_bullets)
-    {
-        delete i;
-    }
-
-    // Delete enemies
-    for(auto *i: this->m_enemy_manager->GetAsteroids())
-    {
-        delete i;
-    }
 } 
 
 
@@ -110,7 +102,7 @@ void Game::UpdateInput()
     //Shoot Bullets
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->m_player_manager->GetPlayer()->CanAttack())
     {
-        this->m_bullets.push_back(
+        this->m_bullet_manager->GetBullets().push_back(
             new Bullet(
                 this->m_player_manager->GetPlayer()->GetPosition().x + this->m_player_manager->GetPlayer()->GetBounds().width/2.f-12.f,
                 this->m_player_manager->GetPlayer()->GetPosition().y
@@ -129,26 +121,7 @@ void Game::UpdateWorld()
 
 
 
-void Game::UpdateBullets()
-{
-    unsigned counter=0;
 
-    for(auto *bullet: this->m_bullets)
-    {
-        bullet->Update();
-
-        // Bullet culling (top of the screen)
-        if(bullet->GetBounds().top + bullet->GetBounds().height < 0.f)
-        {
-            //Delete bullet
-            delete this->m_bullets.at(counter);
-            this->m_bullets.erase(this->m_bullets.begin()+counter);
-            
-        }
-
-        ++counter;
-    }
-}
 void Game::UpdateEnemies()
 {
 
@@ -178,12 +151,12 @@ void Game::UpdateCombat()
     { 
         bool enemy_deleted=false;
 
-        for(size_t k=0; k<this->m_bullets.size() && enemy_deleted==false; ++k)
+        for(size_t k=0; k<this->m_bullet_manager->GetBullets().size() && enemy_deleted==false; ++k)
         {
-            if(this->m_enemy_manager->GetAsteroids()[i]->GetBounds().intersects(this->m_bullets[k]->GetBounds()))
+            if(this->m_enemy_manager->GetAsteroids()[i]->GetBounds().intersects(this->m_bullet_manager->GetBullets()[k]->GetBounds()))
             {
                 //Enemy take damage
-                this->m_enemy_manager->GetAsteroids()[i]->LoseHp(this->m_bullets[k]->GetDamage());
+                this->m_enemy_manager->GetAsteroids()[i]->LoseHp(this->m_bullet_manager->GetBullets()[k]->GetDamage());
 
                 if(m_enemy_manager->GetAsteroids()[i]->GetHp()==0)
                 {
@@ -199,8 +172,8 @@ void Game::UpdateCombat()
 
 
                 //Delete Bullet
-                delete this->m_bullets[k];
-                this->m_bullets.erase(this->m_bullets.begin() + k); 
+                delete this->m_bullet_manager->GetBullets()[k];
+                this->m_bullet_manager->GetBullets().erase(this->m_bullet_manager->GetBullets().begin() + k); 
                 
             }
         }
@@ -216,7 +189,7 @@ void Game::Update()
 
     this->m_player_manager->Update();
 
-    this->UpdateBullets();
+    this->m_bullet_manager->Update();
 
     this->m_enemy_manager->Update();
 
@@ -253,7 +226,7 @@ void Game::Render()
     this->m_player_manager->GetPlayer()->Render(*this->m_window_manager->GetWindow());
 
     //Render the bullets
-    for(auto *bullet: this->m_bullets)
+    for(auto *bullet: this->m_bullet_manager->GetBullets())
     {
         bullet->Render(*this->m_window_manager->GetWindow());
     }

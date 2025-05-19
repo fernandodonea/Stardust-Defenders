@@ -16,6 +16,7 @@
 #include "gui_manager.h"
 #include "player_manager.h"
 #include "enemy_manager.h"
+#include "bullet_manager.h"
 
 
 namespace Game_Engine
@@ -33,17 +34,16 @@ class Game
         //GUI
         GuiManager* m_gui_manager;
 
-        //Player
+        //Player 
         PlayerManager *m_player_manager;
 
         //Enemy
         EnemyManager *m_enemy_manager;
 
+        //Bullet 
+        BulletManager *m_bullet_manager;
 
 
-
-        //Resources 
-        std::vector<Bullet*> m_bullets;
 
 
         //World 
@@ -76,7 +76,7 @@ class Game
         void UpdateInput();
 
         void UpdateWorld();
-        void UpdateBullets();
+
         void UpdateEnemies();
         void UpdateCombat();
         void Update();
