@@ -12,7 +12,7 @@ class BulletManager
 
     public:
         BulletManager();
-        BulletManager(sf::RenderWindow *window);
+        BulletManager();
         ~BulletManager();
 
         std::vector<Bullet*>& GetBullets();

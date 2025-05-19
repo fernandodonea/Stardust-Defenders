@@ -16,8 +16,6 @@ class WorldManager
 
         //Systems
         int points;
-
-        
         
     public:
         WorldManager();

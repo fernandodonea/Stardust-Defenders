@@ -20,11 +20,11 @@ Game::Game()
         m_window_manager->GetWindow()
     ); // Initialize GUI
 
-    this->m_player_manager = new PlayerManager(this->m_window_manager->GetWindow());
+    this->m_player_manager = new PlayerManager();
 
-    this->m_enemy_manager = new EnemyManager(this->m_window_manager->GetWindow());
+    this->m_enemy_manager = new EnemyManager();
 
-    this->m_bullet_manager = new BulletManager(this->m_window_manager->GetWindow());
+    this->m_bullet_manager = new BulletManager();
 
     this->m_world_manager = new WorldManager();
 }
@@ -100,28 +100,7 @@ void Game::UpdateInput()
 
 
 
-void Game::UpdateEnemies()
-{
 
-
-    //Update 
-    unsigned counter=0; 
-    for(auto *enemy: this->m_enemy_manager->GetAsteroids())
-    {
-
-        //Enemy player collision 
-        if(enemy->GetBounds().intersects(this->m_player_manager->GetPlayer()->GetBounds()))
-        {
-            //take damge
-            this->m_player_manager->GetPlayer()->LoseHp(this->m_enemy_manager->GetAsteroids().at(counter)->GetDamage());
-
-            delete this->m_enemy_manager->GetAsteroids().at(counter);
-            this->m_enemy_manager->GetAsteroids().erase(this->m_enemy_manager->GetAsteroids().begin()+counter); 
-        }
-
-        ++counter;
-    }
-}
 
 void Game::UpdateCombat()
 {
@@ -163,13 +142,17 @@ void Game::Update()
     this->UpdateInput();
 
   
-    this->m_player_manager->Update();
+    this->m_player_manager->Update(
+        this->m_window_manager->GetWindow()
+    );
 
     this->m_bullet_manager->Update();
 
-    this->m_enemy_manager->Update();
+    this->m_enemy_manager->Update(
+        this->m_window_manager->GetWindow(),
+        this->m_player_manager->GetPlayer()
+    );
 
-    this->UpdateEnemies();
     this->UpdateCombat();
 
     m_gui_manager->Update(

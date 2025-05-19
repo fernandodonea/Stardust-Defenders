@@ -2,6 +2,7 @@
 #define ENEMY_MANAGER_H
 
 #include "asteroid.h"
+#include "player.h"
 
 class EnemyManager
 {
@@ -10,20 +11,19 @@ class EnemyManager
         float spawn_timer_max;
         std::vector<Asteroid*> m_enemies;
 
-        sf::RenderWindow *m_window;
-
-
     public:
         EnemyManager();
-        EnemyManager(sf::RenderWindow *window);
         ~EnemyManager();
 
         std::vector<Asteroid*>& GetAsteroids();
+        
+        void SpawnEnemies(sf::RenderWindow *window);
+        
+        void WorldCollision(sf:: RenderWindow *window);
+        void PlayerCollision(Player *player);
 
-        void WorldCollision();
-        void SpawnEnemies();
 
-        void Update();
+        void Update(sf:: RenderWindow *window, Player *player);
 };
 
 

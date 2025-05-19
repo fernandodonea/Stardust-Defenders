@@ -1,12 +1,8 @@
 #include "../include/enemy_manager.h"
 
+
 EnemyManager::EnemyManager()
 {
-
-}
-EnemyManager::EnemyManager(sf::RenderWindow *window)
-{
-    this->m_window=window;
 
     this->spawn_timer_max=50.f;
     this->spawn_timer=this->spawn_timer_max;
@@ -27,16 +23,16 @@ std::vector<Asteroid*>& EnemyManager::GetAsteroids()
 }
 
 
-void EnemyManager::SpawnEnemies()
+void EnemyManager::SpawnEnemies(sf::RenderWindow *window)
 {
     this->spawn_timer+=0.5f;
     if(this->spawn_timer >= this->spawn_timer_max)
     {
-        this->m_enemies.push_back(new Asteroid(rand()%this->m_window->getSize().x-80.f, -100.f));
+        this->m_enemies.push_back(new Asteroid(rand()%window->getSize().x-80.f, -100.f));
         this->spawn_timer=0.f;
     }
 }
-void EnemyManager::WorldCollision()
+void EnemyManager::WorldCollision(sf:: RenderWindow *window)
 {
     unsigned counter=0; 
     for(auto *enemy: this->m_enemies)
@@ -45,20 +41,40 @@ void EnemyManager::WorldCollision()
         enemy->Update();
 
         // Enemy culling (Bottom of the screen)
-        if(enemy->GetBounds().top > this->m_window->getSize().y)
+        if(enemy->GetBounds().top > window->getSize().y)
         {
             //Delete Enemy
             delete this->m_enemies.at(counter);
-            this->m_enemies.erase(this->m_enemies.begin()+counter);
-             
+            this->m_enemies.erase(this->m_enemies.begin()+counter);   
         }
         counter++;
     }
 }
-
-void EnemyManager::Update()
+void EnemyManager::PlayerCollision(Player *player)
 {
-    SpawnEnemies();
-    WorldCollision();
+
+    unsigned counter=0; 
+    for(auto *enemy: this->m_enemies)
+    {
+
+        //Enemy player collision 
+        if(enemy->GetBounds().intersects(player->GetBounds()))
+        {
+            //take damge
+            player->LoseHp(this->m_enemies.at(counter)->GetDamage());
+
+            delete this->m_enemies.at(counter);
+            this->m_enemies.erase(this->m_enemies.begin()+counter); 
+        }
+
+        ++counter;
+    }
+}
+
+void EnemyManager::Update(sf:: RenderWindow *window, Player *player)
+{
+    SpawnEnemies(window);
+    WorldCollision(window);
+    PlayerCollision(player);
 }
 

@@ -7,21 +7,17 @@ class PlayerManager
 {
     private:
         Player* m_player;
-        sf::RenderWindow *m_window;
-
-        void _InitPlayer();
     public:
         //Constructors and destructors
         PlayerManager();
-        PlayerManager(sf::RenderWindow *window);
         ~PlayerManager();
 
         //Getter
         Player* GetPlayer();
 
         //Functions
-        void WorldCollision();
-        void Update();
+        void WorldCollision(sf::RenderWindow *window);
+        void Update(sf::RenderWindow *window);
 };
 
 

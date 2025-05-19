@@ -6,11 +6,7 @@ BulletManager::BulletManager()
 {
 
 }
-BulletManager::BulletManager(sf::RenderWindow *window)
-{
-    this->m_window=window;
 
-}
 BulletManager::~BulletManager()
 {
     // Delete any bullets left
