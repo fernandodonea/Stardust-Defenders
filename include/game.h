@@ -15,6 +15,7 @@
 #include "resource_manager.h"
 #include "gui_manager.h"
 #include "player_manager.h"
+#include "input_manager.h"
 #include "enemy_manager.h"
 #include "bullet_manager.h"
 #include "combat_manager.h"
@@ -38,6 +39,9 @@ class Game
 
         //Player 
         PlayerManager *m_player_manager;
+
+        //Input
+        InputManager *m_input_manager;
 
         //Enemy
         EnemyManager *m_enemy_manager;
@@ -66,7 +70,6 @@ class Game
         void Update();
         
         void Render();
-
 };
 
 

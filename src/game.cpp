@@ -22,6 +22,8 @@ Game::Game()
 
     this->m_player_manager = new PlayerManager();
 
+    this->m_input_manager = new InputManager();
+
     this->m_enemy_manager = new EnemyManager();
 
     this->m_bullet_manager = new BulletManager();
@@ -40,6 +42,8 @@ Game::~Game()
     delete this->m_gui_manager;
 
     delete this->m_player_manager;
+
+    delete this->m_input_manager;
 
     delete this->m_enemy_manager;
 
@@ -69,46 +73,13 @@ void Game::Run()
 
 
 
-void Game::UpdateInput()
-{
-    //Move player
-    //Left
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-        this->m_player_manager->GetPlayer()->Move(-1.f,0.f);
-    //Right
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-        this->m_player_manager->GetPlayer()->Move(1.f,0.f);
-    //Up
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-        this->m_player_manager->GetPlayer()->Move(0.f,-1.f);
-    //Down
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-        this->m_player_manager->GetPlayer()->Move(0.f,1.f);
-
-    //Shoot Bullets
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->m_player_manager->GetPlayer()->CanAttack())
-    {
-        this->m_bullet_manager->GetBullets().push_back(
-            new Bullet(
-                this->m_player_manager->GetPlayer()->GetPosition().x + this->m_player_manager->GetPlayer()->GetBounds().width/2.f-12.f,
-                this->m_player_manager->GetPlayer()->GetPosition().y
-            )
-        );
-    }
-}
-
-
-
-
-
-
-
-
-
 
 void Game::Update()
 {
-    this->UpdateInput();
+    this->m_input_manager->Update(
+        this->m_player_manager->GetPlayer(),
+        this->m_bullet_manager->GetBullets()
+    );
 
   
     this->m_player_manager->Update(
@@ -161,9 +132,9 @@ void Game::Render()
     }
 
     //Render the enemies
-    for(auto *enemy: this->m_enemy_manager->GetAsteroids())
+    for(auto *asteroid: this->m_enemy_manager->GetAsteroids())
     {
-        enemy->Render(*this->m_window_manager->GetWindow());
+        asteroid->Render(*this->m_window_manager->GetWindow());
     }
 
     //Render Gui
@@ -171,7 +142,9 @@ void Game::Render()
 
     //Game Over Screen
     if(this->m_player_manager->GetPlayer()->GetHp()<=0)
+    {
         this->m_gui_manager->GameOver(*this->m_window_manager->GetWindow());
+    }
 
       
     this->m_window_manager->GetWindow()->display();
