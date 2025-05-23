@@ -20,8 +20,8 @@ class WorldManager
 {
     private:
         //World 
-        sf::Texture world_background_texture;
-        sf::Sprite world_background;
+        sf::Texture m_world_background_texture;
+        sf::Sprite m_world_background;
 
         //Systems
         int points;

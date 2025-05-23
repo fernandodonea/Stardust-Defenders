@@ -9,8 +9,8 @@
 EnemyManager::EnemyManager()
 {
 
-    this->spawn_timer_max=50.f;
-    this->spawn_timer=this->spawn_timer_max;
+    this->m_spawn_timer_max=50.f;
+    this->m_spawn_timer=this->m_spawn_timer_max;
 }
 
 EnemyManager::~EnemyManager()
@@ -39,11 +39,11 @@ std::vector<Asteroid*>& EnemyManager::GetAsteroids()
 */
 void EnemyManager::SpawnEnemies(sf::RenderWindow *window)
 {
-    this->spawn_timer+=0.5f;
-    if(this->spawn_timer >= this->spawn_timer_max)
+    this->m_spawn_timer+=0.5f;
+    if(this->m_spawn_timer >= this->m_spawn_timer_max)
     {
         this->m_enemies.push_back(new Asteroid(rand()%window->getSize().x-80.f, -100.f));
-        this->spawn_timer=0.f;
+        this->m_spawn_timer=0.f;
     }
 }
 

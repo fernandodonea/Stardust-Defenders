@@ -3,10 +3,10 @@
 
 const int& Projectile::GetDamage() const
 {
-   return this->damage;
+   return this->m_damage;
 }
 void Projectile::Update()
 {
    //Movement
-   Move(direction.x, direction.y);
+   Move(m_direction.x, m_direction.y);
 }

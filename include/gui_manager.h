@@ -9,12 +9,12 @@
 class GuiManager
 {
     private:
-        sf::Text point_text;
-        sf::Text game_over_text;
+        sf::Text m_point_text;
+        sf::Text m_game_over_text;
 
         //Player GUI
-        sf::RectangleShape player_hp_bar;
-        sf::RectangleShape player_hp_bar_back;
+        sf::RectangleShape m_player_hp_bar;
+        sf::RectangleShape m_player_hp_bar_back;
 
         void _InitPoints(sf::Font &font);
         void _InitGameOver(sf::Font &font,sf::RenderWindow* window);

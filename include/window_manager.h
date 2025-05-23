@@ -21,7 +21,7 @@
 class WindowManger
 {
     private:
-        sf::RenderWindow* window;
+        sf::RenderWindow* m_window;
 
     public:
         //Constructor and destructor

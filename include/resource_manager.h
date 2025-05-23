@@ -24,8 +24,8 @@
 class ResourceManager
 {
     private:
-        std::map<std::string, sf::Texture*> textures;
-        sf::Font font;
+        std::map<std::string, sf::Texture*> m_textures;
+        sf::Font m_font;
     public:
         //Constructor and destructor
         ResourceManager();

@@ -19,28 +19,28 @@ Enemy::~Enemy()
 //Accesors
 const int& Enemy::GetType() const
 {
-    return this->type; 
+    return this->m_type; 
 }
 const int& Enemy::GetHp() const
 {
-    return this->hp;
+    return this->m_hp;
 }
 const int& Enemy::GetPoints() const
 {
-    return this->points; 
+    return this->m_points; 
 }
 const int&Enemy::GetDamage() const
 {
-    return this->damage; 
+    return this->m_damage; 
 }
 
 //Functions
 
 void Enemy::LoseHp(const int value)
 {
-    this->hp-=value;
-    if(this->hp<0)
-        this->hp=0;
+    this->m_hp-=value;
+    if(this->m_hp<0)
+        this->m_hp=0;
 }
 
 void Enemy::Update()

@@ -19,10 +19,10 @@ const sf::Vector2f right(1.f,0.f);
 class Entity
 {
     protected:
-        sf::Sprite sprite;
-        sf::Texture texture;
+        sf::Sprite m_sprite;
+        sf::Texture m_texture;
 
-        float movement_speed;
+        float m_movement_speed;
 
         virtual void _InitVariables()=0;
         virtual void _InitTexture()=0;

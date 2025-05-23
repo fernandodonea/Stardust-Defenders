@@ -6,20 +6,20 @@
 
 void Player::_InitVariables()
 {
-    this->movement_speed=5.f;
+    this->m_movement_speed=5.f;
 
-    this->attack_cooldown_max=10.f;
-    this->attack_cooldown=this->attack_cooldown_max;
+    this->m_attack_cooldown_max=10.f;
+    this->m_attack_cooldown=this->m_attack_cooldown_max;
 
-    this->hp_max=100;
-    this->hp=this->hp_max;
+    this->m_hp_max=100;
+    this->m_hp=this->m_hp_max;
     
 }
 
 void Player::_InitTexture()
 {
     //Load texture from file 
-    if(!this->texture.loadFromFile("resources/textures/spaceship.png"))
+    if(!this->m_texture.loadFromFile("resources/textures/spaceship.png"))
     {
         std::cout<<"ERROR:PLAYER::_INITTEXTURE: Could not load texture file"<<"\n";
     }
@@ -28,15 +28,15 @@ void Player::_InitTexture()
 void Player::_InitSprite()
 {
     //Set the texture to the sprite
-    this->sprite.setTexture(this->texture);
+    this->m_sprite.setTexture(this->m_texture);
 
     //Resize the sprite 
-    this->sprite.scale(0.3f,0.3f);
+    this->m_sprite.scale(0.3f,0.3f);
 
     //Set the player in the center of the speed
     SetPosition(
-        512.f-this->sprite.getGlobalBounds().width,
-        364.f-this->sprite.getGlobalBounds().height);
+        512.f-this->m_sprite.getGlobalBounds().width,
+        364.f-this->m_sprite.getGlobalBounds().height);
 } 
 
 
@@ -60,12 +60,12 @@ Player::~Player()
 //Accesors
 const int& Player::GetHp() const
 {
-    return this->hp;
+    return this->m_hp;
 
 }
 const int& Player::GetHpMax() const
 {
-    return this->hp_max; 
+    return this->m_hp_max; 
 
 } 
 
@@ -73,30 +73,30 @@ const int& Player::GetHpMax() const
 //Modifiers
 void Player::SetHp(const int hp)
 {
-    this->hp=hp;
+    this->m_hp=hp;
 }
 void Player::LoseHp(const int value)
 {
-    this->hp-=value;
-    if(this->hp<0)
-        this->hp=0;
+    this->m_hp-=value;
+    if(this->m_hp<0)
+        this->m_hp=0;
 }
 
 
 //Functions
 const bool Player::CanAttack()
 {
-    if(this->attack_cooldown>=this->attack_cooldown_max)
+    if(this->m_attack_cooldown>=this->m_attack_cooldown_max)
     {
-        this->attack_cooldown=0.f;
+        this->m_attack_cooldown=0.f;
         return true;
     }
     return false;
 }
 void Player::UpdateAttack()
 {
-    if(this->attack_cooldown < this->attack_cooldown_max)
-        this->attack_cooldown+=0.5f;
+    if(this->m_attack_cooldown < this->m_attack_cooldown_max)
+        this->m_attack_cooldown+=0.5f;
 }
 
 

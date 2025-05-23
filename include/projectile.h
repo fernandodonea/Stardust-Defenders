@@ -5,8 +5,8 @@
 
 class Projectile : public Entity {
 protected:
-    int damage;
-    sf::Vector2f direction;
+    int m_damage;
+    sf::Vector2f m_direction;
 
 public:
     // Getters

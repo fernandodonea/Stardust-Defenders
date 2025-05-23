@@ -7,11 +7,11 @@
 class Player: public Entity
 {
     protected:
-        float attack_cooldown;
-        float attack_cooldown_max; 
+        float m_attack_cooldown;
+        float m_attack_cooldown_max; 
 
-        int hp;
-        int hp_max;
+        int m_hp;
+        int m_hp_max;
 
         void _InitVariables() override;
         void _InitTexture() override;

@@ -19,8 +19,8 @@
 class EnemyManager
 {
     private:
-        float spawn_timer;
-        float spawn_timer_max;
+        float m_spawn_timer;
+        float m_spawn_timer_max;
         std::vector<Asteroid*> m_enemies;
 
     public:

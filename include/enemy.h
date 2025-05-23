@@ -6,15 +6,15 @@
 class Enemy: public Entity
 {
     protected:  
-        int type;
+        int m_type;
         
-        int hp;
-        int hp_max;
+        int m_hp;
+        int m_hp_max;
 
-        int damage;
-        int points;
+        int m_damage;
+        int m_points;
 
-        float size;
+        float m_size;
 
         //Private functions
 
