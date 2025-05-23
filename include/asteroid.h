@@ -9,13 +9,12 @@ class Asteroid: public Enemy
     private:
         //Private functions
         void _InitVariables() override;
-        void _InitTexture() ;
-        void _InitSprite() ;
+
 
     public:
         //Constructor and Destructor
         Asteroid();
-        Asteroid(float pos_x, float pos_y);
+        Asteroid(int type, sf::Texture* texture,float pos_x, float pos_y);
         virtual ~Asteroid();
 
         //Accesors

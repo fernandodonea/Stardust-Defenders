@@ -9,6 +9,7 @@
 
 PlayerManager::PlayerManager(sf::Texture* texture)
 {
+    std::cout<<"Player texture"<<texture;
     this->m_player=new Player(texture);
 }
 

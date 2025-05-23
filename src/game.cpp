@@ -24,7 +24,11 @@ Game::Game()
 
     this->m_input_manager = new InputManager();
 
-    this->m_enemy_manager = new EnemyManager();
+    this->m_enemy_manager = new EnemyManager(
+        m_resource_manager->GetTexture("ASTEROID_NORMAL"),
+        m_resource_manager->GetTexture("ASTEROID_FAST"),
+        m_resource_manager->GetTexture("ASTEROID_TANK")
+    );
 
     this->m_bullet_manager = new BulletManager();
 
