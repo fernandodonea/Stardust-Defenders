@@ -1,5 +1,16 @@
 #include "../include/entity.h"
 
+//Protected functions
+void Entity::_InitSprite(sf::Texture* texture,float pos_x, float pos_y, float size)
+{
+    SetTexture(texture);
+
+    SetPosition(pos_x,pos_y);
+
+    SetSize(size);
+
+}
+
 
 
 // Getters
@@ -24,6 +35,14 @@ void Entity::SetPosition(const float x, const float y)
 void Entity::SetPosition(const sf::Vector2f pos)
 {
     this->m_sprite.setPosition(pos);
+}
+void Entity::SetTexture(sf::Texture* texture)
+{
+    this->m_sprite.setTexture(*texture);
+}
+void Entity::SetSize(float size)
+{
+    this->m_sprite.setScale(size,size);
 }
 
 

@@ -21,7 +21,7 @@ class PlayerManager
     
     public:
         //Constructor and destructor
-        PlayerManager();
+        PlayerManager(sf::Texture* texture);
         ~PlayerManager();
 
         //Getter

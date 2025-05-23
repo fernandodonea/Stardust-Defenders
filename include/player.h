@@ -14,12 +14,10 @@ class Player: public Entity
         int m_hp_max;
 
         void _InitVariables() override;
-        void _InitTexture() override;
-        void _InitSprite() override;
 
     public:
         //Constructor and destructor
-        Player();
+        Player(sf::Texture* texture);
         virtual ~Player();
 
         //Accesors

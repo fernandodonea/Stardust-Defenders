@@ -25,8 +25,7 @@ class Entity
         float m_movement_speed;
 
         virtual void _InitVariables()=0;
-        virtual void _InitTexture()=0;
-        virtual void _InitSprite()=0;
+        void _InitSprite(sf::Texture* texture,float pos_x, float pos_y, float size);
     
     public:
         // Getters
@@ -36,6 +35,8 @@ class Entity
         // Setters
         void SetPosition(const float x, const float y);
         void SetPosition(const sf::Vector2f pos);
+        void SetTexture(sf::Texture* texture);
+        void SetSize(float size);
     
         // Functions
         void Move(const float dir_x, const float dir_y);

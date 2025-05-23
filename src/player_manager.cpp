@@ -7,9 +7,9 @@
 -------------------------------
 */
 
-PlayerManager::PlayerManager()
+PlayerManager::PlayerManager(sf::Texture* texture)
 {
-    this->m_player=new Player();
+    this->m_player=new Player(texture);
 }
 
 PlayerManager::~PlayerManager()

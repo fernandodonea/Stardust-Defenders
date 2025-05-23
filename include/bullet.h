@@ -10,8 +10,8 @@ class Bullet: public Projectile
 {
     private:
         void _InitVariables() override;
-        void _InitTexture() override;
-        void _InitSprite() override;
+        void _InitTexture() ;
+        void _InitSprite() ;
 
 
     public:

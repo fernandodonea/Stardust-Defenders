@@ -20,7 +20,7 @@ Game::Game()
         m_window_manager->GetWindow()
     ); // Initialize GUI
 
-    this->m_player_manager = new PlayerManager();
+    this->m_player_manager = new PlayerManager(m_resource_manager->GetTexture("PLAYER"));
 
     this->m_input_manager = new InputManager();
 

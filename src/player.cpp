@@ -16,37 +16,15 @@ void Player::_InitVariables()
     
 }
 
-void Player::_InitTexture()
-{
-    //Load texture from file 
-    if(!this->m_texture.loadFromFile("resources/textures/spaceship.png"))
-    {
-        std::cout<<"ERROR:PLAYER::_INITTEXTURE: Could not load texture file"<<"\n";
-    }
-}
-
-void Player::_InitSprite()
-{
-    //Set the texture to the sprite
-    this->m_sprite.setTexture(this->m_texture);
-
-    //Resize the sprite 
-    this->m_sprite.scale(0.3f,0.3f);
-
-    //Set the player in the center of the speed
-    SetPosition(
-        512.f-this->m_sprite.getGlobalBounds().width,
-        364.f-this->m_sprite.getGlobalBounds().height);
-} 
-
-
-
 //Constructor and destructor
-Player::Player()
+Player::Player(sf::Texture* texture)
 {
-    this->_InitVariables();
-    this->_InitTexture();
-    this->_InitSprite();
+    _InitVariables();
+
+    float pos_x=512.f-this->m_sprite.getGlobalBounds().width;
+    float pos_y=364.f-this->m_sprite.getGlobalBounds().height;
+
+    _InitSprite(texture,pos_x,pos_y,0.3f);
 
 }
 

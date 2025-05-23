@@ -9,8 +9,8 @@ class Asteroid: public Enemy
     private:
         //Private functions
         void _InitVariables() override;
-        void _InitTexture() override;
-        void _InitSprite() override;
+        void _InitTexture() ;
+        void _InitSprite() ;
 
     public:
         //Constructor and Destructor
