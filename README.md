@@ -4,53 +4,6 @@ A classic-style space shooter game built with C++ and SFML to practice object-or
 
 ![Game Screenshot](/resources/screenshots/gameplay.png)
 
-## Class hierarchy
-```
-Entity (Abstract Base Class)
-├── Player
-├── Projectile (Abstract)
-│   ├── PlayerBullet
-│   └── BossBullet //TODO
-└── Enemy (Abstract)
-    ├── BasicEnemy
-    ├── FastEnemy
-    ├── TankEnemy
-    └── Boss //TODO
-```
-```
-Manager Classes
-├── WindowManager
-├── ResourceManager
-├── GuiManager
-├── PlayerManager
-├── EnemyManager
-├── BulletManager
-├── CombatManager
-├── InputManager
-└── WorldManager
-
-```
-
-## Manager Classes
-
-- **WindowManager**: Manages the game window and window-related events.
-
-- **ResourceManager**: Loads, stores, and provides access to textures and fonts.
-
-- **GuiManager**: Handles all GUI elements (score, health bar, game over screen).
-
-- **PlayerManager**: Manages the player entity, movement, and world collision.
-
-- **EnemyManager**: Spawns, updates, and removes enemies.
-
-- **BulletManager**: Creates, updates, and deletes bullets.
-
-- **CombatManager**: Handles all combat logic (player-enemy and bullet-enemy collisions).
-
-- **InputManager**: Processes player input for movement, shooting.
-
-- **WorldManager**: Manages the world background and global game variables (score, etc.).
-
 
 ## Features
 
@@ -70,12 +23,15 @@ Manager Classes
 
 ## Controls
 
-- **W** - Move Up
-- **S** - Move Down
-- **A** - Move Left
-- **D** - Move Right
-- **Space** - Shoot
-- **ESC** - Exit Game
+| Action      | Key        |
+|-------------|------------|
+| Move Up     | W          |
+| Move Down   | S          |
+| Move Left   | A          |
+| Move Right  | D          |
+| Shoot       | Space      |
+| Exit Game   | ESC        |
+
 
 
 
