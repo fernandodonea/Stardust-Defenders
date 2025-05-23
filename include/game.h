@@ -7,10 +7,6 @@
 #include <sstream>
 
 
-#include "player.h"
-#include "bullet.h"
-#include "asteroid.h"
-
 #include "window_manager.h"
 #include "resource_manager.h"
 #include "gui_manager.h"
@@ -64,8 +60,6 @@ class Game
 
         //Functions
         void Run(); 
-
-        void UpdateInput();
 
         void Update();
         

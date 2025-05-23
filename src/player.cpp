@@ -32,6 +32,11 @@ void Player::_InitSprite()
 
     //Resize the sprite 
     this->sprite.scale(0.3f,0.3f);
+
+    //Set the player in the center of the speed
+    SetPosition(
+        512.f-this->sprite.getGlobalBounds().width,
+        364.f-this->sprite.getGlobalBounds().height);
 } 
 
 
