@@ -18,7 +18,7 @@ class Bullet: public Projectile
         //Constructor and destructor
         Bullet()=default;
         Bullet(float pos_x, float pos_y);
-        virtual ~Bullet();
+        virtual ~Bullet()=default;
 };
 
 

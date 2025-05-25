@@ -11,6 +11,8 @@ const int& Projectile::GetDamage() const
    return this->m_damage;
 }
 
+
+
 /*
 --------------
    Functions

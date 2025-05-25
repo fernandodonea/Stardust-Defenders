@@ -17,8 +17,9 @@ class Player: public Entity
 
     public:
         //Constructor and destructor
+        Player()=default;
         Player(sf::Texture* texture);
-        virtual ~Player();
+        virtual ~Player()=default;
 
         //Getter
         const int& GetHp() const;

@@ -16,6 +16,7 @@ void Bullet::_InitVariables()
     
 
 }
+
 void Bullet::_InitTexture()
 {
     //Load texture from file 
@@ -23,13 +24,14 @@ void Bullet::_InitTexture()
     {
         std::cout<<"ERROR:BULLET::_INITTEXTURE: Could not load texture file"<<"\n";
     }
-
 }
+
 void Bullet::_InitSprite()
 {
     this->m_sprite.setTexture(this->m_texture);
     this->m_sprite.setScale(0.5f,0.5f);
 }
+
 
 
 /*
@@ -44,8 +46,3 @@ Bullet::Bullet (float pos_x, float pos_y)
     _InitSprite();
     this->m_sprite.setPosition(pos_x,pos_y);
 }
-Bullet::~Bullet()
-{
-
-}
-

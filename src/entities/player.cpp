@@ -7,7 +7,6 @@
     Private functions
 -----------------------
 */
-
 void Player::_InitVariables()
 {
     this->m_movement_speed=5.f;
@@ -21,10 +20,11 @@ void Player::_InitVariables()
 }
 
 
+
 /*
---------------------------------
-    Constructor and destructor
---------------------------------
+-----------------
+    Constructor 
+-----------------
 */
 Player::Player(sf::Texture* texture)
 {
@@ -34,11 +34,6 @@ Player::Player(sf::Texture* texture)
     float pos_y=364.f-this->m_sprite.getGlobalBounds().height;
 
     _InitSprite(texture,pos_x,pos_y,0.4f);
-
-}
-
-Player::~Player()
-{
 
 }
 
@@ -61,6 +56,7 @@ const int& Player::GetHpMax() const
 } 
 
 
+
 /*
 ------------
     Setter
@@ -78,6 +74,7 @@ void Player::LoseHp(const int value)
 }
 
 
+
 /*
 ---------------
     Functions
@@ -92,6 +89,7 @@ const bool Player::CanAttack()
     }
     return false;
 }
+
 void Player::UpdateAttack()
 {
     if(this->m_attack_cooldown < this->m_attack_cooldown_max)
