@@ -16,14 +16,13 @@ class Enemy: public Entity
 
         float m_size;
 
-        //Private functions
 
     public:
         //Constructor and Destructor
-        Enemy();
-        virtual ~Enemy();
+        Enemy()=default;
+        virtual ~Enemy()=default;
 
-        //Accesors
+        //Getters
         const int& GetType() const;
         const int& GetHp() const;
         const int& GetPoints() const;

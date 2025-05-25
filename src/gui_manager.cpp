@@ -3,22 +3,12 @@
 #include <string>
 #include <sstream>
 
-GuiManager::GuiManager()
-{
 
-}
-GuiManager::GuiManager(sf::Font &font,sf::RenderWindow* window) 
-{
-    _InitPoints(font);
-    _InitHealthBar();
-    _InitGameOver(font,window);
-
-}
-GuiManager::~GuiManager()
-{
-
-}
-
+/*
+-----------------------
+    Private functions
+-----------------------
+*/
 
 void GuiManager::_InitPoints(sf::Font &font)
 {
@@ -28,7 +18,7 @@ void GuiManager::_InitPoints(sf::Font &font)
     this->m_point_text.setFillColor(sf::Color::White);
     this->m_point_text.setString("");
     this->m_point_text.setPosition(850.f,20.f);
-
+    
 }
 void GuiManager::_InitGameOver(sf::Font &font,sf::RenderWindow* window)
 {
@@ -48,11 +38,39 @@ void GuiManager::_InitHealthBar()
     this->m_player_hp_bar.setSize(sf::Vector2f(300.f,25.f));
     this->m_player_hp_bar.setPosition(sf::Vector2f(20.f,15.f));
     this->m_player_hp_bar.setFillColor(sf::Color::Red);
-
+    
     this->m_player_hp_bar_back=this->m_player_hp_bar;
     this->m_player_hp_bar_back.setFillColor(sf::Color(25,25,25,200));
 }
 
+
+/*
+-------------------------------
+    Constructor and destructor
+-------------------------------
+*/
+GuiManager::GuiManager()
+{
+
+}
+GuiManager::GuiManager(sf::Font &font,sf::RenderWindow* window) 
+{
+    _InitPoints(font);
+    _InitHealthBar();
+    _InitGameOver(font,window);
+
+}
+GuiManager::~GuiManager()
+{
+
+}
+
+
+/*
+----------------
+    Functions
+----------------
+*/
 void GuiManager::Update(int points, int health, int health_max)
 {
     //Update Score

@@ -24,12 +24,9 @@ class Asteroid: public Enemy
 
         //Setter
         static void IncrementAsteroidsDestroyed();
-
-
-
+ 
         //Functions
         void Update() override;
-  
 };
 
 

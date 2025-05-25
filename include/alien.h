@@ -19,7 +19,7 @@ class Alien : public Enemy
         float m_targetX = 0.f;
 
         int m_idleFrames = 0;
-        int m_idleFramesMax = 180; // ~1 second at 60 FPSd
+        int m_idleFramesMax = 180; // ~1 second at 60 FPSd => 3 seconds total
 
         //Private Function
         void _InitVariables() override;

@@ -1,6 +1,11 @@
 #include "../include/bullet.h"
 
 
+/*
+-------------------------
+    Private Functions
+-------------------------
+*/
 void Bullet::_InitVariables()
 {
     this->m_movement_speed=8.f;
@@ -26,7 +31,12 @@ void Bullet::_InitSprite()
     this->m_sprite.setScale(0.5f,0.5f);
 }
 
-//Constructor and destructor
+
+/*
+--------------------------------
+    Constructor and destructor
+--------------------------------
+*/
 Bullet::Bullet()
 {
 

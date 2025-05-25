@@ -9,10 +9,10 @@ protected:
     sf::Vector2f m_direction;
 
 public:
-    // Getters
+    //Getters
     const int& GetDamage() const;
     
-    // Core functionality
+    //Functions
     void Update() override;
 };
 

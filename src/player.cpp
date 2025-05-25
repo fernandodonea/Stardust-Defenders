@@ -2,7 +2,11 @@
 
 
 
-//Private Functions
+/*
+-----------------------
+    Private functions
+-----------------------
+*/
 
 void Player::_InitVariables()
 {
@@ -16,7 +20,12 @@ void Player::_InitVariables()
     
 }
 
-//Constructor and destructor
+
+/*
+--------------------------------
+    Constructor and destructor
+--------------------------------
+*/
 Player::Player(sf::Texture* texture)
 {
     _InitVariables();
@@ -35,7 +44,11 @@ Player::~Player()
 
 
 
-//Accesors
+/*
+--------------
+    Getters
+--------------
+*/
 const int& Player::GetHp() const
 {
     return this->m_hp;
@@ -48,7 +61,11 @@ const int& Player::GetHpMax() const
 } 
 
 
-//Modifiers
+/*
+------------
+    Setter
+------------
+*/
 void Player::SetHp(const int hp)
 {
     this->m_hp=hp;
@@ -61,7 +78,11 @@ void Player::LoseHp(const int value)
 }
 
 
-//Functions
+/*
+---------------
+    Functions
+---------------
+*/
 const bool Player::CanAttack()
 {
     if(this->m_attack_cooldown>=this->m_attack_cooldown_max)

@@ -8,7 +8,11 @@ namespace Game_Engine
 
 
 
-//Constructors and destructors
+/*
+-------------------------------
+    Constructor and destructor
+------------------------------
+*/
 Game::Game()
 {
     this->m_window_manager = new WindowManger(); // Initialize the window manager
@@ -62,7 +66,11 @@ Game::~Game()
 
 
  
-//Functions
+/*
+---------------
+    Functions
+---------------
+*/
 void Game::Run()
 {
     while(this->m_window_manager->GetWindow()->isOpen())
@@ -75,8 +83,6 @@ void Game::Run()
     }
 
 }
-
-
 
 
 void Game::Update()
@@ -115,17 +121,15 @@ void Game::Update()
 
 
 
-
-
-
 void Game::Render()
 {
     //Clear the screen
     this->m_window_manager->GetWindow()->clear();
 
+
+
     //Draw world
     this->m_world_manager->Render(*this->m_window_manager->GetWindow());
-
 
     //Render de player
     this->m_player_manager->GetPlayer()->Render(*this->m_window_manager->GetWindow());
@@ -150,8 +154,9 @@ void Game::Render()
     {
         this->m_gui_manager->GameOver(*this->m_window_manager->GetWindow());
     }
+   
 
-      
+    
     this->m_window_manager->GetWindow()->display();
 }
 

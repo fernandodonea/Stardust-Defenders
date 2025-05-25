@@ -24,15 +24,16 @@ class Entity
 
         float m_movement_speed;
 
+        //Protected functions
         virtual void _InitVariables()=0;
         void _InitSprite(sf::Texture* texture,float pos_x, float pos_y, float size);
     
     public:
-        // Getters
+        //Getters
         const sf::Vector2f& GetPosition() const;
         const sf::FloatRect GetBounds() const;
     
-        // Setters
+        //Setters
         void SetPosition(const float x, const float y);
         void SetPosition(const sf::Vector2f pos);
         void SetTexture(sf::Texture* texture);

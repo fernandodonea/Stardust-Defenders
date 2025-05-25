@@ -47,7 +47,7 @@ class EnemyManager
         void SpawnEnemies(sf::RenderWindow *window);
         void WorldCollision(sf:: RenderWindow *window);
 
-
+        
         void Update(sf:: RenderWindow *window);
 };
 

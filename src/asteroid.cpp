@@ -35,7 +35,7 @@ int Asteroid::m_asteroids_destroyed=0;
 /*
 ----------------------
     Private function
----------------------
+----------------------
 */
 void Asteroid::_InitVariables()
 {
@@ -56,7 +56,7 @@ void Asteroid::_InitVariables()
 /*
 --------------------------------
     Constructors and Destructor
-------------------------------
+--------------------------------
 */
 Asteroid::Asteroid()
 {

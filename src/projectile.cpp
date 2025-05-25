@@ -1,10 +1,21 @@
 #include "../include/projectile.h" 
 
 
+/*
+-----------
+   Getter
+-----------
+*/
 const int& Projectile::GetDamage() const
 {
    return this->m_damage;
 }
+
+/*
+--------------
+   Functions
+--------------
+*/
 void Projectile::Update()
 {
    //Movement

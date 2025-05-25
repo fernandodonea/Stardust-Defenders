@@ -5,18 +5,14 @@
 
 
 
-//Constructor and Destructor
-Enemy::Enemy()
-{
-
-}
-Enemy::~Enemy()
-{
-    
-}
 
 
-//Accesors
+
+/*
+--------------
+    Getters
+--------------
+*/
 const int& Enemy::GetType() const
 {
     return this->m_type; 
@@ -34,7 +30,11 @@ const int&Enemy::GetDamage() const
     return this->m_damage; 
 }
 
-//Functions
+/*
+--------------
+    Functions
+-------------
+*/
 
 void Enemy::LoseHp(const int value)
 {

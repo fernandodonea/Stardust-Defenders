@@ -13,10 +13,9 @@ class Bullet: public Projectile
         void _InitTexture() ;
         void _InitSprite() ;
 
-
     public:
         //Constructor and destructor
-        Bullet();
+        Bullet()=default;
         Bullet(float pos_x, float pos_y);
         virtual ~Bullet();
 };
