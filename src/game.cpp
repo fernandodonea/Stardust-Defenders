@@ -27,7 +27,8 @@ Game::Game()
     this->m_enemy_manager = new EnemyManager(
         m_resource_manager->GetTexture("ASTEROID_NORMAL"),
         m_resource_manager->GetTexture("ASTEROID_FAST"),
-        m_resource_manager->GetTexture("ASTEROID_TANK")
+        m_resource_manager->GetTexture("ASTEROID_TANK"),
+        m_resource_manager->GetTexture("ALIEN")
     );
 
     this->m_bullet_manager = new BulletManager();
@@ -98,7 +99,7 @@ void Game::Update()
 
     this->m_combat_manager->Update(
         m_player_manager->GetPlayer(),
-        m_enemy_manager->GetAsteroids(),
+        m_enemy_manager->GetEnemies(),
         m_bullet_manager->GetBullets(),
         m_world_manager
     );
@@ -136,7 +137,7 @@ void Game::Render()
     }
 
     //Render the enemies
-    for(auto *asteroid: this->m_enemy_manager->GetAsteroids())
+    for(auto *asteroid: this->m_enemy_manager->GetEnemies())
     {
         asteroid->Render(*this->m_window_manager->GetWindow());
     }

@@ -14,6 +14,7 @@
 #define ENEMY_MANAGER_H
 
 #include "asteroid.h"
+#include "alien.h"
 #include "player.h"
 
 class EnemyManager
@@ -21,20 +22,27 @@ class EnemyManager
     private:
         float m_spawn_timer;
         float m_spawn_timer_max;
-        std::vector<Asteroid*> m_enemies;
+
+        int m_last_alien_spawn_kill_count=0;
+        std::vector<Enemy*> m_enemies;
         std::vector<sf::Texture*> m_textures; 
 
     public:
         //Constructor and destructor
-        EnemyManager(sf::Texture* texture1,sf::Texture* texture2,sf::Texture* texture3);
+        EnemyManager(sf::Texture* texture1,sf::Texture* texture2,sf::Texture* texture3,sf::Texture* texture4);
         ~EnemyManager();
 
         //Getter
-        std::vector<Asteroid*>& GetAsteroids();
+        std::vector<Enemy*>& GetEnemies();
         
         //Functions
         float RandomLocation(sf::RenderWindow *window);
         int RandomType();
+
+        bool AlienAlive();
+
+        void SpawnAsteroids(sf::RenderWindow *window);
+        void SpawnAlien(sf::RenderWindow *window);
 
         void SpawnEnemies(sf::RenderWindow *window);
         void WorldCollision(sf:: RenderWindow *window);

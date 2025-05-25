@@ -8,22 +8,22 @@
 
 void CombatManager::HandleEnemyPlayerCollision(
     Player *player,
-    std::vector<Asteroid*>& asteroids)
+    std::vector<Enemy*>& enemies)
 {
 
     unsigned counter=0; 
-    for(auto *enemy: asteroids)
+    for(auto *enemy: enemies)
     {
 
         //Enemy-Player collision 
         if(enemy->GetBounds().intersects(player->GetBounds()))
         {
             //Player takes damage
-            player->LoseHp(asteroids.at(counter)->GetDamage());
+            player->LoseHp(enemies.at(counter)->GetDamage());
 
             //Delete enemy
-            delete asteroids.at(counter);
-            asteroids.erase(asteroids.begin()+counter); 
+            delete enemies.at(counter);
+            enemies.erase(enemies.begin()+counter); 
         }
         ++counter;
     }
@@ -33,29 +33,35 @@ void CombatManager::HandleEnemyPlayerCollision(
 
 void CombatManager::HandleBulletEnemyCollisions(
     std::vector<Bullet*>& bullets,
-    std::vector<Asteroid*>& asteroids,
+    std::vector<Enemy*>& enemies,
     WorldManager *world)
 {
 
-    for(int i=0; i<asteroids.size(); ++i)
+    for(int i=0; i<enemies.size(); ++i)
     { 
         bool enemy_deleted=false;
 
         for(size_t k=0; k < bullets.size() && enemy_deleted==false; ++k)
         {
-            if(asteroids[i]->GetBounds().intersects(bullets[k]->GetBounds()))
+            if(enemies[i]->GetBounds().intersects(bullets[k]->GetBounds()))
             {
                 //Enemy takes damage
-                asteroids[i]->LoseHp(bullets[k]->GetDamage());
+                enemies[i]->LoseHp(bullets[k]->GetDamage());
 
-                if(asteroids[i]->GetHp()==0)
+                if(enemies[i]->GetHp()==0)
                 {
                     //Increase points
-                    world->AddPoints(asteroids[i]->GetPoints());
+                    world->AddPoints(enemies[i]->GetPoints());
+
+                    //Increment asteroid counter if it's an Asteroid
+                    if (Asteroid* asteroid = dynamic_cast<Asteroid*>(enemies[i])) 
+                    {
+                        Asteroid::IncrementAsteroidsDestroyed();
+                    }
 
                     //Delete Enemy
-                    delete asteroids[i];
-                    asteroids.erase(asteroids.begin() + i);
+                    delete enemies[i];
+                    enemies.erase(enemies.begin() + i);
 
                     enemy_deleted=true;
                 }
@@ -75,10 +81,10 @@ void CombatManager::HandleBulletEnemyCollisions(
 
 void CombatManager::Update(
     Player *player,
-    std::vector<Asteroid*>& asteroids,
+    std::vector<Enemy*>& enemies,
     std::vector<Bullet*>& bullets,
      WorldManager *world)
 {
-    HandleEnemyPlayerCollision(player, asteroids);
-    HandleBulletEnemyCollisions(bullets,asteroids,world);
+    HandleEnemyPlayerCollision(player, enemies);
+    HandleBulletEnemyCollisions(bullets,enemies,world);
 }

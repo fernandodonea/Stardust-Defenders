@@ -10,26 +10,33 @@ struct enemy_data
 std::map<int, enemy_data> enemy_types
 {
     {1, {
-        Asteroid_Normal::movement_speed,
-        Asteroid_Normal::hp, Asteroid_Normal::hp_max,
-        Asteroid_Normal::damage,
-        Asteroid_Normal::points,
-        Asteroid_Normal::size}}, 
+        Const_Asteroid_Normal::movement_speed,
+        Const_Asteroid_Normal::hp, Const_Asteroid_Normal::hp_max,
+        Const_Asteroid_Normal::damage,
+        Const_Asteroid_Normal::points,
+        Const_Asteroid_Normal::size}}, 
     {2, {
-        Asteroid_Fast::movement_speed,
-        Asteroid_Fast::hp, Asteroid_Fast::hp_max,
-        Asteroid_Fast::damage,
-        Asteroid_Fast::points,
-        Asteroid_Fast::size}}, 
+        Const_Asteroid_Fast::movement_speed,
+        Const_Asteroid_Fast::hp, Const_Asteroid_Fast::hp_max,
+        Const_Asteroid_Fast::damage,
+        Const_Asteroid_Fast::points,
+        Const_Asteroid_Fast::size}}, 
     {3, {
-        Asteroid_Tank::movement_speed,
-        Asteroid_Tank::hp, Asteroid_Tank::hp_max,
-        Asteroid_Tank::damage,
-        Asteroid_Tank::points,
-        Asteroid_Tank::size}}
+        Const_Asteroid_Tank::movement_speed,
+        Const_Asteroid_Tank::hp, Const_Asteroid_Tank::hp_max,
+        Const_Asteroid_Tank::damage,
+        Const_Asteroid_Tank::points,
+        Const_Asteroid_Tank::size}}
 };
 
-//Private functions
+//initialise static variable
+int Asteroid::m_asteroids_destroyed=0;
+
+/*
+----------------------
+    Private function
+---------------------
+*/
 void Asteroid::_InitVariables()
 {
 
@@ -46,8 +53,11 @@ void Asteroid::_InitVariables()
 }
 
 
-
-//Constructor and Destructor
+/*
+--------------------------------
+    Constructors and Destructor
+------------------------------
+*/
 Asteroid::Asteroid()
 {
 
@@ -65,7 +75,34 @@ Asteroid::~Asteroid()
     
 }
 
-//Functions
+
+/*
+------------
+    Getter
+------------
+*/
+int Asteroid::GetAsteroidsDestroyed()
+{
+    return m_asteroids_destroyed;
+}
+
+/*
+------------
+    Setter
+------------
+*/
+void Asteroid::IncrementAsteroidsDestroyed()
+{
+    m_asteroids_destroyed++;
+}
+
+
+
+/*
+------------
+    Setter
+-----------
+*/
 void Asteroid::Update()
 {
    Move(down);

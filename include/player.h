@@ -20,11 +20,11 @@ class Player: public Entity
         Player(sf::Texture* texture);
         virtual ~Player();
 
-        //Accesors
+        //Getter
         const int& GetHp() const;
         const int& GetHpMax() const ; 
 
-        //Modifiers
+        //Setter
         void SetHp(const int hp);
         void LoseHp(const int value);
 

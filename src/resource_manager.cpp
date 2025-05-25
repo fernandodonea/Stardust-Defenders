@@ -55,7 +55,7 @@ void ResourceManager::LoadFont()
 void ResourceManager::LoadTextures()
 {
     this->m_textures["PLAYER"] = new sf::Texture();
-    this->m_textures["PLAYER"]->loadFromFile("resources/textures/spaceship.png");
+    this->m_textures["PLAYER"]->loadFromFile("resources/textures/purple-spaceship.png");
     
     this->m_textures["BACKGROUND"] = new sf::Texture();
     this->m_textures["BACKGROUND"]->loadFromFile("resources/textures/starry_background.png");
@@ -71,4 +71,7 @@ void ResourceManager::LoadTextures()
 
     this->m_textures["ASTEROID_TANK"] = new sf::Texture();
     this->m_textures["ASTEROID_TANK"]->loadFromFile("resources/textures/asteroid_3.png");
+
+    this->m_textures["ALIEN"] = new sf::Texture();
+    this->m_textures["ALIEN"]->loadFromFile("resources/textures/green-spaceship.png");
 }

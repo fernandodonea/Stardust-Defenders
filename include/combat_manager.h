@@ -27,17 +27,17 @@ class CombatManager
         //Functions
         void HandleEnemyPlayerCollision(
             Player *player,
-            std::vector<Asteroid*>& asteroids
+            std::vector<Enemy*>& enemies
         );
         void HandleBulletEnemyCollisions(
             std::vector<Bullet*>& bullets,
-            std::vector<Asteroid*>& asteroids,
+            std::vector<Enemy*>& enemies,
             WorldManager *world
         );
 
         void Update(
             Player *player,
-            std::vector<Asteroid*>& asteroids,
+            std::vector<Enemy*>& enemies,
             std::vector<Bullet*>& bullets,
              WorldManager *world
         );

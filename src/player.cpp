@@ -24,7 +24,7 @@ Player::Player(sf::Texture* texture)
     float pos_x=512.f-this->m_sprite.getGlobalBounds().width;
     float pos_y=364.f-this->m_sprite.getGlobalBounds().height;
 
-    _InitSprite(texture,pos_x,pos_y,0.3f);
+    _InitSprite(texture,pos_x,pos_y,0.4f);
 
 }
 

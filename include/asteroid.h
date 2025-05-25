@@ -2,11 +2,13 @@
 #define ASTEROID_H
 
 #include "enemy.h"
-#include "constants/constants_asteroid.h"
+#include "constants/constants_enemy.h"
 
 class Asteroid: public Enemy
 {
     private:
+        static int m_asteroids_destroyed;
+
         //Private functions
         void _InitVariables() override;
 
@@ -17,7 +19,13 @@ class Asteroid: public Enemy
         Asteroid(int type, sf::Texture* texture,float pos_x, float pos_y);
         virtual ~Asteroid();
 
-        //Accesors
+        //Getter
+        static int GetAsteroidsDestroyed();
+
+        //Setter
+        static void IncrementAsteroidsDestroyed();
+
+
 
         //Functions
         void Update() override;
