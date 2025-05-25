@@ -2,16 +2,10 @@
 
 
 /*
--------------------------------
-    Constructor and destructor
--------------------------------
+----------------
+    Destructor
+------------------
 */
-
-BulletManager::BulletManager()
-{
-
-}
-
 BulletManager::~BulletManager()
 {
     // Delete any bullets left
@@ -20,6 +14,8 @@ BulletManager::~BulletManager()
         delete i;
     }
 }
+
+
 
 /*
 ----------------
@@ -33,12 +29,14 @@ std::vector<Bullet*>& BulletManager::GetBullets()
 }
 
 
+
 /*
 ---------------
     Functions
 ---------------
 */
 
+//Handles the collision of bullets with the world boundaries
 void BulletManager::WorldCollision()
 {
     unsigned counter=0;

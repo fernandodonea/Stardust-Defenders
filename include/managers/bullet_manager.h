@@ -25,7 +25,7 @@ class BulletManager
 
     public:
         //Constructor and destructor
-        BulletManager();
+        BulletManager()=default;
         ~BulletManager();
 
         //Getters

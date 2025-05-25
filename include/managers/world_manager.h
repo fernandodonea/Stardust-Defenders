@@ -28,8 +28,9 @@ class WorldManager
         
     public:
         //Constructor and destructor
-        WorldManager();
-        ~WorldManager();
+        WorldManager()=default;
+        WorldManager(sf::Texture* texture);
+        ~WorldManager()=default;
 
         //Getters
         const sf::Sprite& GetBackground() const;

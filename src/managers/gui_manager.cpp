@@ -9,7 +9,6 @@
     Private functions
 -----------------------
 */
-
 void GuiManager::_InitPoints(sf::Font &font)
 {
     //Init POINTS text
@@ -32,6 +31,7 @@ void GuiManager::_InitGameOver(sf::Font &font,sf::RenderWindow* window)
         window->getSize().y/2 - this->m_game_over_text.getGlobalBounds().height/2.f
     );
 }
+
 void GuiManager::_InitHealthBar()
 {
     //Init player GUI
@@ -44,15 +44,12 @@ void GuiManager::_InitHealthBar()
 }
 
 
-/*
--------------------------------
-    Constructor and destructor
--------------------------------
-*/
-GuiManager::GuiManager()
-{
 
-}
+/*
+-----------------
+    Constructor
+------------------
+*/
 GuiManager::GuiManager(sf::Font &font,sf::RenderWindow* window) 
 {
     _InitPoints(font);
@@ -60,10 +57,7 @@ GuiManager::GuiManager(sf::Font &font,sf::RenderWindow* window)
     _InitGameOver(font,window);
 
 }
-GuiManager::~GuiManager()
-{
 
-}
 
 
 /*

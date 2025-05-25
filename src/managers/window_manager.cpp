@@ -17,6 +17,8 @@ WindowManger::~WindowManger()
     delete this->m_window;
 }
 
+
+
 /*
 ------------
     Getter
@@ -34,6 +36,8 @@ sf::RenderWindow* WindowManger::GetWindow()
     Functions
 ----------------
 */
+
+// Poll events from the window
 void WindowManger::PollEvents()
 {
     sf::Event ev;

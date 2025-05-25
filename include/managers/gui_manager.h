@@ -22,9 +22,9 @@ class GuiManager
 
     public:
         //Constructors and destructor
-        GuiManager();
+        GuiManager()=default;
         GuiManager(sf::Font &font,sf::RenderWindow* window);
-        ~GuiManager();
+        ~GuiManager()=default;
 
         //Functions
         void Update(int points, int health, int health_max);

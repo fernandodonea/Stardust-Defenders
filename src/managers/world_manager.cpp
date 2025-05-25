@@ -1,27 +1,18 @@
 #include "../include/managers/world_manager.h"
 
 /*
---------------------------------
-    Constructor and destructor
---------------------------------
+-----------------
+    Constructor 
+------------------
 */
-
-WorldManager::WorldManager()
+WorldManager::WorldManager(sf::Texture* texture)
 {
-    //Load background
-    if(!this->m_world_background_texture.loadFromFile("resources/textures/starry_background.png"))
-        std::cout<<"ERROR::GAME::_INITWORLD: Failed to load background"<<"\n";
-
-    this->m_world_background.setTexture(this->m_world_background_texture);
+    this->m_world_background.setTexture(*texture);
 
     //Innit System
     this->points=0;
 }
 
-WorldManager::~WorldManager()
-{
-
-}
 
 
 /*
@@ -41,6 +32,7 @@ int WorldManager::GetPoints() const
 }
 
 
+
 /*
 -------------
     Setters
@@ -55,6 +47,7 @@ void WorldManager::AddPoints(int value)
 {
     SetPoints(this->points+value);
 }
+
 
 
 /*

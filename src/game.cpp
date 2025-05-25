@@ -39,7 +39,7 @@ Game::Game()
 
     this->m_combat_manager = new CombatManager();
 
-    this->m_world_manager = new WorldManager();
+    this->m_world_manager = new WorldManager(m_resource_manager->GetTexture("BACKGROUND"));
 }
 
 Game::~Game()

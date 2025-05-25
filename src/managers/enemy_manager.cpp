@@ -42,10 +42,13 @@ std::vector<Enemy*>& EnemyManager::GetEnemies()
 ---------------
 */
 
+// Random location for the enemy to spawn
 float EnemyManager::RandomLocation(sf::RenderWindow *window)
 {
     return rand()%window->getSize().x-80.f;
 }
+
+// Random type of enemy to spawn
 int EnemyManager::RandomType()
 {
     //Spawn rate
@@ -87,6 +90,7 @@ void EnemyManager::SpawnAsteroids(sf::RenderWindow *window)
         this->m_spawn_timer=0.f;
     }
 }
+
 void EnemyManager::SpawnAlien(sf::RenderWindow *window)
 {
     this->m_enemies.push_back(

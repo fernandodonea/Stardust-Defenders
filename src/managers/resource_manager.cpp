@@ -5,13 +5,10 @@
     Constructor and destructor
 -------------------------------
 */
-
 ResourceManager::ResourceManager()
 {
-    //Load font
     this->LoadFont();
 
-    //Load textures
     this->LoadTextures();
 
 }
@@ -22,8 +19,8 @@ ResourceManager::~ResourceManager()
     {
         delete i.second;
     }
-
 }
+
 
 
 /*
@@ -39,6 +36,7 @@ sf::Font& ResourceManager::GetFont()
 {
     return this->m_font;  
 }
+
 
 
 /*
