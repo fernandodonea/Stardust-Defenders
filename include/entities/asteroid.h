@@ -15,9 +15,9 @@ class Asteroid: public Enemy
 
     public:
         //Constructor and Destructor
-        Asteroid();
+        Asteroid()=default;
         Asteroid(int type, sf::Texture* texture,float pos_x, float pos_y);
-        virtual ~Asteroid();
+        virtual ~Asteroid()=default;
 
         //Getter
         static int GetAsteroidsDestroyed();

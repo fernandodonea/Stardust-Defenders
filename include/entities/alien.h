@@ -16,22 +16,27 @@ class Alien : public Enemy
 
         MoveState m_state = MoveState::Idle;
 
-        float m_targetX = 0.f;
+        float m_target_x = 0.f; // Target x position to move to
 
-        int m_idleFrames = 0;
-        int m_idleFramesMax = 180; // ~1 second at 60 FPSd => 3 seconds total
+        int m_idle_frames = 0;
+        int m_idleframes_max = 180; // ~1 second at 60 FPSd => 3 seconds total
 
         //Private Function
         void _InitVariables() override;
 
     public:
         //Constructor and Destructor
-        Alien();
+        Alien()=default;
         Alien(sf::Texture* texture,float pos_x, float pos_y);
-        virtual ~Alien();
+        virtual ~Alien()=default;
 
+        
         //Functions
+
+        //Chose a new position to move to
         void DecideNextMove();
+
+        //Move to the alien to the position
         void MoveToTarget();
 
         void Update() override;

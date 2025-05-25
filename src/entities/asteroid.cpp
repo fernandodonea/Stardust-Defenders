@@ -1,5 +1,6 @@
 #include "../include/entities/asteroid.h"
 
+
 struct enemy_data
 {
     float movement_speed;
@@ -7,6 +8,8 @@ struct enemy_data
     int damage, points;
     float size;
 };
+
+//Map to hold enemy types and their properties
 std::map<int, enemy_data> enemy_types
 {
     {1, {
@@ -32,6 +35,8 @@ std::map<int, enemy_data> enemy_types
 //initialise static variable
 int Asteroid::m_asteroids_destroyed=0;
 
+
+
 /*
 ----------------------
     Private function
@@ -39,7 +44,6 @@ int Asteroid::m_asteroids_destroyed=0;
 */
 void Asteroid::_InitVariables()
 {
-
     this->m_movement_speed=enemy_types[this->m_type].movement_speed;
 
     this->m_hp_max=enemy_types[this->m_type].hp_max;
@@ -53,27 +57,19 @@ void Asteroid::_InitVariables()
 }
 
 
-/*
---------------------------------
-    Constructors and Destructor
---------------------------------
-*/
-Asteroid::Asteroid()
-{
 
-}
+/*
+-----------------
+    Constructors 
+------------------
+*/
 Asteroid::Asteroid(int type,sf::Texture* texture,float pos_x, float pos_y)
 {
     this->m_type=type;
     this->_InitVariables(); 
     _InitSprite(texture,pos_x,pos_y,this->m_size);
-    
-
 } 
-Asteroid::~Asteroid()
-{
-    
-}
+
 
 
 /*
@@ -85,6 +81,8 @@ int Asteroid::GetAsteroidsDestroyed()
 {
     return m_asteroids_destroyed;
 }
+
+
 
 /*
 ------------
@@ -99,9 +97,9 @@ void Asteroid::IncrementAsteroidsDestroyed()
 
 
 /*
-------------
-    Setter
------------
+-------------
+    Function
+-------------
 */
 void Asteroid::Update()
 {
