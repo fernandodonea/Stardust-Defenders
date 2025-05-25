@@ -1,4 +1,4 @@
-#include "../include/asteroid.h"
+#include "../include/entities/asteroid.h"
 
 struct enemy_data
 {

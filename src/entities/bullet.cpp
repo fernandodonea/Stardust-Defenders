@@ -1,4 +1,4 @@
-#include "../include/bullet.h"
+#include "../include/entities/bullet.h"
 
 
 /*
@@ -37,10 +37,6 @@ void Bullet::_InitSprite()
     Constructor and destructor
 --------------------------------
 */
-Bullet::Bullet()
-{
-
-}
 Bullet::Bullet (float pos_x, float pos_y)
 {
     _InitVariables();

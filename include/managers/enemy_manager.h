@@ -13,9 +13,9 @@
 #ifndef ENEMY_MANAGER_H
 #define ENEMY_MANAGER_H
 
-#include "asteroid.h"
-#include "alien.h"
-#include "player.h"
+#include "../entities/asteroid.h"
+#include "../entities/alien.h"
+#include "../entities/player.h"
 
 class EnemyManager
 {

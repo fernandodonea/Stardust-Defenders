@@ -7,15 +7,15 @@
 #include <sstream>
 
 
-#include "window_manager.h"
-#include "resource_manager.h"
-#include "gui_manager.h"
-#include "player_manager.h"
-#include "input_manager.h"
-#include "enemy_manager.h"
-#include "bullet_manager.h"
-#include "combat_manager.h"
-#include "world_manager.h"
+#include "./managers/window_manager.h"
+#include "./managers/resource_manager.h"
+#include "./managers/gui_manager.h"
+#include "./managers/player_manager.h"
+#include "./managers/input_manager.h"
+#include "./managers/enemy_manager.h"
+#include "./managers/bullet_manager.h"
+#include "./managers/combat_manager.h"
+#include "./managers/world_manager.h"
 
 
 namespace Game_Engine

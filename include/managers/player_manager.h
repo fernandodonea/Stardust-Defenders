@@ -12,7 +12,7 @@
 #ifndef PLAYER_MANAGER_H
 #define PLAYER_MANAGER_H
 
-#include "player.h"
+#include "../entities/player.h"
 
 class PlayerManager
 {

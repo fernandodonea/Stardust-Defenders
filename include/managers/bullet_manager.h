@@ -14,7 +14,7 @@
 #ifndef BULLET_MANAGER_H
 #define BULLET_MANAGER_H
 
-#include "bullet.h"
+#include "../entities/bullet.h"
 
 class BulletManager
 {

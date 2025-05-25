@@ -16,9 +16,10 @@
 #ifndef COMBAT_MANAGER_H
 #define COMBAT_MANAGER_H
 
-#include "player.h"
-#include "asteroid.h"
-#include "bullet.h"
+#include "../entities/player.h"
+#include "../entities/asteroid.h"
+#include "../entities/bullet.h"
+
 #include "world_manager.h"
 
 class CombatManager

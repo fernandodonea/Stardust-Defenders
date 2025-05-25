@@ -11,8 +11,8 @@
 #ifndef INPUT_MANAGER_H
 #define INPUT_MANAGER_H
 
-#include "player.h"
-#include "bullet.h"
+#include "../entities/player.h"
+#include "../entities/bullet.h"
 
 class InputManager
 {

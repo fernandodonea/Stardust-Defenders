@@ -1,4 +1,4 @@
-#include "../include/gui_manager.h"
+#include "../include/managers/gui_manager.h"
 
 #include <string>
 #include <sstream>

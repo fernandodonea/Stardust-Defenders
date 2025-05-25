@@ -1,4 +1,4 @@
-#include "../include/alien.h"
+#include "../include/entities/alien.h"
 
 
 /*
