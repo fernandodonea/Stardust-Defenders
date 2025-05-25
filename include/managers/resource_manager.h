@@ -16,10 +16,8 @@
 #define RESOURCE_MANAGER_H
 
 #include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
-
-#include <iostream>
+#include <map>
+#include <string>
 
 class ResourceManager
 {

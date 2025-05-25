@@ -3,11 +3,7 @@
 
 
 #include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
 
-#include <iostream>
-#include <string>
 
 const sf::Vector2f up(0.f,-1.f);
 const sf::Vector2f down(0.f,1.f);

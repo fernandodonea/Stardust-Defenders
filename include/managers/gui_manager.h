@@ -2,8 +2,6 @@
 #define GUI_MANAGER_H
 
 #include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
 
 
 class GuiManager
