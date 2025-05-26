@@ -17,32 +17,17 @@ void Bullet::_InitVariables()
 
 }
 
-void Bullet::_InitTexture()
-{
-    //Load texture from file 
-    if(!this->m_texture.loadFromFile("resources/textures/cyan-bullet.png"))
-    {
-        std::cout<<"ERROR:BULLET::_INITTEXTURE: Could not load texture file"<<"\n";
-    }
-}
-
-void Bullet::_InitSprite()
-{
-    this->m_sprite.setTexture(this->m_texture);
-    this->m_sprite.setScale(0.5f,0.5f);
-}
-
 
 
 /*
---------------------------------
-    Constructor and destructor
---------------------------------
+----------------
+    Constructor 
+------------------
 */
-Bullet::Bullet (float pos_x, float pos_y)
+Bullet::Bullet (sf::Texture* texture,float pos_x, float pos_y)
 {
     _InitVariables();
-    _InitTexture();
-    _InitSprite();
-    this->m_sprite.setPosition(pos_x,pos_y);
+
+     _InitSprite(texture,pos_x,pos_y,0.5f);
+
 }

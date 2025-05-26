@@ -89,7 +89,8 @@ void Game::Update()
 {
     this->m_input_manager->Update(
         this->m_player_manager->GetPlayer(),
-        this->m_projectile_manager->GetProjectiles()
+        this->m_projectile_manager->GetProjectiles(),
+        this->m_resource_manager->GetTexture("BULLET")
     );
 
   

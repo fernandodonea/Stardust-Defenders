@@ -24,13 +24,14 @@ void InputManager::Movement(Player* player)
         player->Move(down);
 }
 
-void InputManager::Attack(Player* player,std::vector<Projectile*>&projectiles)
+void InputManager::Attack(Player* player,std::vector<Projectile*>&projectiles,sf::Texture* bullet_texture)
 {
     //Shoot Bullets
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && player->CanAttack())
     {
         projectiles.push_back(
             new Bullet(
+                bullet_texture,
                 player->GetPosition().x + player->GetBounds().width/2.f-12.f,
                 player->GetPosition().y
             )
@@ -38,8 +39,8 @@ void InputManager::Attack(Player* player,std::vector<Projectile*>&projectiles)
     }
 }
 
-void InputManager::Update(Player* player,std::vector<Projectile*>&projectiles)
+void InputManager::Update(Player* player,std::vector<Projectile*>&projectiles,sf::Texture* bullet_texture)
 {
     Movement(player);
-    Attack(player,projectiles);
+    Attack(player,projectiles,bullet_texture);
 }
