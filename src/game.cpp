@@ -6,8 +6,6 @@ namespace Game_Engine
 
 
 
-
-
 /*
 -------------------------------
     Constructor and destructor
@@ -15,14 +13,14 @@ namespace Game_Engine
 */
 Game::Game()
 {
-    this->m_window_manager = new WindowManger(); // Initialize the window manager
+    this->m_window_manager = new WindowManger(); 
 
-    this->m_resource_manager = new ResourceManager(); // Initialize the resource manager
+    this->m_resource_manager = new ResourceManager(); 
 
     this->m_gui_manager = new GuiManager(
         m_resource_manager->GetFont(),
         m_window_manager->GetWindow()
-    ); // Initialize GUI
+    ); 
 
     this->m_player_manager = new PlayerManager(m_resource_manager->GetTexture("PLAYER"));
 
@@ -116,6 +114,7 @@ void Game::Update()
         m_player_manager->GetPlayer(),
         m_enemy_manager->GetEnemies(),
         m_projectile_manager->GetBullets(),
+        m_projectile_manager->GetLasers(),
         m_world_manager
     );
     

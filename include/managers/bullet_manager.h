@@ -44,11 +44,6 @@ class ProjectileManager
         void PlayerShoot(Player* player, sf::Texture* bullet_texture);
         void AlienShoot(sf::Texture* laser_texture, float pos_x, float pos_y, sf::Vector2f direction);
 
-        
-        void BulletCollison();
-        void LaserCollision();
-
-        void WorldCollision();
         void Update();
 };
 

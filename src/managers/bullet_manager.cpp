@@ -2,7 +2,33 @@
 
 
 /*
-----------------
+--------------
+    Template
+--------------
+*/
+template<typename T>
+void ProjectileCollision(std::vector<T*>& projectiles)
+{
+    unsigned counter = 0;
+    for (auto* proj : projectiles)
+    {
+        proj->Update();
+        if (proj->IsOutOfScreen())
+        {
+            delete projectiles.at(counter);
+            projectiles.erase(projectiles.begin() + counter);
+        }
+        else
+        {
+            ++counter;
+        }
+    }
+}
+
+
+
+/*
+------------------
     Destructor
 ------------------
 */
@@ -58,50 +84,9 @@ void ProjectileManager::AlienShoot(sf::Texture* laser_texture, float pos_x, floa
     m_lasers.push_back(new Laser(laser_texture, pos_x, pos_y, direction));
 }
 
-void ProjectileManager::BulletCollison()
-{
-    unsigned counter = 0;
-    for (auto* bullet : this->m_bullets)
-    {
-        bullet->Update();
-        if (bullet->IsOutOfScreen())
-        {
-            delete this->m_bullets.at(counter);
-            this->m_bullets.erase(this->m_bullets.begin() + counter);
-        }
-        else
-        {
-            ++counter;
-        }
-    }
-}
-void ProjectileManager::LaserCollision()
-{
-    unsigned counter = 0;
-    for (auto* laser : this->m_lasers)
-    {
-        laser->Update();
-        if (laser->IsOutOfScreen())
-        {
-            delete this->m_lasers.at(counter);
-            this->m_lasers.erase(this->m_lasers.begin() + counter);
-        }
-        else
-        {
-            ++counter;
-        }
-    }
-}
-
-//Handles the collision of bullets with the world boundaries
-void ProjectileManager::WorldCollision()
-{
-    BulletCollison();
-    LaserCollision();
-}
-
 
 void ProjectileManager::Update()
 {
-    WorldCollision();
+    ProjectileCollision(m_bullets);
+    ProjectileCollision(m_lasers);
 }

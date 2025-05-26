@@ -13,7 +13,6 @@ public:
     Projectile()=default;
     virtual ~Projectile();
 
-
     //Getters
     const int& GetDamage() const;
     

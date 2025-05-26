@@ -52,7 +52,6 @@ class Game
         WorldManager *m_world_manager;
 
 
-
     public:
         //Constructors and destructors
         Game();

@@ -6,12 +6,13 @@
 -------------------------------
 */
 
-EnemyManager::EnemyManager(sf::Texture* texture1,sf::Texture* texture2,sf::Texture* texture3,sf::Texture* texture4)
+EnemyManager::EnemyManager(sf::Texture* asteroid_normal_texture,sf::Texture* asteroid_fast_texture,
+    sf::Texture* asteroid_tank_texture,sf::Texture* alien_texture)
 {
-    m_textures.push_back(texture1);
-    m_textures.push_back(texture2);
-    m_textures.push_back(texture3);
-    m_textures.push_back(texture4);
+    m_textures.push_back(asteroid_normal_texture);
+    m_textures.push_back(asteroid_fast_texture);
+    m_textures.push_back(asteroid_tank_texture);
+    m_textures.push_back(alien_texture);
     
     this->m_spawn_timer_max=50.f;
     this->m_spawn_timer=this->m_spawn_timer_max;
@@ -44,7 +45,7 @@ std::vector<Enemy*>& EnemyManager::GetEnemies()
 
 
 void EnemyManager::SetProjectileManagerForAliens(ProjectileManager* mgr) {
-    m_projectileManager = mgr;
+    m_projectile_manager = mgr;
     for (auto* enemy : m_enemies) {
         Alien* alien = dynamic_cast<Alien*>(enemy);
         if (alien) {
@@ -110,8 +111,8 @@ void EnemyManager::SpawnAlien(sf::RenderWindow *window)
         m_textures[3],
         WINDOW_WIDTH/2-SPRITE_MARGIN/2, 50.f
     );
-    if (m_projectileManager) {
-        alien->SetProjectileManager(m_projectileManager);
+    if (m_projectile_manager) {
+        alien->SetProjectileManager(m_projectile_manager);
     }
     m_enemies.push_back(alien);
 }

@@ -29,11 +29,12 @@ class EnemyManager
         std::vector<Enemy*> m_enemies;
         std::vector<sf::Texture*> m_textures; 
 
-        ProjectileManager* m_projectileManager = nullptr;
+        ProjectileManager* m_projectile_manager = nullptr;
 
     public:
         //Constructor and destructor
-        EnemyManager(sf::Texture* texture1,sf::Texture* texture2,sf::Texture* texture3,sf::Texture* texture4);
+        EnemyManager(sf::Texture* asteroid_normal_texture,sf::Texture* asteroid_fast_texture,
+            sf::Texture* asteroid_tank_texture,sf::Texture* alien_texture);
         ~EnemyManager();
 
         //Getter

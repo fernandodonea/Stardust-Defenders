@@ -12,7 +12,6 @@ class Asteroid: public Enemy
         //Private functions
         void _InitVariables() override;
 
-
     public:
         //Constructor and Destructor
         Asteroid()=default;

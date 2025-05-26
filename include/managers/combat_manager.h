@@ -30,6 +30,12 @@ class CombatManager
             Player *player,
             std::vector<Enemy*>& enemies
         );
+
+        void HandleLaserPlayerCollision(
+            Player *player,
+            std::vector<Projectile*>& lasers
+        );
+
         void HandleBulletEnemyCollisions(
             std::vector<Projectile*>& projectiles,
             std::vector<Enemy*>& enemies,
@@ -40,6 +46,7 @@ class CombatManager
             Player *player,
             std::vector<Enemy*>& enemies,
             std::vector<Projectile*>& projectiles,
+            std::vector<Projectile*>& lasers,
              WorldManager *world
         );
 

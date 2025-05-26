@@ -93,16 +93,16 @@ void Alien::MoveToTarget()
 
 void Alien::Attack(sf::Texture* laser_texture)
 {
-    if (!m_projectileManager) return;
+    if (!m_projectile_manager) return;
 
     //Position of the alien
     float pos_x = GetPosition().x + GetBounds().width / 2.f;
     float pos_y = GetPosition().y + GetBounds().height;
 
     
-    m_projectileManager->AlienShoot(laser_texture, pos_x, pos_y, down); 
-    m_projectileManager->AlienShoot(laser_texture, pos_x, pos_y, diag_left);
-    m_projectileManager->AlienShoot(laser_texture, pos_x, pos_y, diag_right);
+    m_projectile_manager->AlienShoot(laser_texture, pos_x, pos_y, down); 
+    m_projectile_manager->AlienShoot(laser_texture, pos_x, pos_y, diag_left);
+    m_projectile_manager->AlienShoot(laser_texture, pos_x, pos_y, diag_right);
 }
 
 

@@ -52,12 +52,12 @@ void ResourceManager::LoadFont()
 }
 void ResourceManager::LoadTextures()
 {
-    this->m_textures["PLAYER"] = new sf::Texture();
-    this->m_textures["PLAYER"]->loadFromFile("resources/textures/purple-spaceship.png");
-    
     this->m_textures["BACKGROUND"] = new sf::Texture();
     this->m_textures["BACKGROUND"]->loadFromFile("resources/textures/starry_background.png");
 
+    this->m_textures["PLAYER"] = new sf::Texture();
+    this->m_textures["PLAYER"]->loadFromFile("resources/textures/purple-spaceship.png");
+    
     this->m_textures["BULLET"] = new sf::Texture();
     this->m_textures["BULLET"]->loadFromFile("resources/textures/cyan-bullet.png");
 

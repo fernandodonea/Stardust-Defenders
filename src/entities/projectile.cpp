@@ -32,6 +32,7 @@ const int& Projectile::GetDamage() const
 bool Projectile::IsOutOfScreen()
 {
    sf::FloatRect bounds=GetBounds();
+   
    // Left
    if (bounds.left+bounds.width < 0.f)
         return true;
