@@ -90,11 +90,31 @@ void Alien::MoveToTarget()
     }
 }
 
-void Alien::Update()
+
+void Alien::Attack(sf::Texture* laser_texture)
+{
+    if (!m_projectile_manager) return;
+
+    //Position of the alien
+    float pos_x = GetPosition().x + GetBounds().width / 2.f;
+    float pos_y = GetPosition().y + GetBounds().height;
+
+    
+    m_projectile_manager->AlienShoot(laser_texture, pos_x, pos_y, down); 
+    m_projectile_manager->AlienShoot(laser_texture, pos_x, pos_y, diag_left);
+    m_projectile_manager->AlienShoot(laser_texture, pos_x, pos_y, diag_right);
+}
+
+
+void Alien::Update(sf::Texture* laser_texture)
 {
     switch (m_state) {
         case MoveState::Idle:
             m_idle_frames++;
+            if (m_idle_frames == m_idleframes_max/2) 
+            {
+                Attack(laser_texture);
+            }
             if (m_idle_frames >= m_idleframes_max) 
             {
                 m_idle_frames = 0;

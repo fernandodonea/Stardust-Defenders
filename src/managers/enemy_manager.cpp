@@ -6,12 +6,13 @@
 -------------------------------
 */
 
-EnemyManager::EnemyManager(sf::Texture* texture1,sf::Texture* texture2,sf::Texture* texture3,sf::Texture* texture4)
+EnemyManager::EnemyManager(sf::Texture* asteroid_normal_texture,sf::Texture* asteroid_fast_texture,
+    sf::Texture* asteroid_tank_texture,sf::Texture* alien_texture)
 {
-    m_textures.push_back(texture1);
-    m_textures.push_back(texture2);
-    m_textures.push_back(texture3);
-    m_textures.push_back(texture4);
+    m_textures.push_back(asteroid_normal_texture);
+    m_textures.push_back(asteroid_fast_texture);
+    m_textures.push_back(asteroid_tank_texture);
+    m_textures.push_back(alien_texture);
     
     this->m_spawn_timer_max=50.f;
     this->m_spawn_timer=this->m_spawn_timer_max;
@@ -41,6 +42,19 @@ std::vector<Enemy*>& EnemyManager::GetEnemies()
     Functions
 ---------------
 */
+
+
+void EnemyManager::SetProjectileManagerForAliens(ProjectileManager* mgr) {
+    m_projectile_manager = mgr;
+    for (auto* enemy : m_enemies) {
+        Alien* alien = dynamic_cast<Alien*>(enemy);
+        if (alien) {
+            alien->SetProjectileManager(mgr);
+        }
+    }
+}
+
+
 
 // Random location for the enemy to spawn
 float EnemyManager::RandomLocation(sf::RenderWindow *window)
@@ -93,12 +107,14 @@ void EnemyManager::SpawnAsteroids(sf::RenderWindow *window)
 
 void EnemyManager::SpawnAlien(sf::RenderWindow *window)
 {
-    this->m_enemies.push_back(
-        new Alien(
-            m_textures[3],
-                WINDOW_WIDTH/2-SPRITE_MARGIN/2, 50.f
-        )
+    Alien* alien = new Alien(
+        m_textures[3],
+        WINDOW_WIDTH/2-SPRITE_MARGIN/2, 50.f
     );
+    if (m_projectile_manager) {
+        alien->SetProjectileManager(m_projectile_manager);
+    }
+    m_enemies.push_back(alien);
 }
 
 
@@ -123,9 +139,6 @@ void EnemyManager::WorldCollision(sf:: RenderWindow *window)
     unsigned counter=0; 
     for(auto *asteroid: this->m_enemies)
     {
-        //Enemy moving down
-        asteroid->Update();
-
         // Enemy culling (Bottom of the screen)
         if(asteroid->GetBounds().top > window->getSize().y)
         {
@@ -138,8 +151,18 @@ void EnemyManager::WorldCollision(sf:: RenderWindow *window)
 }
 
 
-void EnemyManager::Update(sf:: RenderWindow *window)
+void EnemyManager::Update(sf:: RenderWindow *window,sf::Texture* alien_laser_texture)
 {
+    for (auto* enemy : m_enemies) 
+    {
+        Alien* alien = dynamic_cast<Alien*>(enemy);
+        if (alien) {
+            alien->Update(alien_laser_texture);
+        } else {
+            enemy->Update();
+        }
+    }
+
     SpawnEnemies(window);
     WorldCollision(window);
 }

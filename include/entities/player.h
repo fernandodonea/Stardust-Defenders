@@ -13,6 +13,7 @@ class Player: public Entity
         int m_hp;
         int m_hp_max;
 
+        //Protected functions
         void _InitVariables() override;
 
     public:

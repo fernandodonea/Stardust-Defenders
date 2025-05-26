@@ -6,7 +6,6 @@
 --------------
 */
 
-// Handles the collision between the player and enemies
 void CombatManager::HandleEnemyPlayerCollision(
     Player *player,
     std::vector<Enemy*>& enemies)
@@ -28,6 +27,33 @@ void CombatManager::HandleEnemyPlayerCollision(
         ++counter;
     }
 }
+
+
+void CombatManager::HandleLaserPlayerCollision(
+    Player *player,
+    std::vector<Projectile*>& lasers
+)
+{
+        unsigned counter=0; 
+    for(auto *laser: lasers)
+    {
+
+        //Enemy-Player collision 
+        if(laser->GetBounds().intersects(player->GetBounds()))
+        {
+            //Player takes damage
+            player->LoseHp(lasers.at(counter)->GetDamage());
+
+            //Delete enemy
+            delete lasers.at(counter);
+            lasers.erase(lasers.begin()+counter); 
+        }
+        ++counter;
+    }
+
+}
+
+
 //Handles the collision between bullets and enemies
 void CombatManager::HandleBulletEnemyCollisions(
     std::vector<Projectile*>& projectiles,
@@ -82,8 +108,10 @@ void CombatManager::Update(
     Player *player,
     std::vector<Enemy*>& enemies,
     std::vector<Projectile*>& projectiles,
+    std::vector<Projectile*>& lasers,
      WorldManager *world)
 {
     HandleEnemyPlayerCollision(player, enemies);
+    HandleLaserPlayerCollision(player,lasers);
     HandleBulletEnemyCollisions(projectiles,enemies,world);
 }

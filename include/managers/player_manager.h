@@ -28,6 +28,7 @@ class PlayerManager
         Player* GetPlayer();
 
         //Functions
+        
         void WorldCollision(sf::RenderWindow *window);
         void Update(sf::RenderWindow *window);
 };
