@@ -2,7 +2,10 @@
 
 A classic-style space shooter game built with C++ and SFML to practice object-oriented programming (OOP). Take control of a spaceship and defend against waves of enemies while trying to achieve the highest score possible.
 
-![Game Screenshot](/resources/screenshots/gameplay.png)
+
+![Game Screenshot](/resources/screenshots/gameplay-normal.png)
+
+
 
 
 ## Features
@@ -16,10 +19,16 @@ A classic-style space shooter game built with C++ and SFML to practice object-or
   - Continuous enemy spawning
   - Different enemy speed and health
   - Collision detection with player and bullets
+- **Boss**:
+  - Special alien boss enemy with laser attack 
+  - Randomized movement
+
+![Game Screenshot](/resources/screenshots/gameplay-boss.png)
 - **GUI Elements**:
   - Score tracking
   - Health bar
   - Game over screen
+
 
 ## Controls
 
