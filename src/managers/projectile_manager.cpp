@@ -1,4 +1,4 @@
-#include "../include/managers/bullet_manager.h"
+#include "../include/managers/projectile_manager.h"
 
 
 /*

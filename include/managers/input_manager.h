@@ -14,7 +14,7 @@
 #include "../entities/player.h"
 #include "../entities/bullet.h"
 
-#include "bullet_manager.h"
+#include "projectile_manager.h"
 
 class InputManager
 {

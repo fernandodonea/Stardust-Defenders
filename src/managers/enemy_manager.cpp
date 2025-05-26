@@ -124,7 +124,7 @@ void EnemyManager::SpawnEnemies(sf::RenderWindow *window)
         return;
 
     int destroyed=Asteroid::GetAsteroidsDestroyed();
-    if (destroyed - m_last_alien_spawn_kill_count >= 3 && destroyed > 0)
+    if (destroyed - m_last_alien_spawn_kill_count >= 10 && destroyed > 0)
     {
         SpawnAlien(window);
         m_last_alien_spawn_kill_count = destroyed;

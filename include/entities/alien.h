@@ -5,7 +5,7 @@
 #include "laser.h"
 #include "constants/constants_enemy.h"
 
-#include "../managers/bullet_manager.h"
+#include "../managers/projectile_manager.h"
 
 
 enum class AlienPos { Left, Center, Right };

@@ -11,8 +11,8 @@
 */
 
 
-#ifndef BULLET_MANAGER_H
-#define BULLET_MANAGER_H
+#ifndef PROJECTILE_MANAGER_H
+#define PROJECTILE_MANAGER_H
 
 
 #include "../entities/bullet.h"
@@ -48,4 +48,4 @@ class ProjectileManager
 };
 
 
-#endif//BULLET_MANAGER_H
+#endif//PROJECTILE_MANAGER_H

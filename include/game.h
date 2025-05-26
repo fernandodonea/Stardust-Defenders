@@ -13,7 +13,7 @@
 #include "./managers/player_manager.h"
 #include "./managers/input_manager.h"
 #include "./managers/enemy_manager.h"
-#include "./managers/bullet_manager.h"
+#include "./managers/projectile_manager.h"
 #include "./managers/combat_manager.h"
 #include "./managers/world_manager.h"
 

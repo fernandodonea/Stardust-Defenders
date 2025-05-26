@@ -17,7 +17,7 @@
 #include "../entities/alien.h"
 #include "../entities/player.h"
 
-#include "bullet_manager.h"
+#include "projectile_manager.h"
 
 class EnemyManager
 {
