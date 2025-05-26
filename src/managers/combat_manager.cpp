@@ -30,7 +30,7 @@ void CombatManager::HandleEnemyPlayerCollision(
 }
 //Handles the collision between bullets and enemies
 void CombatManager::HandleBulletEnemyCollisions(
-    std::vector<Bullet*>& bullets,
+    std::vector<Projectile*>& projectiles,
     std::vector<Enemy*>& enemies,
     WorldManager *world)
 {
@@ -39,13 +39,13 @@ void CombatManager::HandleBulletEnemyCollisions(
     { 
         bool enemy_deleted=false;
 
-        for(size_t k=0; k < bullets.size() && enemy_deleted==false; ++k)
+        for(size_t k=0; k < projectiles.size() && enemy_deleted==false; ++k)
         {
             //Enemy-Bullet collision
-            if(enemies[i]->GetBounds().intersects(bullets[k]->GetBounds()))
+            if(enemies[i]->GetBounds().intersects(projectiles[k]->GetBounds()))
             {
                 //Enemy takes damage
-                enemies[i]->LoseHp(bullets[k]->GetDamage());
+                enemies[i]->LoseHp(projectiles[k]->GetDamage());
 
                 if(enemies[i]->GetHp()<=0)
                 {
@@ -67,8 +67,8 @@ void CombatManager::HandleBulletEnemyCollisions(
 
 
                 //Delete Bullet
-                delete bullets[k];
-                bullets.erase(bullets.begin() + k); 
+                delete projectiles[k];
+                projectiles.erase(projectiles.begin() + k); 
                 
             }
         }
@@ -81,9 +81,9 @@ void CombatManager::HandleBulletEnemyCollisions(
 void CombatManager::Update(
     Player *player,
     std::vector<Enemy*>& enemies,
-    std::vector<Bullet*>& bullets,
+    std::vector<Projectile*>& projectiles,
      WorldManager *world)
 {
     HandleEnemyPlayerCollision(player, enemies);
-    HandleBulletEnemyCollisions(bullets,enemies,world);
+    HandleBulletEnemyCollisions(projectiles,enemies,world);
 }

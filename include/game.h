@@ -43,7 +43,7 @@ class Game
         EnemyManager *m_enemy_manager;
 
         //Bullet 
-        BulletManager *m_bullet_manager;
+        ProjectileManager *m_projectile_manager;
 
         //Combat
         CombatManager *m_combat_manager;

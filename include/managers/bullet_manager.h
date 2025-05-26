@@ -1,13 +1,13 @@
 /*
-* @class BulletManager
+* @class ProjectileManager
 * @brief Manages all the bullets shot by the player.
 
-    BulletManager is responsible for creating, updating, and deleting Bullet objects.
+    ProjectileManager is responsible for creating, updating, and deleting Bullet objects.
 
     It updates bullet positions, checks for collisions with world boundaries (removing bullets that leave the screen),
     and provides access to the current list of active bullets for rendering or collision detection.
 
-    BulletManager also ensures proper memory management by deleting bullets when they leave the screen.
+    ProjectileManager also ensures proper memory management by deleting bullets when they leave the screen.
 */
 
 
@@ -16,20 +16,21 @@
 
 #include "../entities/bullet.h"
 
-class BulletManager
+
+class ProjectileManager
 {
     private:
-        std::vector<Bullet*> m_bullets;
+        std::vector<Projectile*> m_projectiles;
         
         sf::RenderWindow *m_window;
 
     public:
         //Constructor and destructor
-        BulletManager()=default;
-        ~BulletManager();
+        ProjectileManager()=default;
+        ~ProjectileManager();
 
         //Getters
-        std::vector<Bullet*>& GetBullets();
+        std::vector<Projectile*>& GetProjectiles();
 
         //Functions
         void WorldCollision();

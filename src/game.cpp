@@ -35,7 +35,7 @@ Game::Game()
         m_resource_manager->GetTexture("ALIEN")
     );
 
-    this->m_bullet_manager = new BulletManager();
+    this->m_projectile_manager = new ProjectileManager();
 
     this->m_combat_manager = new CombatManager();
 
@@ -56,7 +56,7 @@ Game::~Game()
 
     delete this->m_enemy_manager;
 
-    delete this->m_bullet_manager;
+    delete this->m_projectile_manager;
 
     delete this->m_combat_manager;
 
@@ -89,7 +89,7 @@ void Game::Update()
 {
     this->m_input_manager->Update(
         this->m_player_manager->GetPlayer(),
-        this->m_bullet_manager->GetBullets()
+        this->m_projectile_manager->GetProjectiles()
     );
 
   
@@ -97,7 +97,7 @@ void Game::Update()
         this->m_window_manager->GetWindow()
     );
 
-    this->m_bullet_manager->Update();
+    this->m_projectile_manager->Update();
 
     this->m_enemy_manager->Update(
         this->m_window_manager->GetWindow()
@@ -106,7 +106,7 @@ void Game::Update()
     this->m_combat_manager->Update(
         m_player_manager->GetPlayer(),
         m_enemy_manager->GetEnemies(),
-        m_bullet_manager->GetBullets(),
+        m_projectile_manager->GetProjectiles(),
         m_world_manager
     );
     
@@ -135,7 +135,7 @@ void Game::Render()
     this->m_player_manager->GetPlayer()->Render(*this->m_window_manager->GetWindow());
 
     //Render the bullets
-    for(auto *bullet: this->m_bullet_manager->GetBullets())
+    for(auto *bullet: this->m_projectile_manager->GetProjectiles())
     {
         bullet->Render(*this->m_window_manager->GetWindow());
     }

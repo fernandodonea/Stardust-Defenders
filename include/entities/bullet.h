@@ -4,7 +4,7 @@
 
 #include "projectile.h"
 
-
+#include <iostream>
 
 class Bullet: public Projectile
 {

@@ -20,9 +20,9 @@ class InputManager
     public:
         //Functions
         void Movement(Player* player);
-        void Attack(Player* player,std::vector<Bullet*>&bullets);
+        void Attack(Player* player,std::vector<Projectile*>&projectiles);
 
-        void Update(Player* player,std::vector<Bullet*>&bullets);
+        void Update(Player* player,std::vector<Projectile*>&projectiles);
 };
 
 #endif //INPUT_MANAGER_H

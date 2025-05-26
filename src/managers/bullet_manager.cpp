@@ -6,10 +6,10 @@
     Destructor
 ------------------
 */
-BulletManager::~BulletManager()
+ProjectileManager::~ProjectileManager()
 {
     // Delete any bullets left
-    for(auto *i: this->m_bullets)
+    for(auto *i: this->m_projectiles)
     {
         delete i;
     }
@@ -23,9 +23,9 @@ BulletManager::~BulletManager()
 ----------------
 */
 
-std::vector<Bullet*>& BulletManager::GetBullets()
+std::vector<Projectile*>& ProjectileManager::GetProjectiles()
 {
-    return this->m_bullets;
+    return this->m_projectiles;
 }
 
 
@@ -37,11 +37,11 @@ std::vector<Bullet*>& BulletManager::GetBullets()
 */
 
 //Handles the collision of bullets with the world boundaries
-void BulletManager::WorldCollision()
+void ProjectileManager::WorldCollision()
 {
     unsigned counter=0;
 
-    for(auto *bullet: this->m_bullets)
+    for(auto *bullet: this->m_projectiles)
     {   
         //Bullet Movement
         bullet->Update();
@@ -50,16 +50,15 @@ void BulletManager::WorldCollision()
         if(bullet->GetBounds().top + bullet->GetBounds().height < 0.f)
         {
             //Delete bullet
-            delete this->m_bullets.at(counter);
-            this->m_bullets.erase(this->m_bullets.begin()+counter);
-            
+            delete this->m_projectiles.at(counter);
+            this->m_projectiles.erase(this->m_projectiles.begin()+counter);          
         }
         ++counter;
     }
 }
 
 
-void BulletManager::Update()
+void ProjectileManager::Update()
 {
     WorldCollision();
 }

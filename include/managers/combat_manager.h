@@ -31,7 +31,7 @@ class CombatManager
             std::vector<Enemy*>& enemies
         );
         void HandleBulletEnemyCollisions(
-            std::vector<Bullet*>& bullets,
+            std::vector<Projectile*>& projectiles,
             std::vector<Enemy*>& enemies,
             WorldManager *world
         );
@@ -39,7 +39,7 @@ class CombatManager
         void Update(
             Player *player,
             std::vector<Enemy*>& enemies,
-            std::vector<Bullet*>& bullets,
+            std::vector<Projectile*>& projectiles,
              WorldManager *world
         );
 
