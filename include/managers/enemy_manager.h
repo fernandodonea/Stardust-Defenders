@@ -17,6 +17,8 @@
 #include "../entities/alien.h"
 #include "../entities/player.h"
 
+#include "bullet_manager.h"
+
 class EnemyManager
 {
     private:
@@ -27,6 +29,8 @@ class EnemyManager
         std::vector<Enemy*> m_enemies;
         std::vector<sf::Texture*> m_textures; 
 
+        ProjectileManager* m_projectileManager = nullptr;
+
     public:
         //Constructor and destructor
         EnemyManager(sf::Texture* texture1,sf::Texture* texture2,sf::Texture* texture3,sf::Texture* texture4);
@@ -36,6 +40,8 @@ class EnemyManager
         std::vector<Enemy*>& GetEnemies();
         
         //Functions
+        void SetProjectileManagerForAliens(ProjectileManager* mgr);
+
         float RandomLocation(sf::RenderWindow *window);
         int RandomType();
 
@@ -48,7 +54,7 @@ class EnemyManager
         void WorldCollision(sf:: RenderWindow *window);
 
         
-        void Update(sf:: RenderWindow *window);
+        void Update(sf:: RenderWindow *window,sf::Texture* alien_laser_texture);
 };
 
 

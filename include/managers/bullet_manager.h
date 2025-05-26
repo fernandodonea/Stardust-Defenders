@@ -14,13 +14,19 @@
 #ifndef BULLET_MANAGER_H
 #define BULLET_MANAGER_H
 
+
 #include "../entities/bullet.h"
+#include "../entities/laser.h"
+
+#include "../entities/player.h"
 
 
 class ProjectileManager
 {
     private:
-        std::vector<Projectile*> m_projectiles;
+        std::vector<Projectile*> m_bullets;
+
+        std::vector<Projectile*> m_lasers;
         
         sf::RenderWindow *m_window;
 
@@ -30,9 +36,18 @@ class ProjectileManager
         ~ProjectileManager();
 
         //Getters
-        std::vector<Projectile*>& GetProjectiles();
+        std::vector<Projectile*>& GetBullets();
+
+        std::vector<Projectile*>& GetLasers();
 
         //Functions
+        void PlayerShoot(Player* player, sf::Texture* bullet_texture);
+        void AlienShoot(sf::Texture* laser_texture, float pos_x, float pos_y, sf::Vector2f direction);
+
+        
+        void BulletCollison();
+        void LaserCollision();
+
         void WorldCollision();
         void Update();
 };

@@ -18,6 +18,7 @@ public:
     const int& GetDamage() const;
     
     //Functions
+    bool IsOutOfScreen();
     void Update() override;
 };
 

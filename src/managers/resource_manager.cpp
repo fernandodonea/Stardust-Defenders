@@ -61,6 +61,9 @@ void ResourceManager::LoadTextures()
     this->m_textures["BULLET"] = new sf::Texture();
     this->m_textures["BULLET"]->loadFromFile("resources/textures/cyan-bullet.png");
 
+    this->m_textures["LASER"] = new sf::Texture();
+    this->m_textures["LASER"]->loadFromFile("resources/textures/green-bullet.png");
+
     this->m_textures["ASTEROID_NORMAL"] = new sf::Texture();
     this->m_textures["ASTEROID_NORMAL"]->loadFromFile("resources/textures/asteroid_1.png");
 

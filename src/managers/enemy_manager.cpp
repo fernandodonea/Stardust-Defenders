@@ -42,6 +42,19 @@ std::vector<Enemy*>& EnemyManager::GetEnemies()
 ---------------
 */
 
+
+void EnemyManager::SetProjectileManagerForAliens(ProjectileManager* mgr) {
+    m_projectileManager = mgr;
+    for (auto* enemy : m_enemies) {
+        Alien* alien = dynamic_cast<Alien*>(enemy);
+        if (alien) {
+            alien->SetProjectileManager(mgr);
+        }
+    }
+}
+
+
+
 // Random location for the enemy to spawn
 float EnemyManager::RandomLocation(sf::RenderWindow *window)
 {
@@ -93,12 +106,14 @@ void EnemyManager::SpawnAsteroids(sf::RenderWindow *window)
 
 void EnemyManager::SpawnAlien(sf::RenderWindow *window)
 {
-    this->m_enemies.push_back(
-        new Alien(
-            m_textures[3],
-                WINDOW_WIDTH/2-SPRITE_MARGIN/2, 50.f
-        )
+    Alien* alien = new Alien(
+        m_textures[3],
+        WINDOW_WIDTH/2-SPRITE_MARGIN/2, 50.f
     );
+    if (m_projectileManager) {
+        alien->SetProjectileManager(m_projectileManager);
+    }
+    m_enemies.push_back(alien);
 }
 
 
@@ -108,7 +123,7 @@ void EnemyManager::SpawnEnemies(sf::RenderWindow *window)
         return;
 
     int destroyed=Asteroid::GetAsteroidsDestroyed();
-    if (destroyed - m_last_alien_spawn_kill_count >= 10 && destroyed > 0)
+    if (destroyed - m_last_alien_spawn_kill_count >= 3 && destroyed > 0)
     {
         SpawnAlien(window);
         m_last_alien_spawn_kill_count = destroyed;
@@ -123,9 +138,6 @@ void EnemyManager::WorldCollision(sf:: RenderWindow *window)
     unsigned counter=0; 
     for(auto *asteroid: this->m_enemies)
     {
-        //Enemy moving down
-        asteroid->Update();
-
         // Enemy culling (Bottom of the screen)
         if(asteroid->GetBounds().top > window->getSize().y)
         {
@@ -138,8 +150,18 @@ void EnemyManager::WorldCollision(sf:: RenderWindow *window)
 }
 
 
-void EnemyManager::Update(sf:: RenderWindow *window)
+void EnemyManager::Update(sf:: RenderWindow *window,sf::Texture* alien_laser_texture)
 {
+    for (auto* enemy : m_enemies) 
+    {
+        Alien* alien = dynamic_cast<Alien*>(enemy);
+        if (alien) {
+            alien->Update(alien_laser_texture);
+        } else {
+            enemy->Update();
+        }
+    }
+
     SpawnEnemies(window);
     WorldCollision(window);
 }

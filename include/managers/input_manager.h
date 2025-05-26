@@ -14,15 +14,22 @@
 #include "../entities/player.h"
 #include "../entities/bullet.h"
 
+#include "bullet_manager.h"
+
 class InputManager
 {
     private:
+        //Dependency injection
+        ProjectileManager* m_bulletManager = nullptr; 
+
     public:
         //Functions
-        void Movement(Player* player);
-        void Attack(Player* player,std::vector<Projectile*>&projectiles, sf::Texture* bullet_texture);
+        void SetBulletManager(ProjectileManager* mgr) { m_bulletManager = mgr; }
 
-        void Update(Player* player,std::vector<Projectile*>&projectiles,sf::Texture* bullet_texture);
+        void Movement(Player* player);
+        void Attack(Player* player, sf::Texture* bullet_texture);
+
+        void Update(Player* player, sf::Texture* bullet_texture);
 };
 
 #endif //INPUT_MANAGER_H

@@ -13,7 +13,6 @@ void Bullet::_InitVariables()
     this->m_damage=10;
 
     this->m_direction=up;
-    
 
 }
 
@@ -28,6 +27,7 @@ Bullet::Bullet (sf::Texture* texture,float pos_x, float pos_y)
 {
     _InitVariables();
 
-     _InitSprite(texture,pos_x,pos_y,0.5f);
-
+    _InitSprite(texture,pos_x,pos_y,0.5f);
 }
+
+
