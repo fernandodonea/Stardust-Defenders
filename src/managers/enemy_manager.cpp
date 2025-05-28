@@ -102,6 +102,8 @@ void EnemyManager::SpawnAsteroids(sf::RenderWindow *window)
                 RandomLocation(window), -100.f
             ));
         this->m_spawn_timer=0.f;
+
+        std::cout<<*m_enemies[m_enemies.size()-1];
     }
 }
 
@@ -115,6 +117,8 @@ void EnemyManager::SpawnAlien(sf::RenderWindow *window)
         alien->SetProjectileManager(m_projectile_manager);
     }
     m_enemies.push_back(alien);
+
+    std::cout<<*m_enemies[m_enemies.size()-1];
 }
 
 

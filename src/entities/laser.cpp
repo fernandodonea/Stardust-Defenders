@@ -8,6 +8,8 @@
 */
 void Laser::_InitVariables()
 {
+    this->m_type=2;
+
     this->m_movement_speed=8.f;
 
     this->m_damage=30;

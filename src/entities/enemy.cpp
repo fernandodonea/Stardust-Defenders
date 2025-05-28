@@ -29,6 +29,24 @@ const int&Enemy::GetDamage() const
     Functions
 -------------
 */
+std::string Enemy::ToString() const
+{
+    std::string debug_message="";
+    debug_message+="Enemy(pos="+std::to_string(GetPosition().x) + "," + std::to_string(GetPosition().y)+")\n";
+
+    std::string type;
+    if(GetType() == 1)
+        type="Normal Asteroid";
+    else if(GetType() == 2)
+        type="Fast Asteroid";
+    else if(GetType() == 3)
+        type="Tank Asteroid";
+    else if(GetType() == 4)
+        type="Alien";
+
+    debug_message+="Type: "+type+"\n\n";
+    return debug_message;
+}
 
 void Enemy::LoseHp(const int value)
 {

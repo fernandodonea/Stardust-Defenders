@@ -39,6 +39,15 @@ class Entity
         // Functions
         void Move(const float dir_x, const float dir_y);
         void Move(const sf::Vector2f direction);
+
+        virtual std::string ToString() const = 0;
+
+        //operator << overload
+        friend std::ostream& operator<<(std::ostream& os, const Entity& entity) {
+        os << entity.ToString();
+        return os;
+        }
+
         
         virtual void Update() = 0;
         void Render(sf::RenderTarget& target);

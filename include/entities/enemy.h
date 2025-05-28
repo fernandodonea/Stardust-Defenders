@@ -29,6 +29,8 @@ class Enemy: public Entity
         const int& GetDamage() const;
         
         //Functions
+        std::string ToString() const override;
+
         void LoseHp(const int value);
 
         void Update() override;

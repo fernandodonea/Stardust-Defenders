@@ -80,6 +80,17 @@ void Player::LoseHp(const int value)
     Functions
 ---------------
 */
+std::string Player::ToString() const
+{
+    std::string debug_message="";
+    debug_message+="Player(pos="+std::to_string(GetPosition().x) + "," + std::to_string(GetPosition().y)+")\n";
+    debug_message+="HP:"+std::to_string(GetHp())+"\n\n";
+
+    return debug_message;
+}
+
+
+
 const bool Player::CanAttack()
 {
     if(this->m_attack_cooldown>=this->m_attack_cooldown_max)

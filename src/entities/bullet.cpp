@@ -8,6 +8,8 @@
 */
 void Bullet::_InitVariables()
 {
+    this->m_type=1;
+
     this->m_movement_speed=8.f;
 
     this->m_damage=10;

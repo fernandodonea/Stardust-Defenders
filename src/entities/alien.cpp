@@ -8,6 +8,8 @@
 */
 void Alien::_InitVariables()
 {
+    this->m_type=4;
+
     this->m_movement_speed=Const_Alien::movement_speed;
 
     this->m_hp_max=Const_Alien::hp_max;

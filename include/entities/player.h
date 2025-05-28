@@ -32,8 +32,11 @@ class Player: public Entity
 
 
         //Functions
+        std::string ToString() const override;
+        
         const bool CanAttack();
         void UpdateAttack();
+
 
         void Update() override;
 };
