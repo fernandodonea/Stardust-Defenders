@@ -6,8 +6,6 @@ namespace Game_Engine
 
 
 
-
-
 /*
 -------------------------------
     Constructor and destructor
@@ -15,14 +13,14 @@ namespace Game_Engine
 */
 Game::Game()
 {
-    this->m_window_manager = new WindowManger(); // Initialize the window manager
+    this->m_window_manager = new WindowManger(); 
 
-    this->m_resource_manager = new ResourceManager(); // Initialize the resource manager
+    this->m_resource_manager = new ResourceManager(); 
 
     this->m_gui_manager = new GuiManager(
         m_resource_manager->GetFont(),
         m_window_manager->GetWindow()
-    ); // Initialize GUI
+    ); 
 
     this->m_player_manager = new PlayerManager(m_resource_manager->GetTexture("PLAYER"));
 
@@ -40,6 +38,14 @@ Game::Game()
     this->m_combat_manager = new CombatManager();
 
     this->m_world_manager = new WorldManager(m_resource_manager->GetTexture("BACKGROUND"));
+
+
+    //Dependency injection
+    this->m_input_manager->SetBulletManager(this->m_projectile_manager);
+
+    this->m_enemy_manager->SetProjectileManagerForAliens(this->m_projectile_manager);
+
+   
 }
 
 Game::~Game()
@@ -89,7 +95,6 @@ void Game::Update()
 {
     this->m_input_manager->Update(
         this->m_player_manager->GetPlayer(),
-        this->m_projectile_manager->GetProjectiles(),
         this->m_resource_manager->GetTexture("BULLET")
     );
 
@@ -101,13 +106,15 @@ void Game::Update()
     this->m_projectile_manager->Update();
 
     this->m_enemy_manager->Update(
-        this->m_window_manager->GetWindow()
+        this->m_window_manager->GetWindow(),
+        this->m_resource_manager->GetTexture("LASER")
     );
 
     this->m_combat_manager->Update(
         m_player_manager->GetPlayer(),
         m_enemy_manager->GetEnemies(),
-        m_projectile_manager->GetProjectiles(),
+        m_projectile_manager->GetBullets(),
+        m_projectile_manager->GetLasers(),
         m_world_manager
     );
     
@@ -136,9 +143,15 @@ void Game::Render()
     this->m_player_manager->GetPlayer()->Render(*this->m_window_manager->GetWindow());
 
     //Render the bullets
-    for(auto *bullet: this->m_projectile_manager->GetProjectiles())
+    for(auto *bullet: this->m_projectile_manager->GetBullets())
     {
         bullet->Render(*this->m_window_manager->GetWindow());
+    }
+
+    //Render the lasers
+    for(auto *laser: this->m_projectile_manager->GetLasers())
+    {
+        laser->Render(*this->m_window_manager->GetWindow());
     }
 
     //Render the enemies

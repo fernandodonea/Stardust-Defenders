@@ -3,14 +3,15 @@
 
 
 #include <SFML/Graphics.hpp>
-
+#include <iostream>
 
 const sf::Vector2f up(0.f,-1.f);
 const sf::Vector2f down(0.f,1.f);
 const sf::Vector2f left(-1.f,0.f);
 const sf::Vector2f right(1.f,0.f);
 
-
+const sf::Vector2f diag_left(-0.7f, 1.f);
+const sf::Vector2f diag_right(0.7f, 1.f);
 
 class Entity
 {

@@ -28,6 +28,27 @@ const int& Projectile::GetDamage() const
    Functions
 --------------
 */
+
+bool Projectile::IsOutOfScreen()
+{
+   sf::FloatRect bounds=GetBounds();
+   
+   // Left
+   if (bounds.left+bounds.width < 0.f)
+        return true;
+    // Right
+    if (bounds.left>1024.f)
+        return true;
+    // Top
+    if (bounds.top + bounds.height < 0.f)
+        return true;
+    // Bottom
+    if (bounds.top >728.f)
+        return true;
+
+    return false;
+
+}
 void Projectile::Update()
 {
    //Movement

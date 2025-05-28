@@ -13,11 +13,11 @@ public:
     Projectile()=default;
     virtual ~Projectile();
 
-
     //Getters
     const int& GetDamage() const;
     
     //Functions
+    bool IsOutOfScreen();
     void Update() override;
 };
 
