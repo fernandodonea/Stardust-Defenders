@@ -10,16 +10,18 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
 endif()
 
-
-# Set HERE the "brew --prefix sfml@2"
-#  |
-#  |
-#  v
-
-# Specify SFML path (update this if needed)
-set(SFML_PATH "/usr/local/opt/sfml@2")
-include_directories(${SFML_PATH}/include)
-link_directories(${SFML_PATH}/lib)
+# Detect the operating system
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    # Use default system paths for SFML on Linux
+    find_package(SFML 2.5 COMPONENTS graphics window system audio REQUIRED)
+    include_directories(${SFML_INCLUDE_DIRS})
+    link_directories(${SFML_LIBRARY_DIRS})
+else()
+    # macOS-specific SFML setup
+    set(SFML_PATH "/usr/local/opt/sfml@2")
+    include_directories(${SFML_PATH}/include)
+    link_directories(${SFML_PATH}/lib)
+endif()
 
 # Include our own additional headers
 include_directories(${CMAKE_SOURCE_DIR}/include)
@@ -30,14 +32,12 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR})
 # Recursively get all .cpp files in the src directory
 file(GLOB_RECURSE CPP_FILES ${CMAKE_SOURCE_DIR}/src/*.cpp)
 
-# Create executable
+# Add the executable
 add_executable(StardustDefenders ${CPP_FILES})
 
-# Set RPATH to SFML libraries for runtime linking
-set_target_properties(StardustDefenders PROPERTIES
-    BUILD_RPATH "${SFML_PATH}/lib"
-    INSTALL_RPATH "${SFML_PATH}/lib"
-)
-
 # Link SFML libraries
-target_link_libraries(StardustDefenders sfml-graphics sfml-window sfml-system sfml-audio sfml-network)
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    target_link_libraries(StardustDefenders sfml-graphics sfml-window sfml-system sfml-audio)
+else()
+    target_link_libraries(StardustDefenders sfml-graphics sfml-window sfml-system sfml-audio sfml-network)
+endif()
