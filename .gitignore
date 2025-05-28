@@ -11,6 +11,8 @@
 *.dll
 *.dylib
 
+StardustDefenders
+
 # CMake and Make build files
 CMakeFiles/
 CMakeCache.txt
@@ -39,14 +41,15 @@ Thumbs.db
 # Ignore screenshots and piskel source files
 *.piskel
 
-# Ignore the commit message file (if not needed in repo)
-commitMessage.md
-
 # Ignore the binary app (if built locally)
 bin/app
 
-#Other
-oop.md
-class.md
-overload.md
-*.app
+# Local files
+commitMessage.md
+
+wiki/
+
+local/
+
+*.piskel
+
