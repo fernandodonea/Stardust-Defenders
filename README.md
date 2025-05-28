@@ -6,7 +6,7 @@ A classic-style space shooter game built with C++ and SFML to practice object-or
 ![Game Screenshot](/resources/screenshots/gameplay-normal.png)
 
 
-**Check the `wiki` for more details on the project structure and OOP principles used in this game.**
+**Check the [wiki](https://github.com/fernandodonea/Stardust-Defenders/wiki) for more details on the project structure and OOP principles used in this game.**
 
 ## Features
 
