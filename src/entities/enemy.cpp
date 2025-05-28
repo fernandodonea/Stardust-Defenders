@@ -44,7 +44,8 @@ std::string Enemy::ToString() const
     else if(GetType() == 4)
         type="Alien";
 
-    debug_message+="Type: "+type+"\n\n";
+    debug_message+="Type: "+type+"\n";
+    debug_message+="Dimensions:"+ std::to_string(GetBounds().width) + "x" + std::to_string(GetBounds().height)+"\n\n";
     return debug_message;
 }
 

@@ -34,7 +34,7 @@ void CombatManager::HandleLaserPlayerCollision(
     std::vector<Projectile*>& lasers
 )
 {
-        unsigned counter=0; 
+    unsigned counter=0; 
     for(auto *laser: lasers)
     {
 

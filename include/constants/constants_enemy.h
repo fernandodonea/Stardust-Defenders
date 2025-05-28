@@ -39,16 +39,16 @@ namespace Const_Alien
     const int damage=35;
     const int points=1000;
     const float size=0.4;
+
+    const float sprite_margin=102.4f;
+
+    const float alien_left_x   = sprite_margin/2 + 100.f;
+    const float alien_center_x = 1024.f / 2.f - sprite_margin/2 ;
+    const float alien_right_x  = 1024.f - sprite_margin - 100.f;
 }
 
 // Alien Positions
 
-const float WINDOW_WIDTH = 1024.f;
-const float SPRITE_MARGIN = 102.4f;
-
-const float ALIEN_LEFT_X   = SPRITE_MARGIN/2 + 100.f;
-const float ALIEN_CENTER_X = WINDOW_WIDTH / 2.f - SPRITE_MARGIN/2 ;
-const float ALIEN_RIGHT_X  = WINDOW_WIDTH - SPRITE_MARGIN - 100.f;
 
 
 

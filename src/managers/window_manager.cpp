@@ -1,5 +1,7 @@
 #include "../include/managers/window_manager.h" 
 
+#include "../include/constants/constants_game.h"
+
 /*
 --------------------------------
     Constructor and destructor
@@ -7,7 +9,11 @@
 */
 WindowManger::WindowManger()
 {
-    this->m_window = new sf::RenderWindow(sf::VideoMode(1024,728),"Stardust Defenders",
+    this->m_window = new sf::RenderWindow(
+        sf::VideoMode(
+            Const_Window::window_width,
+            Const_Window::window_height),
+        Const_Window::window_title,
     sf::Style::Close | sf::Style::Titlebar);
 
     this->m_window->setFramerateLimit(60);

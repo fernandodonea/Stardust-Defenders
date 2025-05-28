@@ -1,5 +1,6 @@
 #ifndef CONSTANTS_GAME_H
 #define CONSTANTS_GAME_H
+#include <string>
 
 //Constants for Debugging
 namespace Const_Debug
@@ -9,5 +10,14 @@ namespace Const_Debug
     const bool projectile_debug=false;
 }
 
+//Constants for Window Settings
+namespace Const_Window
+{
+    const int window_width=1024;
+    const int window_height=728;
+    const std::string window_title="Stardust Defenders";
+}
 
-#endif 
+
+
+#endif //CONSTANTS_GAME_H

@@ -57,13 +57,13 @@ void Alien::DecideNextMove()
     //Set the target position based on the new position
     switch (newPos) {
         case AlienPos::Left:
-            m_target_x = ALIEN_LEFT_X;
+            m_target_x = Const_Alien::alien_left_x;
             break;
         case AlienPos::Center:
-            m_target_x = ALIEN_CENTER_X;
+            m_target_x = Const_Alien::alien_center_x;
             break;
         case AlienPos::Right:
-            m_target_x = ALIEN_RIGHT_X;
+            m_target_x = Const_Alien::alien_right_x;
             break;
     }
     m_state = MoveState::Moving;

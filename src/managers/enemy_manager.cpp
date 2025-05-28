@@ -61,7 +61,9 @@ void EnemyManager::SetProjectileManagerForAliens(ProjectileManager* mgr) {
 // Random location for the enemy to spawn
 float EnemyManager::RandomLocation(sf::RenderWindow *window)
 {
-    return rand()%window->getSize().x-80.f;
+    unsigned int max_x = window->getSize().x;
+    float enemy_width = 80.f; 
+    return static_cast<float>(rand() % static_cast<int>(max_x - enemy_width));
 }
 
 // Random type of enemy to spawn
@@ -114,7 +116,7 @@ void EnemyManager::SpawnAlien(sf::RenderWindow *window)
 {
     Alien* alien = new Alien(
         m_textures[3],
-        WINDOW_WIDTH/2-SPRITE_MARGIN/2, 50.f
+        Const_Window::window_width/2-Const_Alien::sprite_margin/2, 50.f
     );
     if (m_projectile_manager) {
         alien->SetProjectileManager(m_projectile_manager);
