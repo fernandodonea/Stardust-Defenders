@@ -1,14 +1,10 @@
 /*
-@class ResourceManager
-@brief Manages game resources such as textures and fonts.
 
-    ResourceManager is responsible for loading, storing, and providing access to all game resources,
-    including textures and fonts. 
+ResourceManager manages game resources such as textures and fonts.
 
-    It ensures that each resource is loaded only once and is available
-    throughout the game.
+Responsible for loading, storing, and providing access to all game resources, 
+ensuring each is loaded only once.
 
-    ResourceManager also handles proper cleanup of resources to prevent memory leaks.
 */
 
 

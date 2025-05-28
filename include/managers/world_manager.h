@@ -1,10 +1,13 @@
-/*
-@class WorldManager
-@brief Manages the game world and global systems.
 
-    WorldManager is responsible for handling the world background, global game variables (such as points/score),
-    and rendering the world environment. 
+/*
+    WorldManager - Manages the game world and global systems.
+
+    Responsible for handling the world background, 
+    global game variables (such as points/score),
+    and rendering the world environment.
 */
+
+
 
 
 #ifndef WORLD_MANAGER_H

@@ -1,13 +1,10 @@
 /*
-* @class ProjectileManager
-* @brief Manages all the bullets shot by the player.
 
-    ProjectileManager is responsible for creating, updating, and deleting Bullet objects.
+ProjectileManager manages all the bullets and lasers shot by the player and enemies.
 
-    It updates bullet positions, checks for collisions with world boundaries (removing bullets that leave the screen),
-    and provides access to the current list of active bullets for rendering or collision detection.
+Responsible for creating, updating, and deleting Projectile objects, 
+updating their positions, and handling memory management.
 
-    ProjectileManager also ensures proper memory management by deleting bullets when they leave the screen.
 */
 
 

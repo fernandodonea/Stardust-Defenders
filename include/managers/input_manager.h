@@ -1,10 +1,8 @@
 /*
-* @class InputManager
-* @brief Handles player input and input-driven actions.
+InputManager handles player input and input-driven actions.
 
-    InputManager is responsible for processing keyboard (and potentially other) input,
-    translating it into player actions such as movement, shooting, and abilities.
-
+Responsible for processing keyboard input and translating it into player actions 
+such as movement and shooting.
 */
 
 

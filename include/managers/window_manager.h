@@ -1,14 +1,10 @@
 /*
-@class WindowManager
-@brief Manages the game window and window-related events.
-
-    WindowManager is responsible for creating and maintaining the main game window.
-
-    It provides access to the window for rendering, handles window events,
-    and manages window properties like size and title.
-    
-    WindowManager centralizes all window-related logic.
+    WindowManager manages the game window and window-related events.
+ 
+    Responsible for creating and maintaining the main game window, 
+    handling window events, and managing window properties.
 */
+
 
 
 #ifndef WINDOW_MANAGER_H

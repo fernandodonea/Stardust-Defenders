@@ -1,3 +1,10 @@
+/*
+GuiManager manages the game's graphical user interface (GUI).
+
+Handles the display and update of points, health bars, and game over text.
+*/
+
+
 #ifndef GUI_MANAGER_H
 #define GUI_MANAGER_H
 

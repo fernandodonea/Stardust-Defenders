@@ -1,15 +1,8 @@
 /*
-* @class CombatManager
-* @brief Handles the combat system.
+CombatManager handles the combat system and collision detection.
 
-    CombatManager is responsible for checking collision between: 
-        - Player and Enemies: 
-            -> the player takes damage from the enemy and the enemy is deleted
-        - Bullets and Enemies:
-            -> the enemy takes damage from the bullet
-            -> if the enemy healthbat is depleated, increase the points and delete the enemy
-            -> the bullet that hits an enemy does damage and then is deleted
-
+Responsible for checking collisions between player and enemies, bullets and enemies, and lasers and player.
+Manages damage application, enemy deletion, and score updates.
 */
 
 

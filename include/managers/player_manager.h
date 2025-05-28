@@ -1,10 +1,9 @@
 /*
-@class PlayerManager
-@brief Manages the player entity and its interactions.
 
-    PlayerManager is responsible for creating, updating, and managing the player object.
+PlayerManager manages the player entity and its interactions.
 
-    It handles world collision, attack cooldowns, and provides access to the player for other systems.
+Responsible for creating, updating, and managing the player object, 
+handling world collision, and attack cooldowns.
 
 */
 

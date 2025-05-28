@@ -1,11 +1,9 @@
 /*
-* @class EnemyManager
-* @brief Handles the enemies spawning and despawning
 
-    EnemyManager is responsible for spawning the enemies above the screen
-  at a random location.
-  
-    It also deletes the enemies once they leave the screen.
+EnemyManager handles the spawning and despawning of enemies.
+
+Responsible for spawning enemies above the screen at random locations
+ and deleting them once they leave the screen.
 */
 
 
