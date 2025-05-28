@@ -11,6 +11,10 @@ A classic-style space shooter game built with C++ and SFML to practice object-or
 ## Features
 
 - **Player Controls**: Control your spaceship using `W`, `A`, `S`, `D` keys
+- **GUI Elements**:
+  - Score tracking
+  - Health bar
+  - Game over screen
 - **Combat System**: 
   - Shoot bullets using the `spacebar`
   - Enemy collision detection
@@ -24,21 +28,34 @@ A classic-style space shooter game built with C++ and SFML to practice object-or
   - Randomized movement
 
 ![Game Screenshot](/resources/screenshots/gameplay-boss.png)
-- **GUI Elements**:
-  - Score tracking
-  - Health bar
-  - Game over screen
-
-## Installation
 
 
-### Prerequisites
+# Installation Guide
+ The following guide is for setting up the project on macOS and Linux devices. (UNIX-like systems). Support for windows in coming soon.
+
+
+## Prerequisites
+### macOS
 - A Mac with Xcode installed (for Clang and C++17 support)
 - [Homebrew](https://brew.sh/) for package management
-- SFML v2 (installed via Homebrew)
 
-### Installing SFML
+### Linux
+- A Linux distribution with a C++ compiler (GCC or Clang)
+
+## Installing CMAKE
 Open your terminal and run:
+### macOs
+```
+brew install cmake
+```
+### Linux
+```bash
+sudo apt-get install cmake
+```
+
+## Installing SFML
+Open your terminal and run:
+### macOS
 ```bash
 brew install sfml@2
 ```
@@ -52,41 +69,41 @@ brew --prefix sfml@2
 
 If neccessary, update the `CMakeLists.txt` file  to point to the correct SFML installation path.
 
-### Building the Project
+### Linux
+```bash
+sudo apt update
+sudo apt-get install libsfml-dev
+```
+
+## Building the Project
 
 1. Clone this repository
 
 ```bash
 git clone https://github.com/fernandodonea/Stardust-Defenders
-```
-
-2. Navigate to the project root:
-```bash
 cd Stardust-Defenders
 ```
 
-3. Create a build directory and navigate into it:
+2. Create a build directory and cofigure the project:
 ```bash
-mkdir build && cd build
+mkdir build
+cd build
+cmake ..
 ```
 
-4. Configure the project with CMake:
-  ```bash
-  cmake ..
-  ```
-
-5. Build the project:
+4. Build the project:
 ```bash
-cmake --build .
+make
 ```
 
-6. Navigate to the project root again:
+5. Navigate to the project root again:
 ```bash
 cd ..
 ```
 
-### How to Run the Game
+## How to Run the Game
 To run the game, execute the following command in your terminal in the project root directory:
 ```bash
 ./StardustDefenders
 ```
+
