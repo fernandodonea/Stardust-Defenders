@@ -1,5 +1,6 @@
 #include "../include/managers/projectile_manager.h"
 
+#include "../include/constants/constants_game.h"
 
 /*
 --------------
@@ -75,15 +76,16 @@ void ProjectileManager::PlayerShoot(Player* player, sf::Texture* bullet_texture)
                 player->GetPosition().y
             )
         );
-        std::cout<<*m_bullets[m_bullets.size()-1];
+        if(Const_Debug::projectile_debug)
+            std::cout<<*m_bullets[m_bullets.size()-1];
     }
 }
 
 void ProjectileManager::AlienShoot(sf::Texture* laser_texture, float pos_x, float pos_y, sf::Vector2f direction)
 {
     m_lasers.push_back(new Laser(laser_texture, pos_x, pos_y, direction));
-    
-    std::cout<<*m_lasers[m_lasers.size()-1];
+    if(Const_Debug::projectile_debug)
+        std::cout<<*m_lasers[m_lasers.size()-1];
 }
 
 

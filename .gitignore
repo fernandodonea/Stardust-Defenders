@@ -44,3 +44,7 @@ commitMessage.md
 
 # Ignore the binary app (if built locally)
 bin/app
+
+#Other
+oop.md
+class.md

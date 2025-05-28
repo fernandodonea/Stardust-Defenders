@@ -1,5 +1,5 @@
 #include "../include/managers/player_manager.h"
-
+#include "../include/constants/constants_game.h"
 
 /*
 -------------------------------
@@ -11,7 +11,10 @@ PlayerManager::PlayerManager(sf::Texture* texture)
 {
     this->m_player=new Player(texture);
 
-    std::cout<<*m_player;
+    if(Const_Debug::player_debug)
+    {
+        std::cout<<*this->m_player;
+    }
 }
 
 PlayerManager::~PlayerManager()

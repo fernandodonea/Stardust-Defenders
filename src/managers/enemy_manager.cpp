@@ -1,3 +1,5 @@
+#include "../include/constants/constants_game.h"
+
 #include "../include/managers/enemy_manager.h"
 
 /*
@@ -103,7 +105,8 @@ void EnemyManager::SpawnAsteroids(sf::RenderWindow *window)
             ));
         this->m_spawn_timer=0.f;
 
-        std::cout<<*m_enemies[m_enemies.size()-1];
+        if(Const_Debug::enemy_debug)
+            std::cout<<*m_enemies[m_enemies.size()-1];
     }
 }
 
@@ -118,7 +121,8 @@ void EnemyManager::SpawnAlien(sf::RenderWindow *window)
     }
     m_enemies.push_back(alien);
 
-    std::cout<<*m_enemies[m_enemies.size()-1];
+    if(Const_Debug::enemy_debug)
+            std::cout<<*m_enemies[m_enemies.size()-1];
 }
 
 
