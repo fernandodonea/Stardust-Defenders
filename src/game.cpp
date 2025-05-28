@@ -13,7 +13,7 @@ namespace Game_Engine
 */
 Game::Game()
 {
-    this->m_window_manager = new WindowManger(); 
+    this->m_window_manager = new WindowManager(); 
 
     this->m_resource_manager = new ResourceManager(); 
 

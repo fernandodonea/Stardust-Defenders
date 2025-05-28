@@ -27,7 +27,7 @@ class Game
 {
     private:
         //Core
-        WindowManger* m_window_manager;
+        WindowManager* m_window_manager;
         ResourceManager* m_resource_manager;
         
         //GUI

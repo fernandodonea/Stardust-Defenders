@@ -17,15 +17,15 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
-class WindowManger
+class WindowManager
 {
     private:
         sf::RenderWindow* m_window;
 
     public:
         //Constructor and destructor
-        WindowManger();
-        ~WindowManger();
+        WindowManager();
+        ~WindowManager();
 
         //Getter
         sf::RenderWindow* GetWindow();

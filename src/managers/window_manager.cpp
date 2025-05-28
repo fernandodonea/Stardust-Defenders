@@ -7,7 +7,7 @@
     Constructor and destructor
 --------------------------------
 */
-WindowManger::WindowManger()
+WindowManager::WindowManager()
 {
     this->m_window = new sf::RenderWindow(
         sf::VideoMode(
@@ -18,7 +18,7 @@ WindowManger::WindowManger()
 
     this->m_window->setFramerateLimit(60);
 }
-WindowManger::~WindowManger()
+WindowManager::~WindowManager()
 {
     delete this->m_window;
 }
@@ -31,7 +31,7 @@ WindowManger::~WindowManger()
 ------------
 */
 
-sf::RenderWindow* WindowManger::GetWindow()
+sf::RenderWindow* WindowManager::GetWindow()
 {
     return this->m_window;
 }
@@ -44,7 +44,7 @@ sf::RenderWindow* WindowManger::GetWindow()
 */
 
 // Poll events from the window
-void WindowManger::PollEvents()
+void WindowManager::PollEvents()
 {
     sf::Event ev;
     while(this->m_window->pollEvent(ev))
