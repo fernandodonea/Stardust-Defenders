@@ -5,6 +5,9 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
+#include "interfaces/drawable.h"
+#include "interfaces/movable.h"
+
 const sf::Vector2f up(0.f,-1.f);
 const sf::Vector2f down(0.f,1.f);
 const sf::Vector2f left(-1.f,0.f);
@@ -13,7 +16,7 @@ const sf::Vector2f right(1.f,0.f);
 const sf::Vector2f diag_left(-0.7f, 1.f);
 const sf::Vector2f diag_right(0.7f, 1.f);
 
-class Entity
+class Entity: public Drawable, public Movable
 {
     protected:
         sf::Sprite m_sprite;
@@ -37,8 +40,8 @@ class Entity
         void SetSize(float size);
     
         // Functions
-        void Move(const float dir_x, const float dir_y);
-        void Move(const sf::Vector2f direction);
+        void Move(const float dir_x, const float dir_y) override;
+        void Move(const sf::Vector2f direction) override;
 
         virtual std::string ToString() const = 0;
 
@@ -48,10 +51,8 @@ class Entity
         return os;
         }
 
-        
+        void Render(sf::RenderTarget& target) override;
         virtual void Update() = 0;
-        void Render(sf::RenderTarget& target);
-
 };
 
 

@@ -49,7 +49,7 @@ std::string Enemy::ToString() const
     return debug_message;
 }
 
-void Enemy::LoseHp(const int value)
+void Enemy::LoseHp(int value)
 {
     this->m_hp-=value;
     if(this->m_hp<0)

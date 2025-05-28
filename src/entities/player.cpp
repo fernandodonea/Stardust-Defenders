@@ -58,14 +58,10 @@ const int& Player::GetHpMax() const
 
 
 /*
-------------
-    Setter
-------------
+---------------
+    Functions
+---------------
 */
-void Player::SetHp(const int hp)
-{
-    this->m_hp=hp;
-}
 void Player::LoseHp(const int value)
 {
     this->m_hp-=value;
@@ -73,13 +69,6 @@ void Player::LoseHp(const int value)
         this->m_hp=0;
 }
 
-
-
-/*
----------------
-    Functions
----------------
-*/
 std::string Player::ToString() const
 {
     std::string debug_message="";

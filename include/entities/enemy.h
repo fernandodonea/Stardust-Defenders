@@ -2,8 +2,9 @@
 #define ENEMY_H
 
 #include "entity.h"
+#include "../interfaces/damageable.h"
 
-class Enemy: public Entity
+class Enemy: public Entity, public Damageable
 {
     protected:  
         int m_type;
@@ -31,7 +32,7 @@ class Enemy: public Entity
         //Functions
         std::string ToString() const override;
 
-        void LoseHp(const int value);
+        void LoseHp(int value) override;
 
         void Update() override;
 };

@@ -3,8 +3,9 @@
 
 
 #include "entity.h"
+#include "../interfaces/damageable.h"
 
-class Player: public Entity
+class Player: public Entity, public Damageable
 {
     protected:
         float m_attack_cooldown;
@@ -26,13 +27,10 @@ class Player: public Entity
         const int& GetHp() const;
         const int& GetHpMax() const ; 
 
-        //Setter
-        void SetHp(const int hp);
-        void LoseHp(const int value);
-
 
         //Functions
         std::string ToString() const override;
+        void LoseHp(int value) override;
         
         const bool CanAttack();
         void UpdateAttack();
