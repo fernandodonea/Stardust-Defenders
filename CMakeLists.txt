@@ -18,6 +18,12 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     link_directories(${SFML_LIBRARY_DIRS})
 else()
     # macOS-specific SFML setup
+    # Modify this path if SFML is installed in a different location
+
+    # paste the following command to find the sfml path 
+    # brew --prefix sfml@2
+
+
     set(SFML_PATH "/usr/local/opt/sfml@2")
     include_directories(${SFML_PATH}/include)
     link_directories(${SFML_PATH}/lib)
@@ -38,6 +44,6 @@ add_executable(StardustDefenders ${CPP_FILES})
 # Link SFML libraries
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     target_link_libraries(StardustDefenders sfml-graphics sfml-window sfml-system sfml-audio)
-else()
+else(CMAKE_SYSTEM_NAME STREQUAL "APPLE")
     target_link_libraries(StardustDefenders sfml-graphics sfml-window sfml-system sfml-audio sfml-network)
 endif()

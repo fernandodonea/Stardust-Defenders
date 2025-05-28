@@ -11,6 +11,10 @@ A classic-style space shooter game built with C++ and SFML to practice object-or
 ## Features
 
 - **Player Controls**: Control your spaceship using `W`, `A`, `S`, `D` keys
+- **GUI Elements**:
+  - Score tracking
+  - Health bar
+  - Game over screen
 - **Combat System**: 
   - Shoot bullets using the `spacebar`
   - Enemy collision detection
@@ -24,10 +28,10 @@ A classic-style space shooter game built with C++ and SFML to practice object-or
   - Randomized movement
 
 ![Game Screenshot](/resources/screenshots/gameplay-boss.png)
-- **GUI Elements**:
-  - Score tracking
-  - Health bar
-  - Game over screen
+
+
+# Installation Guide
+ The following guide is for setting up the project on macOS and Linux devices. (UNIX-like systems). Support for windows in coming soon.
 
 
 ## Prerequisites
