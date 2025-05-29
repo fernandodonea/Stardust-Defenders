@@ -1,9 +1,9 @@
-# OOP Project - Stardust Defenders
+# OOP Project - Stardust Defenders 
 
-A classic-style space shooter game built with C++ and SFML to practice object-oriented programming (OOP). Take control of a spaceship and defend against waves of enemies while trying to achieve the highest score possible.
+A classic-style space shooter game built with C++ and SFML to practice object-oriented programming (OOP). Take control of a spaceship and defend against waves of enemies while trying to achieve the highest score possible. 
 
 
-![Game Screenshot](/resources/screenshots/gameplay-normal.png)
+![Game Play](/resources/gameplay/gameplay.gif)
 
 
 **Check the [wiki](https://github.com/fernandodonea/Stardust-Defenders/wiki) for more details on the project structure and OOP principles used in this game.**
@@ -27,7 +27,7 @@ A classic-style space shooter game built with C++ and SFML to practice object-or
   - Special alien boss enemy with laser attack 
   - Randomized movement
 
-![Game Screenshot](/resources/screenshots/gameplay-boss.png)
+![Boss Gameplay](/resources/gameplay/boss-gameplay.gif)
 
 
 # Installation Guide
