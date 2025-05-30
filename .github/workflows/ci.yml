@@ -1,4 +1,4 @@
-name: Build SFML Game (Windows & macOS)
+name: Build SFML Game (Windows, macOS & Ubuntu)
 
 on:
   push:
@@ -10,7 +10,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [windows-latest, macos-latest]
+        os: [windows-latest, macos-latest, ubuntu-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout code
@@ -24,7 +24,13 @@ jobs:
       - name: Install dependencies (macOS)
         if: runner.os == 'macOS'
         run: |
-          brew install sfml
+          brew install sfml@2
+
+      - name: Install dependencies (Ubuntu)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libsfml-dev
 
       - name: Configure CMake
         run: cmake -S . -B build
