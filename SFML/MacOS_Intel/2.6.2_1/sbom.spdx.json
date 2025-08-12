@@ -1,0 +1,62 @@
+{
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "spdxVersion": "SPDX-2.3",
+  "name": "SBOM-SPDX-sfml@2-2.6.2",
+  "creationInfo": {
+    "created": "2025-05-27T10:28:41Z",
+    "creators": [
+      "Tool: https://github.com/Homebrew/brew@4.5.3"
+    ]
+  },
+  "dataLicense": "CC0-1.0",
+  "documentNamespace": "https://formulae.brew.sh/spdx/sfml@2-2.6.2.json",
+  "documentDescribes": [
+    "SPDXRef-Archive-sfml@2-src",
+    "SPDXRef-Compiler"
+  ],
+  "files": [],
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-Archive-sfml@2-src",
+      "name": "sfml@2",
+      "versionInfo": "2.6.2",
+      "filesAnalyzed": false,
+      "licenseDeclared": "NOASSERTION",
+      "builtDate": "2024-11-09 21:00:47 UTC",
+      "licenseConcluded": "Zlib",
+      "downloadLocation": "https://www.sfml-dev.org/files/SFML-2.6.2-sources.zip",
+      "copyrightText": "NOASSERTION",
+      "externalRefs": [],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "19d6dbd9c901c74441d9888c13cb1399f614fe8993d59062a72cfbceb00fed04"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Compiler",
+      "name": "clang",
+      "versionInfo": "16.2",
+      "filesAnalyzed": false,
+      "licenseDeclared": "NOASSERTION",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "checksums": [],
+      "externalRefs": []
+    }
+  ],
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-File-sfml@2",
+      "relationshipType": "PACKAGE_OF",
+      "relatedSpdxElement": "SPDXRef-Archive-sfml@2-src"
+    },
+    {
+      "spdxElementId": "SPDXRef-Compiler",
+      "relationshipType": "BUILD_TOOL_OF",
+      "relatedSpdxElement": "SPDXRef-Package-sfml@2-src"
+    }
+  ]
+}
